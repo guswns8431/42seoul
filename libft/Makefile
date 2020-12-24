@@ -6,14 +6,14 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/23 16:14:36 by hyson             #+#    #+#              #
-#    Updated: 2020/12/23 16:43:16 by hyson            ###   ########.fr        #
+#    Updated: 2020/12/24 20:28:28 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-SRCS = ft_memset.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c
+SRCS = ft_memcpy.c ft_memset.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c
 OBJS = $(SRCS:%.c=%.o)
 
 all : $(NAME)
