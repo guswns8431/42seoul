@@ -6,20 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 15:55:57 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/22 15:57:54 by hyson            ###   ########.fr       */
+/*   Updated: 2020/12/28 20:16:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *dest, size_t size)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
-
-	i = 0;
-	while (i < size)
-	{
-		((unsigned char *)dest)[i] = 0;
-		i++;
-	}
+	ft_memset(s, 0, n);
 }

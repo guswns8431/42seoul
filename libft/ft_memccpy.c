@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/30 15:34:38 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/25 11:42:01 by hyson             #+#    #+#             */
+/*   Updated: 2020/12/25 16:12:57 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t	i;
+	const unsigned char	*psrc;
+	unsigned char		*pdst;
 
-	i = -1;
-	while (++i < len)
-		((unsigned char*)b)[i] = c;
-	return (b);
+	psrc = src;
+	pdst = dst;
+	if (!src && !dst)
+		return (0);
+	while (n-- > 0)
+	{
+		*pdst++ = *psrc++;
+		if (*psrc == (unsigned char)c)
+		{
+			*pdst++ = *psrc;
+			return (pdst);
+		}
+	}
+	return (NULL);
 }

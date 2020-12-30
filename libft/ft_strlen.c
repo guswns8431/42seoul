@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/30 15:34:38 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/28 20:31:34 by hyson             #+#    #+#             */
+/*   Updated: 2020/12/28 20:39:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t	len;
 
-	i = -1;
-	while (++i < len)
-		((unsigned char*)b)[i] = c;
-	return (b);
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }

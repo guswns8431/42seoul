@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/30 15:34:38 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/25 16:20:00 by hyson             #+#    #+#             */
+/*   Updated: 2020/12/30 14:59:06 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	const char	*psrc;
+	char		*pdst;
+	size_t		i;
 
-	i = -1;
-	while (++i < len)
-		((unsigned char*)b)[i] = c;
-	return (b);
+	psrc = src;
+	pdst = dst;
+	if (!psrc && !pdst)
+		return (0);
+	if (psrc >= pdst)
+	{
+		i = -1;
+		while (++i < len)
+			pdst[i] = psrc[i];
+	}
+	else
+	{
+		i = len;
+		while ((int)(--i) >= 0)
+			pdst[i] = psrc[i];
+	}
+	return (pdst);
 }
