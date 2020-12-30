@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 20:16:08 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/24 22:34:02 by hyson            ###   ########.fr       */
+/*   Updated: 2020/12/30 15:50:12 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char		*pdst;
-	const char	*psrc;
+	size_t i;
 
-	pdst = dst;
-	psrc = src;
+	i = -1;
 	if (!dst && !src)
 		return (0);
-	while (n-- > 0)
-		*pdst++ = *psrc++;
+	while (++i < n)
+		((char *)dst)[i] = ((char *)src)[i];
 	return (dst);
 }

@@ -6,13 +6,15 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 20:15:53 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/22 20:32:52 by hyson            ###   ########.fr       */
+/*   Updated: 2020/12/30 17:34:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (ft_isalpha(c) == 2)
 		return (c - 32);
 	return (c);
 }
