@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 18:18:31 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/30 17:07:48 by hyson            ###   ########.fr       */
+/*   Updated: 2020/12/31 15:24:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t i;
 
 	i = 0;
-	if(!dst && !src)
+	if (!dst && !src)
 		return (0);
 	if (dstsize)
 	{
