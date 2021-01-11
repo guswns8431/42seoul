@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 15:25:30 by hyson             #+#    #+#             */
-/*   Updated: 2021/01/11 15:43:47 by hyson            ###   ########.fr       */
+/*   Created: 2021/01/10 15:58:56 by hyson             #+#    #+#             */
+/*   Updated: 2021/01/10 16:09:33 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int result;
-	int sign;
+	char	*ret;
+	size_t	i;
 
-	sign = 1;
-	result = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		++str;
-	if (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			sign = -1;
-	while (ft_isdigit(*str))
-		result = result * 10 + *str++ - '0';
-	return (sign * result);
+	i = 0;
+	if (!s || !f)
+		return (NULL);
+	ret = (char *)malloc(ft_strlen(s) + 1);
+	if (!ret)
+		return (NULL);
+	while (s[i])
+	{
+		ret[i] = f(i, s[i]);
+		++i;
+	}
+	ret[i] = '\0';
+	return (ret);
 }
