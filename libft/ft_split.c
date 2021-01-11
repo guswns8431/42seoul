@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 00:31:26 by hyson             #+#    #+#             */
-/*   Updated: 2021/01/11 15:43:21 by hyson            ###   ########.fr       */
+/*   Updated: 2021/01/11 17:50:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**ft_free_dptr(char **s, int i)
 	s = NULL;
 	return (NULL);
 }
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;
