@@ -6,13 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 00:31:26 by hyson             #+#    #+#             */
-/*   Updated: 2021/01/11 17:50:34 by hyson            ###   ########.fr       */
+/*   Updated: 2021/01/12 02:21:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_wordlen(char const *s, char c)
+static size_t	ft_wordlen(char const *s, char c)
 {
 	size_t	len;
 
@@ -31,7 +31,7 @@ size_t	ft_wordlen(char const *s, char c)
 	return (len);
 }
 
-char	**ft_free_dptr(char **s, int i)
+static char		**ft_free_dptr(char **s, int i)
 {
 	while (--i >= 0 && s[i])
 	{
@@ -43,7 +43,7 @@ char	**ft_free_dptr(char **s, int i)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
 	int		i;
 	char	**ret;

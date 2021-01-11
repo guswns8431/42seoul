@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 11:42:01 by hyson             #+#    #+#             */
-/*   Updated: 2020/12/30 16:04:58 by hyson            ###   ########.fr       */
+/*   Updated: 2021/01/12 02:09:41 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	const unsigned char	*psrc;
-	unsigned char		*pdst;
+	size_t	i;
 
-	psrc = src;
-	pdst = dst;
-	if (!src && !dst)
-		return (0);
-	while (n-- > 0)
+	i = -1;
+	while (++i < n)
 	{
-		*pdst++ = *psrc++;
-		if (*psrc == (unsigned char)c)
-		{
-			*pdst++ = *psrc;
-			return (pdst);
-		}
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		if (((unsigned char *)src)[i] == (unsigned char)c)
+			return (dst + i + 1);
 	}
 	return (NULL);
 }
