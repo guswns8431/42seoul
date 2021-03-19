@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/19 11:59:16 by hyson            ###   ########.fr       */
+/*   Created: 2021/03/19 11:41:23 by hyson             #+#    #+#             */
+/*   Updated: 2021/03/19 11:58:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+#include "printf.h"
 
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
 
-#endif
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
+}
