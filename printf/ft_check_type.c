@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_check_type.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 23:55:51 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 15:52:04 by hyson            ###   ########.fr       */
+/*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
+/*   Updated: 2021/03/20 15:28:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_check_type(char *str)
 {
-	va_list ap;
-	int		len;
-
-	len = ft_strlen(format);
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-			ft_check_option_type(format, ap);
-		else
-			write(1, format++, 1);
-	}
-	return (len);
+	if (*str == 'c')
+	else if (*str == 's')
+	else if (*str == 'd')
+	else if (*str == 'p')
+	else if (*str == 'i')
+	else if (*str == 'u')
+	else if (*str == 'x')
+	else if (*str == 'X')
+	else
 }
+

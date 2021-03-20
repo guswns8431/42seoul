@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 23:55:51 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 15:52:04 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
+/*   Updated: 2020/12/30 15:34:38 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	va_list ap;
-	int		len;
+	size_t	i;
 
-	len = ft_strlen(format);
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-			ft_check_option_type(format, ap);
-		else
-			write(1, format++, 1);
-	}
-	return (len);
+	i = -1;
+	while (++i < len)
+		((unsigned char*)b)[i] = c;
+	return (b);
 }
