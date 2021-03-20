@@ -4,7 +4,7 @@
 int main(void)
 {
 	ft_printf("abc");
-	printf("%123td");
+	printf("%123 ");
 	//printf("%d", ft_printf("abc"));
 	
 	return (0);
