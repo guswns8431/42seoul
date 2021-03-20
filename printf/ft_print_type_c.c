@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_option_type.c                             :+:      :+:    :+:   */
+/*   ft_print_type_c.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 14:07:54 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 19:37:49 by hyson            ###   ########.fr       */
+/*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
+/*   Updated: 2021/03/20 19:46:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_check_option_type(const char *format, va_list ap)
+void	ft_print_type_c(t_option *val, char c)
 {
-	char c;
-	t_option *val;
-
-	ft_memset(&val, 0, sizeof(t_option));
-	while (!ft_is_type(*format))
-		ft_check_option(val, *format++);
-	ft_check_type(*format, val);
+	if (val->minus == 1)
+	{
+		write(1, &c, 1);
+		while (--val->width)
+			write(1, " ", 1);
+	}
+	else
+	{
+		while (--val->width)
+			write(1, " ", 1);
+		write(1, &c, 1);
+	}
 }

@@ -3,9 +3,6 @@
 
 int main(void)
 {
-	ft_printf("abc");
-	printf("%123 ");
-	//printf("%d", ft_printf("abc"));
-	
+	ft_printf("%c", 'a');
 	return (0);
 }

@@ -6,22 +6,24 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 15:28:48 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/20 19:43:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_check_type(char *str)
+void	ft_check_type(char c, t_option *val)
 {
-	if (*str == 'c')
-	else if (*str == 's')
-	else if (*str == 'd')
-	else if (*str == 'p')
-	else if (*str == 'i')
-	else if (*str == 'u')
-	else if (*str == 'x')
+	if (c == 'c')
+		ft_print_type_c(val, c);
+	/*
+	else if (c == 's')
+	else if (c == 'd')
+	else if (c == 'p')
+	else if (c == 'i')
+	else if (c == 'u')
+	else if (c == 'x')
 	else if (*str == 'X')
 	else
+	*/
 }
-

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 15:27:58 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/20 19:49:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	ft_is_type(char c)
 {
-	if (*str == 'c')
+	if (c == 'c')
 		return (1);
-	else if (*str == 's')
+	else if (c == 's')
 		return (1);
-	else if (*str == 'd')
+	else if (c == 'd')
 		return (1);
-	else if (*str == 'p')
+	else if (c == 'p')
 		return (1);
-	else if (*str == 'i')
+	else if (c == 'i')
 		return (1);
-	else if (*str == 'u')
+	else if (c == 'u')
 		return (1);
-	else if (*str == 'x')
+	else if (c == 'x')
 		return (1);
-	else if (*str == 'X')
+	else if (c == 'X')
 		return (1);
 	else
 		return (1);
