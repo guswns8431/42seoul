@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_option_type.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:07:54 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 19:37:49 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/20 22:31:10 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_check_option_type(const char *format, va_list ap)
+void	ft_check_option_type(char **format, va_list ap)
 {
-	char c;
-	t_option *val;
-
+	t_option val;
 	ft_memset(&val, 0, sizeof(t_option));
-	while (!ft_is_type(*format))
-		ft_check_option(val, *format++);
-	ft_check_type(*format, val);
+	while (**format)
+	{
+		ft_check_option(&val, *format);
+		if (ft_is_type(++*format))
+			ft_check_type(*format, &val, ap);
+	}
 }
