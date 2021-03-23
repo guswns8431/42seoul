@@ -3,8 +3,8 @@
 
 int main(void)
 {
-	ft_printf("%4c", 'a');
+	ft_printf("%s", "string");
 	printf("\n");
-	printf("%4c", 'a');
+	printf("%s", "string");
 	return (0);
 }

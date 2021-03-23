@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_type.c                                    :+:      :+:    :+:   */
+/*   ft_print_type_s.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/23 16:46:32 by hyson            ###   ########.fr       */
+/*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
+/*   Updated: 2021/03/23 17:02:09 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_check_type(char *c, t_option *val, va_list ap)
+void	ft_print_type_s(t_option *val, va_list ap)
 {
-	if (*c == 'c')
-		ft_print_type_c(val, ap);
-	else if (*c == 's')
-		ft_print_type_s(val, ap);
-	/*
-	else if (c == 'd')
-	else if (c == 'p')
-	else if (c == 'i')
-	else if (c == 'u')
-	else if (c == 'x')
-	else if (*str == 'X')
+	char *c;
+	int len;
+
+	c = va_arg(ap, char*);
+	len = ft_strlen(c);
+	if (val->minus == 1)
+	{
+		write(1, &c, 1);
+		//while (--val->width)
+		//	write(1, " ", 1);
+	}
 	else
-	*/
+	{
+		//while (--val->width)
+		//	write(1, " ", 1);
+		write(1, c, len);
+	}
 }
