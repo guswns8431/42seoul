@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/23 17:02:09 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/23 17:12:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_print_type_s(t_option *val, va_list ap)
 {
-	char *c;
-	int len;
+	char	*str;
+	int		len;
 
-	c = va_arg(ap, char*);
-	len = ft_strlen(c);
+	str = va_arg(ap, char*);
+	len = ft_strlen(str);
 	if (val->minus == 1)
 	{
-		write(1, &c, 1);
+		write(1, str, len);
 		//while (--val->width)
 		//	write(1, " ", 1);
 	}
@@ -29,6 +29,6 @@ void	ft_print_type_s(t_option *val, va_list ap)
 	{
 		//while (--val->width)
 		//	write(1, " ", 1);
-		write(1, c, len);
+		write(1, str, len);
 	}
 }
