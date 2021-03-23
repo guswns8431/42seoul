@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 22:32:12 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/23 15:35:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
+#include <stdio.h> //지워야해
+
 typedef struct
 {
 	int minus;
