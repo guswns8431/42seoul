@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:07:40 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 22:25:33 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:55:18 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_check_option(t_option *val, char *c)
 		val->width = val->width * 10 + *c - '0';
 	else if (*c == '.')
 		val->dot = 1;
-	else
+	else if (*c >= '0' && 
 		val->precision = val->precision * 10 + *c - '0';
 }

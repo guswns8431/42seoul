@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/23 17:12:19 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:05:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	*ft_memset(void *b, int c, size_t len);
 void	ft_check_option(t_option *val, char *c);
 void	ft_print_type_c(t_option *val, va_list ap);
 void	ft_print_type_s(t_option *val, va_list ap);
+int		ft_process_precision(int len, int precision);
+void	ft_process_width(int len, int precision);
 
 #endif
