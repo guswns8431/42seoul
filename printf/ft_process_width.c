@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:03:43 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/25 19:19:12 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/25 19:30:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_process_width(int len, int width)
 {
 	int i;
-	if (len < width)
+	if (width != 0 && len < width)
 	{
 		i = width - len;
 		while (i--)
