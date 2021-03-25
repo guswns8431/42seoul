@@ -2,8 +2,8 @@
 
 int main(void)
 {
-	ft_printf("%-0s", "string");
+	ft_printf("%6.3s", "string");
 	printf("\n");
-	printf("%1..2s", "string");
+	printf("%6.3s", "string");
 	return (0);
 }
