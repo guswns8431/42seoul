@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_type.c                                    :+:      :+:    :+:   */
+/*   ft_print_type_u.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/29 17:21:02 by hyson            ###   ########.fr       */
+/*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
+/*   Updated: 2021/03/29 17:42:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_check_type(char *c, t_option *val, va_list ap)
+void	ft_print_type_u(t_option *val, va_list ap)
 {
-	if (*c == 'c')
-		ft_print_type_c(val, ap);
-	else if (*c == 's')
-		ft_print_type_s(val, ap);
-	else if (*c == 'd' || *c == 'i')
-		ft_print_type_d(val, ap);
-	else if (*c == 'u')
-		ft_print_type_u(val, ap);
-	/*
-	else if (*c == 'p')
-	else if (*c == 'x')
-	else if (*c == 'X')
+	unsigned int		nbr;
+	int		len;
+
+	nbr = va_arg(ap, unsigned int);
+	len = ft_nbrlen(nbr, 10);
+	if (val->minus == 1)
+	{
+		ft_process_precision_num(val->precision, len);
+		ft_putnbr(nbr);
+		ft_process_width(len, val->width, val->zero, val->dot);
+	}
 	else
-	*/
+	{
+		ft_process_width(len, val->width, val->zero, val->dot);
+		ft_process_precision_num(val->precision, len);
+		ft_putnbr(nbr);
+	}
 }

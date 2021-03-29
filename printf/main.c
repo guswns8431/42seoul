@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	//ft_printf("%u", "abc");
+	ft_printf("%u", -2);
 	printf("\n");
 	printf("%u", -2);
 	return (0);
