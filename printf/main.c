@@ -2,8 +2,8 @@
 
 int main(void)
 {
-	ft_printf("%-4.5d", 123);
+	//ft_printf("%u", "abc");
 	printf("\n");
-	printf("%-4.5d", 123);
+	printf("%u", -2);
 	return (0);
 }

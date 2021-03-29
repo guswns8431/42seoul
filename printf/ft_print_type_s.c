@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/28 15:22:33 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/29 16:35:46 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_print_type_s(t_option *val, va_list ap)
 	if (val->minus == 1)
 	{
 		write(1, str, len);
-		ft_process_width(len, val->width);
+		ft_process_width(len, val->width, val->zero, val->dot);
 	}
 	else
 	{
-		ft_process_width(len, val->width);
+		ft_process_width(len, val->width, val->zero, val->dot);
 		write(1, str, len);
 	}
 }
