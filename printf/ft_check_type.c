@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/29 17:21:02 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/30 18:33:32 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	ft_check_type(char *c, t_option *val, va_list ap)
 		ft_print_type_d(val, ap);
 	else if (*c == 'u')
 		ft_print_type_u(val, ap);
+	else if (*c == 'x')
+		ft_print_type_lowx(val, ap);
+	else if (*c == 'X')
+		ft_print_type_upx(val, ap);
 	/*
 	else if (*c == 'p')
-	else if (*c == 'x')
-	else if (*c == 'X')
 	else
 	*/
 }

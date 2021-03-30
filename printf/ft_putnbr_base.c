@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 16:58:36 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/29 17:40:17 by hyson            ###   ########.fr       */
+/*   Updated: 2021/03/30 18:52:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ static void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(long long nb)
+void	ft_putnbr_base(long long nb, char *base)
 {
+	int base_len;
+
+	base_len = ft_strlen(base);
 	if (nb < 0)
 	{
 		ft_putchar('-');
-		ft_putnbr(-nb);
+		ft_putnbr_base(-nb, base);
 	}
 	else
 	{
-		if (nb > 9)
-		{
-			ft_putnbr(nb / 10);
-		}
-		ft_putchar(nb % 10 + '0');
+		if (nb > base_len - 1)
+			ft_putnbr_base(nb / base_len, base);
+		ft_putchar(base[nb % base_len]);
 	}
 }

@@ -2,8 +2,8 @@
 
 int main(void)
 {
-	ft_printf("%u", -2);
+	ft_printf("%-3.1x", 130);
 	printf("\n");
-	printf("%u", -2);
+	printf("%-3.1x", 130);
 	return (0);
 }
