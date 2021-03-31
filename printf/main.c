@@ -2,8 +2,10 @@
 
 int main(void)
 {
-	ft_printf("%-3.1x", 130);
+	int a = 1;
+
+	ft_printf("%p", &a);
 	printf("\n");
-	printf("%-3.1x", 130);
+	printf("%p", &a);
 	return (0);
 }
