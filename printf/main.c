@@ -2,10 +2,13 @@
 
 int main(void)
 {
-	int a = 1;
+	// int a = 2;
+	int make, real;
 
-	ft_printf("%p", &a);
+	make = ft_printf("%12.p", "123");
 	printf("\n");
-	printf("%p", &a);
+	real = printf("%12.p", "123");
+	printf("\n");
+	printf("make : %d, real : %d\n",make, real);
 	return (0);
 }
