@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/03 20:06:00 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/07 16:07:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ typedef struct
 	int width;
 	int dot;
 	int precision;
+	int len;
 }		t_option;
 
 int		ft_printf(const char *format, ...);
 size_t	ft_strlen(const char *str);
 int		ft_nbrlen(long long nbr, int base);
-void	ft_check_option_type(char **format, va_list ap);
+int		ft_check_option_type(char **format, va_list ap);
 void	ft_check_type(char *c, t_option *val, va_list ap);
 int		ft_is_type(char *c);
 void	*ft_memset(void *b, int c, size_t len);

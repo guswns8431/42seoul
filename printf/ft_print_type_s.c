@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/29 16:35:46 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/07 16:04:12 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_print_type_s(t_option *val, va_list ap)
 
 	str = va_arg(ap, char*);
 	len = ft_strlen(str);
+	val->len = len;
 	len = ft_process_precision(len, val->precision);
 	if (val->minus == 1)
 	{
