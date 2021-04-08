@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/20 22:26:29 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/08 16:53:06 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_is_type(char *c)
 	else if (*c == 'X')
 		return (1);
 	else
-		return (1);
+		return (0);
 	return (0);
 }
 

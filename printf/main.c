@@ -5,9 +5,9 @@ int main(void)
 	// int a = 2;
 	int make, real;
 
-	make = ft_printf("a%sa", "123123");
+	make = ft_printf("aabc%ds", 12);
 	printf("\n");
-	real = printf("a%sa", "123123");
+	real = printf("aabc%ds", 12);
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);
