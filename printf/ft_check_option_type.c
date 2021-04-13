@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:07:54 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/08 17:06:09 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/13 19:07:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	ft_check_option_type(char **format, va_list ap)
 	{
 		ft_check_option(&val, format);
 		++*format;
-	}	
+	}
+	write(1, "1", 1);
 	ft_check_type((*format)++, &val, ap);
 	return (val.len);
 }
