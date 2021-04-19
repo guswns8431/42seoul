@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/07 16:07:44 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/18 00:39:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	ft_process_precision_num(int precision, int len);
 void	ft_print_type_upx(t_option *val, va_list ap);
 void	ft_print_type_lowx(t_option *val, va_list ap);
 void	ft_print_type_p(t_option *val, va_list ap);
+void	ft_print_percent(t_option *val, va_list ap);
 
 #endif

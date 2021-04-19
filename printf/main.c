@@ -6,9 +6,9 @@ int main(void)
 	char* b = "test";
 	int make, real;
 
-	make = ft_printf("%.3s", a);
+	make = ft_printf("a");
 	printf("\n");
-	real = printf("%.3s", a);
+	real = printf("%5%");
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);

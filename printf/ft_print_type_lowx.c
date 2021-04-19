@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/13 17:51:39 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/16 22:28:31 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_type_lowx(t_option *val, va_list ap)
 
 	nbr = va_arg(ap, int);
 	len = ft_nbrlen(nbr, 16);
-	val->len = len;
+	val->len += len;
 	if (val->minus == 1)
 	{
 		ft_process_precision_num(val->precision, len);
