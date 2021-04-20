@@ -6,31 +6,31 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/18 00:46:49 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/20 15:36:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_is_type(char *c)
+int	ft_is_type(char c)
 {
-	if (*c == 'c')
+	if (c == 'c')
 		return (1);
-	else if (*c == 's')
+	else if (c == 's')
 		return (1);
-	else if (*c == 'd')
+	else if (c == 'd')
 		return (1);
-	else if (*c == 'p')
+	else if (c == 'p')
 		return (1);
-	else if (*c == 'i')
+	else if (c == 'i')
 		return (1);
-	else if (*c == 'u')
+	else if (c == 'u')
 		return (1);
-	else if (*c == 'x')
+	else if (c == 'x')
 		return (1);
-	else if (*c == 'X')
+	else if (c == 'X')
 		return (1);
-	else if (*c == '%') //이 부분 %를 위해서 추가했어요
+	else if (c == '%') //이 부분 %를 위해서 추가했어요
 		return (1);
 	else
 		return (0);

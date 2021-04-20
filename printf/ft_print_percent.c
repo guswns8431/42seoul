@@ -6,17 +6,17 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/18 00:56:50 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/19 15:00:49 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	ft_print_percent(t_option *val, va_list ap)
+void	ft_print_percent(t_option *val)
 {
 	int		len;
 
-//	len = ft_process_precision(len, val->precision);
+	len = 1;
 //	val->len += len;
 	if (val->minus == 1)
 	{

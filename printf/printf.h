@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/18 00:39:48 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/20 15:24:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ size_t	ft_strlen(const char *str);
 int		ft_nbrlen(long long nbr, int base);
 int		ft_check_option_type(char **format, va_list ap);
 void	ft_check_type(char *c, t_option *val, va_list ap);
-int		ft_is_type(char *c);
+int		ft_is_type(char c);
 void	*ft_memset(void *b, int c, size_t len);
-void	ft_check_option(t_option *val, char **c);
+void	ft_check_option(t_option *val, char **c, va_list ap);
 void	ft_print_type_c(t_option *val, va_list ap);
 void	ft_print_type_s(t_option *val, va_list ap);
 int		ft_process_precision(int len, int precision);
-void	ft_process_width(int len, int precision, int zero, int dot);
+int		ft_process_width(int len, int precision, int zero, int dot);
 int		ft_atoi(char **str);
 void	ft_print_type_d(t_option *val, va_list ap);
 void	ft_print_type_u(t_option *val, va_list ap);
@@ -47,6 +47,6 @@ void	ft_process_precision_num(int precision, int len);
 void	ft_print_type_upx(t_option *val, va_list ap);
 void	ft_print_type_lowx(t_option *val, va_list ap);
 void	ft_print_type_p(t_option *val, va_list ap);
-void	ft_print_percent(t_option *val, va_list ap);
+void	ft_print_percent(t_option *val);
 
 #endif

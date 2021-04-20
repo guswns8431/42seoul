@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 11:41:23 by hyson             #+#    #+#             */
-/*   Updated: 2021/03/19 11:58:44 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/19 15:33:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ size_t	ft_strlen(const char *str)
 	size_t	len;
 
 	len = 0;
-	while (*str++)
+	while (*str)
+	{
 		len++;
+		str++;
+	}
 	return (len);
 }
