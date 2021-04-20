@@ -6,14 +6,14 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/20 20:34:57 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/21 01:42:57 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 # include <stdarg.h>
-# include <stdio.h>
+# include <stdio.h> //이거 빼야해
 # include <stdlib.h>
 # include <unistd.h>
 
