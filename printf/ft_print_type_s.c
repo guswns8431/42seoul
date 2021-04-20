@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/19 22:14:12 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/20 17:47:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	ft_print_type_s(t_option *val, va_list ap)
 			str = "";
 	}
 	len = ft_strlen(str);
-	len = ft_process_precision(len, val->precision);
+	len = ft_process_precision(len, val->precision, val->dot);
 	val->len += len;
-	//printf("val->width : %d len : %d\n", val->width, val->len);
 	if (val->minus == 1)
 	{
 		write(1, str, len);
