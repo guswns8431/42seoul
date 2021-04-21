@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/21 01:42:57 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/21 16:19:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int		ft_atoi(char **str);
 void	ft_print_type_d(t_option *val, va_list ap);
 void	ft_print_type_u(t_option *val, va_list ap);
 void	ft_putnbr_base(long long nb, char *base);
-int		ft_process_precision_num(int precision, int len);
+void	ft_process_precision_num(int precision, int len);
+int		ft_process_width_num(int len, int precision, int zero, int dot);
 void	ft_print_type_upx(t_option *val, va_list ap);
 void	ft_print_type_lowx(t_option *val, va_list ap);
 void	ft_print_type_p(t_option *val, va_list ap);

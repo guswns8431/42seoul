@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/23 16:14:36 by hyson             #+#    #+#              #
-#    Updated: 2021/04/19 15:00:12 by hyson            ###   ########.fr        #
+#    Updated: 2021/04/21 16:21:39 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =	ft_atoi.c \
 		ft_process_precision.c \
 		ft_process_precision_num.c \
 		ft_process_width.c \
+		ft_process_width_num.c \
 		ft_putnbr_base.c \
 		ft_strlen.c
 
