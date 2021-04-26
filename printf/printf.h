@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 23:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/21 16:19:28 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/26 16:13:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct
 	int dot;
 	int precision;
 	int len;
+	int negative;
 }		t_option;
 
 int		ft_printf(const char *format, ...);
@@ -44,7 +45,7 @@ void	ft_print_type_d(t_option *val, va_list ap);
 void	ft_print_type_u(t_option *val, va_list ap);
 void	ft_putnbr_base(long long nb, char *base);
 void	ft_process_precision_num(int precision, int len);
-int		ft_process_width_num(int len, int precision, int zero, int dot);
+int		ft_process_width_num(int len, int zero, t_option *val);
 void	ft_print_type_upx(t_option *val, va_list ap);
 void	ft_print_type_lowx(t_option *val, va_list ap);
 void	ft_print_type_p(t_option *val, va_list ap);

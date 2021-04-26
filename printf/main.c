@@ -8,9 +8,9 @@ int main(void)
 	int d = -1;
 	int make, real;
 
-	make = ft_printf("-->|%5.2d|<--\n", d);
+	make = ft_printf("-->|%04d|<--\n", d);
 	printf("\n");
-	real = printf("-->|%5.2d|<--\n", d);
+	real = printf("-->|%04d|<--\n", d);
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);

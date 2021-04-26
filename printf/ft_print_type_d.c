@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/21 19:47:26 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/26 16:19:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	ft_print_type_d(t_option *val, va_list ap)
 	tmp = val->width;
 	if (nbr < 0)
 	{
-		write(1, "-", 1);
+		val->negative = 1;
 		nbr *= -1;
-		len++;
-		//val->width -= 1;
-		val->precision += 1;
+		//len++;
+		val->width -= 1; //음수일때 -가 width의 길에 포함되기 때문에
+		//val->precision += 1;
 	}
 	if (nbr == 0 && val->precision == 0 && val->dot == 1)
 	{
@@ -42,20 +42,25 @@ void	ft_print_type_d(t_option *val, va_list ap)
 			val->len += write(1, " ", 1);
 		return ;
 	}
-	len += ft_nbrlen(nbr, 10);
+	len = ft_nbrlen(nbr, 10);
 	if (val->minus == 1)
 	{
+		if (val->negative)
+			val->len += write(1, "-", 1);
+		//printf("precision : %d len : %d\n", val->precision, len);
 		ft_process_precision_num(val->precision, len);
 		len = ft_max(val->precision, len);
 		val->len += len;
 		ft_putnbr_base(nbr, "0123456789");
-		val->len += ft_process_width_num(len, val->width, 0, val->dot);
+		val->len += ft_process_width_num(len, 0, val);
 	}
 	else
 	{
 		len = ft_max(val->precision, len);
 		val->len += len;
-		val->len += ft_process_width_num(len, val->width, val->zero, val->dot);
+		val->len += ft_process_width_num(len, val->zero, val);
+		if (val->negative)
+			val->len += write(1, "-", 1);
 		ft_process_precision_num(val->precision, ft_nbrlen(nbr, 10));
 		ft_putnbr_base(nbr, "0123456789");
 	}
