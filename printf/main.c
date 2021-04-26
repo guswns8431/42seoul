@@ -6,11 +6,12 @@ int main(void)
 	char* b = "test";
 	char* s = "abc";
 	int d = -1;
+	int x = -1;
 	int make, real;
 
-	make = ft_printf("-->|%-15.p|<--\n", a);
+	make = ft_printf("%x", x);
 	printf("\n");
-	real = printf("-->|%-15.p|<--\n", a);
+	real = printf("%x", x);
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);
