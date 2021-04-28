@@ -9,9 +9,9 @@ int main(void)
 	int x = -1;
 	int make, real;
 
-	make = ft_printf("%x", x);
+	make = ft_printf("-->|%.p|<--\n", a);
 	printf("\n");
-	real = printf("%x", x);
+	real = printf("-->|%.p|<--\n", a);
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);
