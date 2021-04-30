@@ -6,11 +6,31 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:07:40 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/30 15:07:17 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:51:14 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+static	void	ft_check_width_negative(t_option *val, va_list ap)
+{
+		val->width = va_arg(ap, int);
+		if (val->width < 0)
+		{
+			val->minus = 1;
+			val->width *= -1;
+		}
+}
+
+static	void	ft_check_precision_negative(t_option *val, va_list ap)
+{
+		val->precision = va_arg(ap, int);
+		if (val->precision < 0)
+		{
+			val->precision = 0;
+			val->dot = 0;
+		}
+}
 
 void	ft_check_option(t_option *val, char **c, va_list ap)
 {
@@ -21,27 +41,13 @@ void	ft_check_option(t_option *val, char **c, va_list ap)
 	else if (**c >= '1' && **c <= '9' && val->dot == 0)
 		val->width = ft_atoi(c);
 	else if (**c == '*' && val->dot == 0)
-	{
-		val->width = va_arg(ap, int);
-		if (val->width < 0)
-		{
-			val->minus = 1;
-			val->width *= -1;
-		}
-	}
+		ft_check_width_negative(val, ap);
 	else if (**c == '.')
 		val->dot = 1;
 	else if (**c >= '1' && **c <= '9' && val->dot == 1)
 		val->precision = ft_atoi(c);
 	else if (**c == '*' && val->dot == 1)
-	{
-		val->precision = va_arg(ap, int);
-		if (val->precision < 0)
-		{
-			val->precision = 0;
-			val->dot = 0;
-		}
-	}
+		ft_check_precision_negative(val, ap);
 	else
 		return ;
 }

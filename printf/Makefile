@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/23 16:14:36 by hyson             #+#    #+#              #
-#    Updated: 2021/04/26 20:05:40 by hyson            ###   ########.fr        #
+#    Updated: 2021/04/30 15:36:46 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,6 @@ SRCS =	ft_atoi.c \
 OBJS = $(SRCS:%.c=%.o)
 
 all : $(NAME)
-
-bonus : $(NAME)
-	$(CC) $(FLAGS) -c $(BONUS_SRCS)
-	ar -rc $(NAME) $(BONUS_OBJS)
 
 $(NAME) : $(OBJS)
 	ar -rc $(NAME) $(OBJS)
