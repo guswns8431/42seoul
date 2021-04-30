@@ -6,24 +6,24 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/26 19:39:15 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:06:15 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static	int	ft_max(int pre, int len)
+static int	ft_max(int pre, int len)
 {
 	if (pre > len)
 		len = pre;
 	return (len);
 }
 
-void	ft_print_type_lowx(t_option *val, va_list ap)
+void		ft_print_type_lowx(t_option *val, va_list ap)
 {
-	unsigned	int	nbr;
-	int		len;
-	int		tmp;
+	unsigned int	nbr;
+	int				len;
+	int				tmp;
 
 	len = 0;
 	nbr = va_arg(ap, unsigned int);

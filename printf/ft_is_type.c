@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:37:18 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/20 15:36:37 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:20:10 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ int	ft_is_type(char c)
 		return (1);
 	else if (c == 'X')
 		return (1);
-	else if (c == '%') //이 부분 %를 위해서 추가했어요
+	else if (c == '%')
 		return (1);
 	else
 		return (0);
 	return (0);
 }
-

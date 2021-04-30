@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/20 16:38:08 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:05:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_print_type_c(t_option *val, va_list ap)
 	}
 	else
 	{
-	//	printf("i : %d width : %d\n",i, val->width);
 		while (--i > 0)
 			write(1, " ", 1);
 		write(1, &c, 1);

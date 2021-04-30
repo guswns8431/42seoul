@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:07:40 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/21 17:27:37 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:07:17 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_check_option(t_option *val, char **c, va_list ap)
 		val->zero = 1;
 	else if (**c >= '1' && **c <= '9' && val->dot == 0)
 		val->width = ft_atoi(c);
-	else if(**c == '*' && val->dot == 0)
+	else if (**c == '*' && val->dot == 0)
 	{
 		val->width = va_arg(ap, int);
 		if (val->width < 0)
@@ -39,7 +39,7 @@ void	ft_check_option(t_option *val, char **c, va_list ap)
 		if (val->precision < 0)
 		{
 			val->precision = 0;
-				val->dot = 0;
+			val->dot = 0;
 		}
 	}
 	else

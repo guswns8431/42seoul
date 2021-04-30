@@ -6,16 +6,16 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 16:46:02 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/03 20:04:27 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:17:53 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_nbrlen(long long  nbr, int base)
+int	ft_nbrlen(long long nbr, int base)
 {
-	int len;
-	
+	int	len;
+
 	len = 1;
 	while ((nbr /= base) > 0)
 		++len;

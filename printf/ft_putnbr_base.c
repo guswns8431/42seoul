@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 16:58:36 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/30 14:36:34 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:17:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr_base(long long nb, char *base)
+void		ft_putnbr_base(long long nb, char *base)
 {
-	int base_len;
+	int	base_len;
 
 	base_len = ft_strlen(base);
 	if (nb < 0)
