@@ -9,9 +9,9 @@ int main(void)
 	int x = -1;
 	int make, real;
 
-	make = ft_printf("-->|%0*%|<--\n", -3);
+	make = ft_printf("%-*.*d", -2, 2, -2147483648);
 	printf("\n");
-	real = printf("-->|%0*%|<--\n", -3);
+	real = printf("%-*.*d", -2, 2, -2147483648);
 	printf("\n");
 	printf("make : %d, real : %d\n",make, real);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/26 16:19:37 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 14:37:19 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	int	ft_max(int pre, int len)
 
 void	ft_print_type_d(t_option *val, va_list ap)
 {
-	int	nbr;
+	long long	nbr;
 	int	len;
 	int	tmp;
 
