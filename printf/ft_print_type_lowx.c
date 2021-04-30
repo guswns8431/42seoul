@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 19:33:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/30 15:06:15 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 17:05:52 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,8 @@ static int	ft_max(int pre, int len)
 	return (len);
 }
 
-void		ft_print_type_lowx(t_option *val, va_list ap)
+static void	ft_process_minus(unsigned int nbr, t_option *val, int len)
 {
-	unsigned int	nbr;
-	int				len;
-	int				tmp;
-
-	len = 0;
-	nbr = va_arg(ap, unsigned int);
-	tmp = val->width;
-	if (nbr == 0 && val->precision == 0 && val->dot == 1)
-	{
-		while (tmp--)
-			val->len += write(1, " ", 1);
-		return ;
-	}
-	len = ft_nbrlen(nbr, 16);
 	if (val->minus == 1)
 	{
 		if (val->negative)
@@ -55,4 +41,23 @@ void		ft_print_type_lowx(t_option *val, va_list ap)
 		ft_process_precision_num(val->precision, ft_nbrlen(nbr, 16));
 		ft_putnbr_base(nbr, "0123456789abcdef");
 	}
+}
+
+void		ft_print_type_lowx(t_option *val, va_list ap)
+{
+	unsigned int	nbr;
+	int				len;
+	int				tmp;
+
+	len = 0;
+	nbr = va_arg(ap, unsigned int);
+	tmp = val->width;
+	if (nbr == 0 && val->precision == 0 && val->dot == 1)
+	{
+		while (tmp--)
+			val->len += write(1, " ", 1);
+		return ;
+	}
+	len = ft_nbrlen(nbr, 16);
+	ft_process_minus(nbr, val, len);
 }
