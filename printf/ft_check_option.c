@@ -6,33 +6,33 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:07:40 by hyson             #+#    #+#             */
-/*   Updated: 2021/04/30 15:51:14 by hyson            ###   ########.fr       */
+/*   Updated: 2021/04/30 15:54:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static	void	ft_check_width_negative(t_option *val, va_list ap)
+static void	ft_check_width_negative(t_option *val, va_list ap)
 {
-		val->width = va_arg(ap, int);
-		if (val->width < 0)
-		{
-			val->minus = 1;
-			val->width *= -1;
-		}
+	val->width = va_arg(ap, int);
+	if (val->width < 0)
+	{
+		val->minus = 1;
+		val->width *= -1;
+	}
 }
 
-static	void	ft_check_precision_negative(t_option *val, va_list ap)
+static void	ft_check_precision_negative(t_option *val, va_list ap)
 {
-		val->precision = va_arg(ap, int);
-		if (val->precision < 0)
-		{
-			val->precision = 0;
-			val->dot = 0;
-		}
+	val->precision = va_arg(ap, int);
+	if (val->precision < 0)
+	{
+		val->precision = 0;
+		val->dot = 0;
+	}
 }
 
-void	ft_check_option(t_option *val, char **c, va_list ap)
+void		ft_check_option(t_option *val, char **c, va_list ap)
 {
 	if (**c == '-')
 		val->minus = 1;
