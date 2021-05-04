@@ -6,10 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/04 19:45:36 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/04 20:05:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 int	get_next_line(int fd, char **line)
 {
 
+}
