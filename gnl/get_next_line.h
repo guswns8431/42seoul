@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:45:48 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/10 15:18:37 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/10 20:00:45 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h> // 이것도 빼야해
 
 # define ERROR -1
+# define HAS_BEEN_READ 1
+# define EOF_REACHED 0
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
