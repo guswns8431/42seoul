@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:45:48 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/07 17:53:37 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/10 15:18:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdio.h> // 이건 빼야해
 # include <fcntl.h> // 이것도 빼야해
+
+# define ERROR -1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096

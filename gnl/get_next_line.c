@@ -6,25 +6,37 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/09 22:31:53 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/10 17:26:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char *ft_backup(char *s1, char *s2)
+{
+	if (!s1 && !s2)
+		return (NULL);
+	
+
+
 int	get_next_line(int fd, char **line)
 {
-	static char *tmp;
-	
-	if (fd < 0 || !line || BUFFER_SIZE < 1)
-		return (-1);
+	static char *save[OPEN_MAX];
+	char 	*buf;
+	int	read_size;
 
-	printf("tmp : %s\n", tmp);
-	tmp = *line;
-	if(read(fd, *line, 10) == -1)
-		printf("read error\n");
-
-	printf("%s\n", *line);
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (fd < 0 || !line || BUFFER_SIZE < 1 || !buf)
+		return (ERROR);
+	read_size = read(fd, buf, BUFFER_SIZE);
+	while (read_size > 0)
+	{
+		buf[read_size] = '\0';
+		save[fd] = ft_backup(save[fd], buf);
+		read_size = read(fd, buf, BUFFER_SIZE);
+	}
+	free(buf);
+	buf = NULL;
 	return (0);
 }
 
