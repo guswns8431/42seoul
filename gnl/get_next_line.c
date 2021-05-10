@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/10 20:08:15 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/11 00:17:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ char *ft_backup(char *s1, char *s2)
 		return (s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	ret = (char *)malloc(i + j + 1);
-	if (!s)
+	ret = (char *)malloc(s1_len + s2_len + 1);
+	if (!ret)
 		return (NULL);
-	ft_strlcpy(ret, s1, i + 1);
-	ft_strlcpy(ret + i, s2, j + 1);
+	ft_strlcpy(ret, s1, s1_len + 1);
+	ft_strlcpy(ret + s1_len, s2, s2_len + 1);
 	return (ret);
 }
 
@@ -69,7 +69,7 @@ int		ft_exception(char **save, char **line, int read_size)
 
 	if (read_size < 0)
 		return (ERROR);
-	idx = ft_check_newline(*save)
+	idx = ft_check_newline(*save);
 	if (*save && idx >= 0)
 		return (ft_split_line(save, line, idx));
 	else if (*save)
@@ -99,32 +99,16 @@ int	get_next_line(int fd, char **line)
 	{
 		buf[read_size] = '\0';
 		save[fd] = ft_backup(save[fd], buf);
-		index = ft_check_newline(save[fd])
+		index = ft_check_newline(save[fd]);
 		if (index >= 0)
 		{
 			free(buf);
 			buf = NULL;
-			return (ft_split_line(&save[fd], line, index);
+			return (ft_split_line(&save[fd], line, index));
 		}
 		read_size = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);
 	buf = NULL;
 	return (ft_exception(&save[fd], line, read_size));
-}
-
-int main()
-{
-	int fd;
-	char *s;
-
-	fd = open("./test.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("cannot open file\n");
-		return (1);
-	}
-	get_next_line(fd, &s);
-	get_next_line(fd, &s);
-	return (0);
 }

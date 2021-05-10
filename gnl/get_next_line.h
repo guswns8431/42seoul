@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:45:48 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/10 20:00:45 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/10 23:08:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,14 @@
 # ifndef OPEN_MAX
 #  define OPEN_MAX 4096
 # endif
+
+int	get_next_line(int fd,char **line);
+char *ft_backup(char *s1, char *s2);
+int	ft_check_newline(char *str);
+int		ft_split_line(char **save, char **line, int idx);
+int		ft_exception(char **save, char **line, int read_size);
+int	ft_strlen(char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strdup(char *s1);
 
 #endif
