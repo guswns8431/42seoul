@@ -6,109 +6,133 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/11 00:17:48 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/11 18:22:35 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *ft_backup(char *s1, char *s2)
+static t_bool	ft_backup(char **s, char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*ret;
-
 	if (!s1 && !s2)
-		return (NULL);
+		return (FALSE);
 	if (!s1)
-		return (s2);
+	{
+		*s = ft_strdup(s2);
+		if (!*s)
+		{
+			free_ptr((void **)(&s1));
+			return (FALSE);
+		}
+		return (TRUE);
+	}
 	else
-		return (s1);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ret = (char *)malloc(s1_len + s2_len + 1);
-	if (!ret)
-		return (NULL);
-	ft_strlcpy(ret, s1, s1_len + 1);
-	ft_strlcpy(ret + s1_len, s2, s2_len + 1);
-	return (ret);
+    {
+        *s = s1;
+		return (TRUE);
+    }
+	if (!dalloc((void **)(s), ft_strlen(s1) + ft_strlen(s2) + 1, 1))
+	{
+		free_ptr((void **)(&s1));
+		return (FALSE);
+	}
+	ft_strlcpy(*s, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(*s + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	return (TRUE);
 }
 
-int	ft_check_newline(char *str)
+static t_bool	ft_check_newline(char *str, int *ret)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (str[++i])
-			if (str[i] == '\n')
-				return (i);
-	return (-1);
+	{
+		if (str[i] == '\n')
+		{
+			*ret = i;
+			return (TRUE);
+		}
+	}
+	*ret = -1;
+	return (FALSE);
 }
 
-int		ft_split_line(char **save, char **line, int idx)
+static int		ft_split_line(char **save, char **line, int idx)
 {
 	char	*tmp;
 
 	(*save)[idx] = '\0';
 	*line = ft_strdup(*save);
+    if (!*line)
+    {
+            free_ptr((void **)(save));
+            return (ERROR);
+    }
 	if (!ft_strlen(*save + idx + 1))
 	{
-		free(*save);
-		*save = NULL;
-		return (HAS_BEEN_READ);
+        free_ptr((void **)(save));
+		return (SUCCESS);
 	}
-	tmp = ft_strdup(*save + idx + 1);
-	free(*save);
-	*save = tmp;
-	return (HAS_BEEN_READ);
+    tmp = *save;
+	*save = ft_strdup(*save + idx + 1);
+    free_ptr((void **)(&tmp));
+    if (!*save)
+            return (ERROR);
+	return (SUCCESS);
 }
 
-int		ft_exception(char **save, char **line, int read_size)
+static int		ft_exception(char **save, char **line, int read_size)
 {
-	int idx;
+	int	idx;
 
+    idx = -1;
 	if (read_size < 0)
-		return (ERROR);
-	idx = ft_check_newline(*save);
-	if (*save && idx >= 0)
-		return (ft_split_line(save, line, idx));
-	else if (*save)
 	{
+		free_ptr((void **)(save));
+		return (ERROR);
+	}
+	if (*save)
+	{
+		if (ft_check_newline(*save, &idx))
+			return (ft_split_line(save, line, idx));
 		*line = *save;
 		*save = NULL;
-		return (EOF_REACHED);
+		return (END);
 	}
-	*line = ft_strdup("");
-	return (EOF_REACHED);
+	if (!dalloc((void **)(&line), 1, sizeof(char)))
+	{
+		free_ptr((void **)(save));
+		return (ERROR);
+	}
+	return (END);
 }
 
-int	get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
-	static char *save[OPEN_MAX];
-	char 	*buf;
-	int	read_size;
-	int	index;
+	static char	*save[OPEN_MAX];
+	char		*buf;
+	int			ret;
 
-	if (fd < 0 || !line || BUFFER_SIZE < 1)
+	if (fd < 0 || !line || BUFFER_SIZE < 1 || OPEN_MAX <= fd ||
+		!dalloc((void **)(&buf), BUFFER_SIZE + 1, 1))
 		return (ERROR);
-	buf = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buf)
-		return (ERROR);
-	read_size = read(fd, buf, BUFFER_SIZE);
-	while (read_size > 0)
+	while (TRUE)
 	{
-		buf[read_size] = '\0';
-		save[fd] = ft_backup(save[fd], buf);
-		index = ft_check_newline(save[fd]);
-		if (index >= 0)
+		ret = read(fd, buf, BUFFER_SIZE);
+		if (ret <= 0)
+			break ;
+		if (!ft_backup((&(save[fd])), save[fd], buf))
 		{
-			free(buf);
-			buf = NULL;
-			return (ft_split_line(&save[fd], line, index));
+			free_ptr((void **)(&buf));
+			return (ERROR);
 		}
-		read_size = read(fd, buf, BUFFER_SIZE);
+		if (ft_check_newline(save[fd], &ret))
+		{
+			free_ptr((void **)(&buf));
+			return (ft_split_line(&save[fd], line, ret));
+		}
 	}
-	free(buf);
-	buf = NULL;
-	return (ft_exception(&save[fd], line, read_size));
+	free_ptr((void **)(&buf));
+	return (ft_exception(&save[fd], line, ret));
 }
