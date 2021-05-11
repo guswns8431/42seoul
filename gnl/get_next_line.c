@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/11 19:41:23 by jseo             ###   ########.fr       */
+/*   Updated: 2021/05/12 01:35:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int		ft_exception(char **save, char **line, int read_size, char **buf)
 
 int				get_next_line(int fd, char **line)
 {
-	static char	*save[OPEN_MAX];
+	static char	*save[OPEN_MAX + 3];
 	char		*buf;
 	int			ret;
 
