@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <sys/fcntl.h>
+#include <stdio.h> // delete
+#include <sys/fcntl.h> // delete
 
 static t_bool	ft_backup(char **s, char *s1, char *s2)
 {
