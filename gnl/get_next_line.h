@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:45:48 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/11 18:17:38 by jseo             ###   ########.fr       */
+/*   Updated: 2021/05/11 18:55:51 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define FALSE          0
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE   4096
+#  define BUFFER_SIZE   42
 # endif
 
 # ifndef OPEN_MAX
