@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/11 19:05:42 by jseo             ###   ########.fr       */
+/*   Updated: 2021/05/11 19:41:23 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static t_bool	ft_backup(char **s, char *s1, char *s2)
 		return (TRUE);
 	}
 	else if (!s2)
-    {
-        *s = s1;
+	{
+		*s = s1;
 		return (TRUE);
-    }
+	}
 	if (!dalloc((void **)(s), ft_strlen(s1) + ft_strlen(s2) + 1, 1))
 	{
 		free_ptr((void **)(&s1));
@@ -38,7 +38,7 @@ static t_bool	ft_backup(char **s, char *s1, char *s2)
 	}
 	ft_strlcpy(*s, s1, ft_strlen(s1) + 1);
 	ft_strlcpy(*s + ft_strlen(s1), s2, ft_strlen(s2) + 1);
-    free_ptr((void **)(&s1));
+	free_ptr((void **)(&s1));
 	return (TRUE);
 }
 
@@ -65,29 +65,30 @@ static int		ft_split_line(char **save, char **line, int idx)
 
 	(*save)[idx] = '\0';
 	*line = ft_strdup(*save);
-    if (!*line)
-    {
-            free_ptr((void **)(save));
-            return (ERROR);
-    }
+	if (!*line)
+	{
+		free_ptr((void **)(save));
+		return (ERROR);
+	}
 	if (!ft_strlen(*save + idx + 1))
 	{
-        free_ptr((void **)(save));
+		free_ptr((void **)(save));
 		return (SUCCESS);
 	}
-    tmp = *save;
+	tmp = *save;
 	*save = ft_strdup(*save + idx + 1);
-    free_ptr((void **)(&tmp));
-    if (!*save)
-            return (ERROR);
+	free_ptr((void **)(&tmp));
+	if (!*save)
+		return (ERROR);
 	return (SUCCESS);
 }
 
-static int		ft_exception(char **save, char **line, int read_size)
+static int		ft_exception(char **save, char **line, int read_size, char **buf)
 {
 	int	idx;
 
-    idx = -1;
+	idx = -1;
+	free_ptr((void **)(buf));
 	if (read_size < 0)
 	{
 		free_ptr((void **)(save));
@@ -101,11 +102,12 @@ static int		ft_exception(char **save, char **line, int read_size)
 		*save = NULL;
 		return (END);
 	}
-	if (!dalloc((void **)(&line), 1, sizeof(char)))
-	{
-		free_ptr((void **)(save));
-		return (ERROR);
-	}
+	*line = ft_strdup("");
+    if (!*line)
+    {
+            free_ptr((void **)save);
+            return (ERROR);
+    }
 	return (END);
 }
 
@@ -121,7 +123,7 @@ int				get_next_line(int fd, char **line)
 	while (TRUE)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-        buf[ret] = '\0';
+		buf[ret] = '\0';
 		if (ret <= 0)
 			break ;
 		if (!ft_backup((&(save[fd])), save[fd], buf))
@@ -132,21 +134,26 @@ int				get_next_line(int fd, char **line)
 		if (ft_check_newline(save[fd], &ret))
 		{
 			free_ptr((void **)(&buf));
-			return (ft_split_line(&save[fd], line, ret));
+			return (ft_split_line(&(save[fd]), line, ret));
 		}
 	}
-	free_ptr((void **)(&buf));
-	return (ft_exception(&save[fd], line, ret));
+	return (ft_exception(&save[fd], line, ret, &buf));
 }
-
+/*
   int main(void)
   {
-          int fd = open("hi", O_RDONLY);
-          char *line;
- 
-          line = NULL;
-          int ret = get_next_line(fd, &line);
-          printf("%d, %s\n", ret, line);
-          return (0);
+			int fd = open("hi", O_RDONLY);
+			char *line;
+			int i;
+
+			i = -1;
+			line = NULL;
+			while (++i < 66)
+			{
+
+			int ret = get_next_line(fd, &line);
+			printf("%d, %s\n", ret, line);
+			}
+			return (0);
   }
-  
+ */
