@@ -6,11 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/11 18:22:35 by jseo             ###   ########.fr       */
+/*   Updated: 2021/05/11 19:05:42 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <sys/fcntl.h>
 
 static t_bool	ft_backup(char **s, char *s1, char *s2)
 {
@@ -19,14 +21,12 @@ static t_bool	ft_backup(char **s, char *s1, char *s2)
 	if (!s1)
 	{
 		*s = ft_strdup(s2);
+		free_ptr((void **)(&s1));
 		if (!*s)
-		{
-			free_ptr((void **)(&s1));
 			return (FALSE);
-		}
 		return (TRUE);
 	}
-	else
+	else if (!s2)
     {
         *s = s1;
 		return (TRUE);
@@ -38,6 +38,7 @@ static t_bool	ft_backup(char **s, char *s1, char *s2)
 	}
 	ft_strlcpy(*s, s1, ft_strlen(s1) + 1);
 	ft_strlcpy(*s + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+    free_ptr((void **)(&s1));
 	return (TRUE);
 }
 
@@ -120,6 +121,7 @@ int				get_next_line(int fd, char **line)
 	while (TRUE)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
+        buf[ret] = '\0';
 		if (ret <= 0)
 			break ;
 		if (!ft_backup((&(save[fd])), save[fd], buf))
@@ -136,3 +138,15 @@ int				get_next_line(int fd, char **line)
 	free_ptr((void **)(&buf));
 	return (ft_exception(&save[fd], line, ret));
 }
+
+  int main(void)
+  {
+          int fd = open("hi", O_RDONLY);
+          char *line;
+ 
+          line = NULL;
+          int ret = get_next_line(fd, &line);
+          printf("%d, %s\n", ret, line);
+          return (0);
+  }
+  
