@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/14 17:41:42 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/14 16:34:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static t_bool	ft_backup(char **s, char *s2)
+static t_bool	ft_strappend(char **s, char *s2)
 {
 	char		*s1;
 
@@ -79,8 +79,7 @@ static int		ft_split_line(char **save, char **line, int idx)
 	return (SUCCESS);
 }
 
-static int		ft_exception(char **save, char **line,
-		int read_size, char **buf)
+static int		ft_exception(char **save, char **line, int read_size, char **buf)
 {
 	int	idx;
 
@@ -99,7 +98,8 @@ static int		ft_exception(char **save, char **line,
 		*save = NULL;
 		return (END);
 	}
-    if (!dalloc((void **)line, 1, sizeof(char)))
+	*line = ft_strdup("");
+    if (!*line)
     {
             free_ptr((void **)save);
             return (ERROR);
@@ -122,7 +122,7 @@ int				get_next_line(int fd, char **line)
 		if (ret <= 0)
 			break ;
 		buf[ret] = '\0';
-		if (!ft_backup((&(save[fd])), buf))
+		if (!ft_strappend((&(save[fd])), buf))
 		{
 			free_ptr((void **)(&buf));
 			return (ERROR);
