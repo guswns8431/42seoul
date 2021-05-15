@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/14 16:34:29 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/15 17:12:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static t_bool	ft_strappend(char **s, char *s2)
+static t_bool	ft_backup(char **s, char *s2)
 {
-	char		*s1;
+	char	*s1;
 
 	if (!*s)
 	{
@@ -79,7 +79,8 @@ static int		ft_split_line(char **save, char **line, int idx)
 	return (SUCCESS);
 }
 
-static int		ft_exception(char **save, char **line, int read_size, char **buf)
+static int		ft_exception(char **save, char **line,
+		int read_size, char **buf)
 {
 	int	idx;
 
@@ -98,20 +99,19 @@ static int		ft_exception(char **save, char **line, int read_size, char **buf)
 		*save = NULL;
 		return (END);
 	}
-	*line = ft_strdup("");
-    if (!*line)
-    {
-            free_ptr((void **)save);
-            return (ERROR);
-    }
+	if (!dalloc((void **)line, 1, sizeof(char)))
+	{
+		free_ptr((void **)save);
+		return (ERROR);
+	}
 	return (END);
 }
 
 int				get_next_line(int fd, char **line)
 {
-	static char	*save[OPEN_MAX + 3];
 	char		*buf;
 	int			ret;
+	static char *save[OPEN_MAX + 3];
 
 	if (fd < 0 || !line || BUFFER_SIZE < 1 || OPEN_MAX <= fd ||
 		!dalloc((void **)(&buf), BUFFER_SIZE + 1, 1))
@@ -122,7 +122,7 @@ int				get_next_line(int fd, char **line)
 		if (ret <= 0)
 			break ;
 		buf[ret] = '\0';
-		if (!ft_strappend((&(save[fd])), buf))
+		if (!ft_backup((&(save[fd])), buf))
 		{
 			free_ptr((void **)(&buf));
 			return (ERROR);

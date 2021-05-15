@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:42:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/05/14 17:41:42 by hyson            ###   ########.fr       */
+/*   Updated: 2021/05/15 17:13:53 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	ft_backup(char **s, char *s2)
 {
-	char		*s1;
+	char	*s1;
 
 	if (!*s)
 	{
@@ -99,19 +99,19 @@ static int		ft_exception(char **save, char **line,
 		*save = NULL;
 		return (END);
 	}
-    if (!dalloc((void **)line, 1, sizeof(char)))
-    {
-            free_ptr((void **)save);
-            return (ERROR);
-    }
+	if (!dalloc((void **)line, 1, sizeof(char)))
+	{
+		free_ptr((void **)save);
+		return (ERROR);
+	}
 	return (END);
 }
 
 int				get_next_line(int fd, char **line)
 {
-	static char	*save[OPEN_MAX + 3];
 	char		*buf;
 	int			ret;
+	static char *save[OPEN_MAX + 3];
 
 	if (fd < 0 || !line || BUFFER_SIZE < 1 || OPEN_MAX <= fd ||
 		!dalloc((void **)(&buf), BUFFER_SIZE + 1, 1))
