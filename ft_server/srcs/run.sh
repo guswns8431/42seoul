@@ -28,9 +28,8 @@ service php7.3-fpm status
 service mysql start
 service php7.3-fpm restart
 mysql < var/www/html/phpmyadmin/sql/create_tables.sql -u root --skip-password
-mysqladmin -u root -p password
 
-mysql < ./tmp/query.sql
+mysql < ./tmp/query.sql -u root --skip-password
 
 wget https://wordpress.org/latest.tar.gz
 tar -xvf latest.tar.gz
