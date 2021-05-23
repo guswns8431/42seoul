@@ -2,14 +2,14 @@ FROM debian:buster
 
 ENV AUTOINDEX 1
 
-RUN apt-get update && apt-get install - y \
+RUN apt-get update && apt-get install -y \
 		nginx \
 		openssl \
 		vim \
 		php-fpm \
 		mariadb-server \
 		php-mysql \
-		wget \
+		wget 
 
 COPY ./srcs/run.sh ./tmp
 COPY ./srcs/default ./tmp
