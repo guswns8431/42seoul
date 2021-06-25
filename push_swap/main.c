@@ -6,28 +6,41 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/24 21:52:08 by hyson            ###   ########.fr       */
+/*   Updated: 2021/06/25 19:35:26 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void check_error(int argc, char **argv)
+int		ft_strcmp(char *s1, char *s2)
+{
+	int i = -1;
+	while (s1[++i] || s2[i])
+		if (s1[i] != s2[i])
+			return (0);
+	return (1);
+}
+
+void	check_error(int argc, char **argv)
 {
 	int i;
 	int j;
 
 	i = 0;
-
-	while (argv[++i])
+	while (++i < argc - 1)
 	{
-		j = -1;
-		while (argv[i][++j])
-			write(1, &argv[i][j], 1);
+		j = i + 1;
+		while (++j < argc)
+			if (ft_strcmp(argv[i], argv[j]))
+			{
+					write(2, "Error\n", 6);
+					exit(0);
+			}
 	}
 }
 
-int main(int argc, char **argv)
+
+int		main(int argc, char **argv)
 {
 	check_error(argc, argv);
 	return (0);
