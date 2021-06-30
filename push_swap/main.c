@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 15:39:09 by hyson            ###   ########.fr       */
+/*   Updated: 2021/06/30 16:34:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@ int		ft_isinteger(char *s)
 {
 	int			i;
 	long long	num;
+	int		sign = 1;
 
 	i = -1;
 	num = 0;
 	while (s[++i])
+	{
+		if (s[i] == '-')
+		{
+			sign = -1;
+			++i;
+		}
 		num = num * 10 + (s[i] - '0');
+	}
+	num *= sign;
 	if (num >= -2147483648 && num <= 2147483647)
 		return (1);
 	return (0);
