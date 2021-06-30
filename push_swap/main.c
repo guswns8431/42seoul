@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 16:34:29 by hyson            ###   ########.fr       */
+/*   Updated: 2021/06/30 20:40:26 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_strcmp(char *s1, char *s2)
 	return (1);
 }
 
-void	ft_check_error(int argc, char **argv)
+bool	ft_check_error(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -70,24 +70,18 @@ void	ft_check_error(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (!ft_isnum(argv[i]) || !ft_isinteger(argv[i]))
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
+			return (true);
 		j = i;
 		while (++j < argc)
-		{
 			if (ft_strcmp(argv[i], argv[j]))
-			{
-				write(2, "Error\n", 6);
-				exit(1);
-			}
-		}
+				return (true);
 	}
+	return (false);
 }
 
 int		main(int argc, char **argv)
 {
-	ft_check_error(argc, argv);
+	if(ft_check_error(argc, argv))
+		write(2, "Error\n", 6);
 	return (0);
 }
