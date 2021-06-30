@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 21:28:46 by hyson            ###   ########.fr       */
+/*   Updated: 2021/06/30 21:40:17 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ typedef struct stack
 
 int		ft_strcmp(char *s1, char *s2);
 bool		ft_check_error(int argc, char **argv);
+
+t_stack	*create_stack(void);
 
 #endif
