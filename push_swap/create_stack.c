@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   create_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 21:28:46 by hyson            ###   ########.fr       */
+/*   Created: 2021/06/30 21:36:57 by hyson             #+#    #+#             */
+/*   Updated: 2021/06/30 21:39:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h> //빼야해
-# include <stdbool.h>
+#include "push_swap.h"
 
-typedef struct node
+t_stack	*create_stack(void)
 {
-	int data;
-	struct node *pre;
-	struct node *next;
-}		t_node;
+	t_stack s;
 
-typedef struct stack
-{
-	struct node *top;
-}		t_stack;
-
-int		ft_strcmp(char *s1, char *s2);
-bool		ft_check_error(int argc, char **argv);
-
-#endif
+	s = (t_stack *)malloc(sizeof(t_stack));
+	s->top = NULL;
+	return (s);
+}
