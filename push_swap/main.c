@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/29 18:41:06 by hyson            ###   ########.fr       */
+/*   Updated: 2021/06/30 15:39:09 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_check_error(int argc, char **argv)
 		if (!ft_isnum(argv[i]) || !ft_isinteger(argv[i]))
 		{
 			write(2, "Error\n", 6);
-			exit(0);
+			exit(1);
 		}
 		j = i;
 		while (++j < argc)
@@ -71,7 +71,7 @@ void	ft_check_error(int argc, char **argv)
 			if (ft_strcmp(argv[i], argv[j]))
 			{
 				write(2, "Error\n", 6);
-				exit(0);
+				exit(1);
 			}
 		}
 	}
