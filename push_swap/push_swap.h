@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/01 16:04:33 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/01 21:56:47 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,25 @@
 # include <stdio.h> //빼야해
 # include <stdbool.h>
 
-typedef struct node
+typedef struct s_node
 {
 	int val;
-	struct node *prev;
-	struct node *next;
+	struct s_node *prev;
+	struct s_node *next;
 }		t_node;
 
-typedef struct stack
+typedef struct s_stack
 {
-	struct node *top;
+	struct s_node *top;
 }		t_stack;
 
 int		ft_strcmp(char *s1, char *s2);
 bool		ft_check_error(int argc, char **argv);
 
-bool	create_stack(void);
+bool	create_stack(t_stack **stack);
 bool	create_node(t_node **node, int val);
+bool	insert_node(t_stack **stack, int val);
+void	delete_node(t_stack **stack);
 
 /*
 ** -----------------------------------------------

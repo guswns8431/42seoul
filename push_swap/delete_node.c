@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   delete_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/01 15:12:57 by hyson            ###   ########.fr       */
+/*   Created: 2021/07/01 21:46:00 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/01 22:54:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	delete_node(t_stack **stack)
 {
-	size_t	i;
+	t_node *tmp;
 
-	i = -1;
-	while (++i < len)
-		((unsigned char*)b)[i] = c;
-	return (b);
+	tmp = (*stack)->top;
+	(*stack)->top = (*stack)->top->prev;
+	(*stack)->top->next = NULL;
+	free(tmp);
 }

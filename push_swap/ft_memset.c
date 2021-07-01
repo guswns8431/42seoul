@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 16:13:09 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/01 20:02:36 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/01 20:04:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool create_node(t_node **node, int val)
+void	ft_memset(void *b, int c, size_t len)
 {
-	if (!ft_calloc((void **)node, 1, sizeof(t_node)))
-		return (false);
-	(*node)->val = val;
-	(*node)->next = NULL;
-	(*node)->prev = NULL;
-	return (true);
-}
+	size_t	i;
 
-bool	create_stack(t_stack **stack)
-{
-	if (!ft_calloc((void **)stack, 1, sizeof(t_stack)))
-		return (false);
-	(*stack)->top = NULL;
-	return (true);
+	i = -1;
+	while (++i < len)
+		((unsigned char*)b)[i] = c;
 }
