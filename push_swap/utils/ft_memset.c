@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_stack.c                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/30 21:36:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 21:39:21 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/21 19:41:04 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/01 15:12:57 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*create_stack(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_stack s;
+	size_t	i;
 
-	s = (t_stack *)malloc(sizeof(t_stack));
-	s->top = NULL;
-	return (s);
+	i = -1;
+	while (++i < len)
+		((unsigned char*)b)[i] = c;
+	return (b);
 }

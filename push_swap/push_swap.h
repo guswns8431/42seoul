@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 21:40:17 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/01 16:04:33 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 typedef struct node
 {
-	int data;
-	struct node *pre;
+	int val;
+	struct node *prev;
 	struct node *next;
 }		t_node;
 
@@ -32,6 +32,16 @@ typedef struct stack
 int		ft_strcmp(char *s1, char *s2);
 bool		ft_check_error(int argc, char **argv);
 
-t_stack	*create_stack(void);
+bool	create_stack(void);
+bool	create_node(t_node **node, int val);
+
+/*
+** -----------------------------------------------
+** utils
+** -----------------------------------------------
+*/
+
+void	ft_memset(void *b, int c, size_t len);
+bool	ft_calloc(void **tmp, size_t cnt, size_t size);
 
 #endif
