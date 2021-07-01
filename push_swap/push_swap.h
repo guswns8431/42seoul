@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/01 21:56:47 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/02 01:12:30 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ bool	create_stack(t_stack **stack);
 bool	create_node(t_node **node, int val);
 bool	insert_node(t_stack **stack, int val);
 void	delete_node(t_stack **stack);
+
+void	push(t_stack **a, t_stack **b, char s);
 
 /*
 ** -----------------------------------------------

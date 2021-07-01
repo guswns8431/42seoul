@@ -2,24 +2,35 @@
 
 int main(void)
 {
-	t_stack *stack;
+	t_stack *a;
+	t_stack *b;
 
-	create_stack(&stack);
-	insert_node(&stack, 1);
-	insert_node(&stack, 2);
-	insert_node(&stack, 3);
+	create_stack(&a);
+	create_stack(&b);
+	insert_node(&a, 1);
+	insert_node(&a, 2);
+	insert_node(&a, 3);
 
-	t_node *cur = stack->top;
+	insert_node(&b, 4);
+	insert_node(&b, 5);
+	insert_node(&b, 6);
+
+	//printf("%d", b->top->val);
+	//printf("%d", b->top->prev->val);
+	push(&a, &b, 'b');
+	push(&a, &b, 'b');
+
+	t_node *cur = a->top;
+	printf("%d", cur->val);
 	while (cur->prev != NULL)
 	{
-		cur = cur->prev;
 		printf("%d\n", cur->val);
-
+		cur = cur->prev;
+		if (cur->prev == NULL)
+			printf("%d\n", cur->val);
 	}
 
-	delete_node(&stack);
-
-	printf("%d", stack->top->val);
-	printf("%d", stack->top->prev->val);
+	//printf("%d", b->top->val);
+	//printf("%d", b->top->prev->val);
 	return (0);
 }
