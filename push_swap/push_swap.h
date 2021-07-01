@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/02 01:12:30 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/02 05:30:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,19 @@ bool	create_node(t_node **node, int val);
 bool	insert_node(t_stack **stack, int val);
 void	delete_node(t_stack **stack);
 
-void	push(t_stack **a, t_stack **b, char s);
 
 /*
-** -----------------------------------------------
+** ---------------------------------------------------
+** instruction
+** ---------------------------------------------------
+*/
+void	push(t_stack **a, t_stack **b, char stack);
+void	swap(t_stack **stack);
+
+/*
+** ---------------------------------------------------
 ** utils
-** -----------------------------------------------
+** ---------------------------------------------------
 */
 
 void	ft_memset(void *b, int c, size_t len);

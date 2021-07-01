@@ -17,11 +17,10 @@ int main(void)
 
 	//printf("%d", b->top->val);
 	//printf("%d", b->top->prev->val);
-	push(&a, &b, 'b');
-	push(&a, &b, 'b');
 
+	swap(&a);
+	swap(&a);
 	t_node *cur = a->top;
-	printf("%d", cur->val);
 	while (cur->prev != NULL)
 	{
 		printf("%d\n", cur->val);
