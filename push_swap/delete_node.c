@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:46:00 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/01 22:54:16 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/02 10:46:08 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	delete_node(t_stack **stack)
 
 	tmp = (*stack)->top;
 	(*stack)->top = (*stack)->top->prev;
+	if ((*stack)->top == NULL)
+		(*stack)->bottom = NULL;
 	(*stack)->top->next = NULL;
 	free(tmp);
 }

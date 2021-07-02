@@ -9,7 +9,6 @@ int main(void)
 	create_stack(&b);
 	insert_node(&a, 1);
 	insert_node(&a, 2);
-	insert_node(&a, 3);
 
 	insert_node(&b, 4);
 	insert_node(&b, 5);
@@ -18,7 +17,6 @@ int main(void)
 	//printf("%d", b->top->val);
 	//printf("%d", b->top->prev->val);
 
-	swap(&a);
 	swap(&a);
 	t_node *cur = a->top;
 	while (cur->prev != NULL)

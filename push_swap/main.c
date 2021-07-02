@@ -6,13 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/06/30 20:40:26 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/02 17:27:09 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_isinteger(char *s)
+int		ft_isinteger(char *s, t_stack **a)
 {
 	int			i;
 	long long	num;
@@ -30,6 +30,7 @@ int		ft_isinteger(char *s)
 		num = num * 10 + (s[i] - '0');
 	}
 	num *= sign;
+	insert_node(a, num);
 	if (num >= -2147483648 && num <= 2147483647)
 		return (1);
 	return (0);
@@ -61,7 +62,7 @@ int		ft_strcmp(char *s1, char *s2)
 	return (1);
 }
 
-bool	ft_check_error(int argc, char **argv)
+bool	ft_check_error(int argc, char **argv, t_stack **a)
 {
 	int	i;
 	int	j;
@@ -69,7 +70,7 @@ bool	ft_check_error(int argc, char **argv)
 	i = 0;
 	while (++i < argc)
 	{
-		if (!ft_isnum(argv[i]) || !ft_isinteger(argv[i]))
+		if (!ft_isnum(argv[i]) || !ft_isinteger(argv[i], a))
 			return (true);
 		j = i;
 		while (++j < argc)
@@ -81,7 +82,31 @@ bool	ft_check_error(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
-	if(ft_check_error(argc, argv))
+	t_stack *a;
+	t_stack *b;
+
+	create_stack(&a);
+	create_stack(&b);
+	if(ft_check_error(argc, argv, &a))
 		write(2, "Error\n", 6);
+	push(&a, &b, 'b');
+	push(&a, &b, 'b');
+	t_node *cur = a->top;
+	while (cur->prev != NULL)
+	{
+		printf("%d", cur->val);
+		cur = cur->prev;
+		if (cur->prev == NULL)
+			printf("%d", cur->val);
+	}
+	printf("\n");
+	cur = b->top;
+	while (cur->prev != NULL)
+	{
+		printf("%d", cur->val);
+		cur = cur->prev;
+		if (cur->prev == NULL)
+			printf("%d", cur->val);
+	}
 	return (0);
 }
