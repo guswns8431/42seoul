@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/02 17:27:09 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/05 18:00:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int		main(int argc, char **argv)
 		write(2, "Error\n", 6);
 	push(&a, &b, 'b');
 	push(&a, &b, 'b');
+	write(1, "test\n", 5);
+
 	t_node *cur = a->top;
 	while (cur->prev != NULL)
 	{
