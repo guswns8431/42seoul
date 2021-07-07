@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/02 16:38:27 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/07 16:16:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	swap(t_stack **stack);
 
 void	ft_memset(void *b, int c, size_t len);
 bool	ft_calloc(void **tmp, size_t cnt, size_t size);
+void	free_ptr(void **ptr);
 
 #endif

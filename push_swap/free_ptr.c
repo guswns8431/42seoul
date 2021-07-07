@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_node.c                                      :+:      :+:    :+:   */
+/*   free_ptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 21:46:00 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/07 16:17:28 by hyson            ###   ########.fr       */
+/*   Created: 2021/07/07 16:10:02 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/07 16:11:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	delete_node(t_stack **stack)
+void free_ptr(void **ptr)
 {
-	t_node *tmp;
-
-	write(1, "test3\n", 6);
-	tmp = (*stack)->top;
-	(*stack)->top = (*stack)->top->prev;
-	if ((*stack)->top == NULL)
-		(*stack)->bottom = NULL;
-	//(*stack)->top->next = NULL;
-	write(1, "test4\n", 6);
-	free_ptr((void **)&tmp);
+	if (*ptr)
+		free(*ptr);
+	*ptr = NULL;
 }
