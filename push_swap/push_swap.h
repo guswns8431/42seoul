@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/07 16:16:48 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/08 23:17:38 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	delete_node(t_stack **stack);
 */
 void	push(t_stack **a, t_stack **b, char stack);
 void	swap(t_stack **stack);
+void	rotate(t_stack **stack);
 
 /*
 ** ---------------------------------------------------

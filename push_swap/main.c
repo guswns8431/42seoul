@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/07 21:49:31 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/08 23:21:47 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		main(int argc, char **argv)
 	create_stack(&b);
 	if(ft_check_error(argc, argv, &a))
 		write(2, "Error\n", 6);
-	swap(&a);
+	rotate(&a);
 
 	t_node *cur = a->top;
 	while (cur)
@@ -99,11 +99,13 @@ int		main(int argc, char **argv)
 	}
 	
 	printf("\n");
+	/*
 	cur = b->top;
 	while (cur)
 	{
 		printf("%d", cur->val);
 		cur = cur->prev;
 	}
+	*/
 	return (0);
 }
