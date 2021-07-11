@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/08 23:21:47 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/11 23:21:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		main(int argc, char **argv)
 	rotate(&a);
 
 	t_node *cur = a->top;
+	printf("%d", a->top->prev->prev->val);
 	while (cur)
 	{
 		printf("%d", cur->val);
