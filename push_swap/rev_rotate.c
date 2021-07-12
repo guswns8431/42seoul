@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 14:44:33 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/12 16:10:36 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/12 23:58:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	rev_rotate(t_stack **stack)
 		return ;
 	tmp = (*stack)->top;
 	(*stack)->top = (*stack)->bottom;
-	(*stack)->top->next = NULL;
 	(*stack)->top->prev = tmp;
-	(*stack)->bottom = (*stack)->top->prev;
-	(*stack)->bottom->next = (*stack)->top->prev->prev;
+	tmp->next = (*stack)->bottom;
+	(*stack)->bottom = (*stack)->top->next;
 	(*stack)->bottom->prev = NULL;
+	write(1, "test7\n", 6);
+	(*stack)->bottom->next = (*stack)->top->next->next;
+	write(1, "test8\n", 6);
+	(*stack)->top->next = NULL;
+	write(1, "test9\n", 6);
 }

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 18:12:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/12 16:03:05 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/13 00:04:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ int		main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	rev_rotate(&a);
+	//rev_rotate(&a);
 
+	printf("%d\n", a->bottom->next->val);
 	t_node *cur = a->top;
 	while (cur)
 	{
