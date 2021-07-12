@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 16:11:34 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/08 23:17:38 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/12 15:11:12 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_stack
 	struct s_node *bottom;
 }		t_stack;
 
-int		ft_strcmp(char *s1, char *s2);
 bool		ft_check_error(int argc, char **argv, t_stack **a);
 
 bool	create_stack(t_stack **stack);
@@ -47,6 +46,7 @@ void	delete_node(t_stack **stack);
 void	push(t_stack **a, t_stack **b, char stack);
 void	swap(t_stack **stack);
 void	rotate(t_stack **stack);
+void	rev_rotate(t_stack **stack);
 
 /*
 ** ---------------------------------------------------
@@ -54,6 +54,7 @@ void	rotate(t_stack **stack);
 ** ---------------------------------------------------
 */
 
+int		ft_strcmp(char *s1, char *s2);
 void	ft_memset(void *b, int c, size_t len);
 bool	ft_calloc(void **tmp, size_t cnt, size_t size);
 void	free_ptr(void **ptr);
