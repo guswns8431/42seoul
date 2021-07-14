@@ -6,7 +6,7 @@
 /*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:59:49 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:41:16 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/14 19:46:01 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	test_swap(t_mother *m)
 {
-	pb(m, "");
-	pb(m, "");
-	pb(m, "");
-	iter(m, 2, sa, "sa");
-	iter(m, 2, sb, "sb");
+	iter(m, 2, pb, "");
+	iter(m, 1, sa, "sa");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	iter(m, 1, sb, "sb");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
+	ft_putchar_fd('\n', STDOUT_FILENO);
 	iter(m, 2, ss, "ss");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
 }

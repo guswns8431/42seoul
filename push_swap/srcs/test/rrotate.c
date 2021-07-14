@@ -6,7 +6,7 @@
 /*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:59:41 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:41:13 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/14 19:37:43 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 void	test_rrotate(t_mother *m)
 {
 	iter(m, 3, pb, "");
-	iter(m, 3, rra, "rra");
-	iter(m, 3, rrb, "rrb");
-	iter(m, 3, rrr, "rrr");
+	iter(m, 2, rra, "rra");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	iter(m, 2, rrb, "rrb");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	iter(m, 2, rrr, "rrr");
+	show_cw(m->a->h);
+	show_cw(m->b->h);
 }
