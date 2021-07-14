@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/14 16:56:15 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/14 16:56:17 by hyson            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static bool	overflowed(int former, int latter)
@@ -15,16 +27,16 @@ bool	ft_atoi(char **s, int *v)
 	int	sign;
 	int	tmp;
 
-	while (jisspace(**s))
+	while (ft_isspace(**s))
 		++(*s);
 	sign = 1;
 	if (**s == '+' || **s == '-')
 		if (*((*s)++) == '-')
 			sign = -1;
-	if (!jisdigit(**s))
+	if (!ft_isdigit(**s))
 		return (false);
 	*v = (*((*s)++) - '0') * sign;
-	while (jisdigit(**s))
+	while (ft_isdigit(**s))
 	{
 		tmp = (*((*s)++) - '0');
 		if (sign < 0)
