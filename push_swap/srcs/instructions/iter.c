@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   iter.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:58:20 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 16:58:21 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/14 18:41:58 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	iter(t_mother **m, int cnt, void (*f)(t_mother **, char *), char *cmd)
+void	iter(t_mother *m, int cnt, void (*f)(t_mother *, char *), char *cmd)
 {
 	int		i;
 

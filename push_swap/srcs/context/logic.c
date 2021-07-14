@@ -3,11 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   logic.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:55:52 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 16:55:54 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/14 18:12:03 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	loigc(t_mother *m)
+{
+	m = NULL;
+}

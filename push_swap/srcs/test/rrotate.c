@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rrotate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:59:41 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 16:59:43 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/14 18:41:13 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test_rrotate(t_mother **m)
+void	test_rrotate(t_mother *m)
 {
 	iter(m, 3, pb, "");
 	iter(m, 3, rra, "rra");
