@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:55:59 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 16:56:04 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/14 18:44:50 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	free_mother(t_mother **m)
 {
-	// 여기서 선행 검사
-	// 해제 <- 리스트 clear
-	ft_free(&((*m)->a));
-	ft_free(&((*m)->b));
+	// clear((*m)->a->h);
+	// clear((*m)->b->h);
+	ft_free((void **)(&((*m)->a)));
+	ft_free((void **)(&((*m)->b)));
 }
 
 void	exit_invalid(t_mother *m)

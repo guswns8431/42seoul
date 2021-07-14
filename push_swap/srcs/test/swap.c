@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:59:49 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 16:59:51 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/14 18:41:16 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test_swap(t_mother **m)
+void	test_swap(t_mother *m)
 {
 	pb(m, "");
 	pb(m, "");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/14 16:55:40 by hyson             #+#    #+#              #
-#    Updated: 2021/07/14 16:55:42 by hyson            ###   ########.fr        #
+#    Updated: 2021/07/14 18:13:47 by jseo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,17 @@ D_INST		=		instructions/
 D_TEST		=		test/
 SRC_LIST	=		main.c					\
 					$(D_CTX)logic.c			\
+					$(D_CTX)node.c			\
 					$(D_CTX)term.c			\
 					$(D_FT)ft_atoi.c		\
 					$(D_FT)ft_calloc.c		\
 					$(D_FT)ft_free.c		\
+					$(D_FT)ft_isdigit.c		\
+					$(D_FT)ft_isspace.c		\
 					$(D_FT)ft_memset.c		\
 					$(D_FT)ft_putchar_fd.c	\
 					$(D_FT)ft_putendl_fd.c	\
+					$(D_FT)ft_putnbr_fd.c	\
 					$(D_FT)ft_putstr_fd.c	\
 					$(D_FT)ft_strlen.c		\
 					$(D_INST)iter.c			\
