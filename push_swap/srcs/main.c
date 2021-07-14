@@ -6,7 +6,7 @@
 /*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:59:15 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:41:45 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/14 19:08:09 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 	if (!init(&(m.a)) || !init(&(m.b)) || !check(argc, argv, &m))
 		exit_invalid(&m);
 	connect(m.a);
-	test_push(&m);
+	test_rrotate(&m);
 	// logic(&m);
 	exit_valid(&m);
 }

@@ -6,7 +6,7 @@
 /*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:58:45 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:40:52 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/14 18:57:34 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void	sa(t_mother *m, char *s)
 {
 	m = NULL;
-	s = NULL;
+	if (*s)
+		ft_putendl_fd(s, STDOUT_FILENO);
 }
 
 void	sb(t_mother *m, char *s)
 {
 	m = NULL;
-	s = NULL;
+	if (*s)
+		ft_putendl_fd(s, STDOUT_FILENO);
 }
 
 void	ss(t_mother *m, char *s)
 {
 	m = NULL;
-	s = NULL;
+	if (*s)
+		ft_putendl_fd(s, STDOUT_FILENO);
 }
