@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 18:09:10 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/17 23:01:25 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/20 15:30:59 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 	if (!init(&(m.a)) || !init(&(m.b)) || !check(argc, argv, &m))
 		exit_invalid(&m);
 	connect(m.a);
-	test_swap(&m);
+	test_push(&m);
 	// logic(&m);
 	exit_valid(&m);
 }
