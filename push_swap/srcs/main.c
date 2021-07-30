@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 18:09:10 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/30 14:34:06 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/30 16:37:19 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ int	main(int argc, char **argv)
 	else if (m.a_len <= 5)
 		sort_under_5(&m, m.a_len);
 	else
-		a_to_b(&m);
+		sort_a(&m, m.a_len);
 	exit_valid(&m);
 }

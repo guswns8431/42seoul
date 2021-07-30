@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logic.c                                            :+:      :+:    :+:   */
+/*   logic_alpha.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 14:28:49 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/30 14:41:41 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/30 21:17:10 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,12 @@ void	sort_under_3(t_mother *m)
 	}
 }
 
-static void	find_median(t_node *tmp, int arr[5], int size)
-{
-	int		i;
-	int		j;
-	int		v;
-
-	i = -1;
-	while (tmp)
-	{
-		arr[++i] = tmp->v;
-		tmp = tmp->n;
-	}
-	i = -1;
-	while (++i < size - 1)
-	{
-		j = i;
-		while (++j < size)
-		{
-			if (arr[i] > arr[j])
-			{
-				v = arr[i];
-				arr[i] = arr[j];
-				arr[j] = v;
-			}
-		}
-	}
-}
-
 void	sort_under_5(t_mother *m, int size)
 {
 	int		i;
 	int		arr[5];
 
-	find_median(m->a->h, arr, size);
+	find_array(m->a->h, arr, size);
 	i = -1;
 	while (++i < size)
 	{
@@ -92,12 +64,54 @@ void	sort_under_5(t_mother *m, int size)
 	}
 }
 
-void	b_to_a(t_mother *m)
+void	sort_b(t_mother *m, int size)
 {
-	m = NULL;
+	t_pivot	p;
+	t_inst	i;
+
+	ft_memset(&p, 0, sizeof(t_pivot));
+	ft_memset(&i, 0, sizeof(t_inst));
+	if (find_deter(m->b->h, size, is_asc))
+	{
+		iter(m, size, pa, "pa");
+		return ;
+	}
+	if (size < 3)
+	{
+		if (size == 2 && m->b->h->v < m->b->h->n->v)
+			sb(m, "sb");
+		iter(m, size, pa, "pa");
+		return ;
+	}
+	if (!find_pivot(m->b->h, &(p.p1), &(p.p2), size))
+		exit_invalid(m);
+	b_to_a(m, size, &p, &i);
+	sort_a(m, i.pa - i.ra);
+	retrieve(m, i.ra, i.rb);
+	sort_a(m, i.ra);
+	sort_b(m, i.rb);
 }
 
-void	a_to_b(t_mother *m)
+void	sort_a(t_mother *m, int size)
 {
-	m = NULL;
+	t_pivot	p;
+	t_inst	i;
+
+	ft_memset(&p, 0, sizeof(t_pivot));
+	ft_memset(&i, 0, sizeof(t_inst));
+	if (find_deter(m->a->h, size, is_dsc))
+		return ;
+	if (size < 3)
+	{
+		if (size == 2 && m->a->h->v > m->a->h->n->v)
+			sa(m, "sa");
+		return ;
+	}
+	if (!find_pivot(m->a->h, &(p.p1), &(p.p2), size))
+		exit_invalid(m);
+	a_to_b(m, size, &p, &i);
+	retrieve(m, i.ra, i.rb);
+	sort_a(m, i.ra);
+	sort_b(m, i.rb);
+	sort_b(m, i.pb - i.rb);
 }

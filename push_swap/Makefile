@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/18 22:56:46 by hyson             #+#    #+#              #
-#    Updated: 2021/07/30 12:43:59 by hyson            ###   ########.fr        #
+#    Updated: 2021/07/30 15:55:27 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ D_FT		=		ft_functions/
 D_INST		=		instructions/
 D_TEST		=		test/
 SRC_LIST	=		main.c					\
-					$(D_CTX)logic.c			\
+					$(D_CTX)find.c			\
+					$(D_CTX)logic_alpha.c	\
+					$(D_CTX)logic_beta.c	\
 					$(D_CTX)stack.c			\
 					$(D_CTX)term.c			\
 					$(D_FT)ft_atoi.c		\

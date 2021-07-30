@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 14:30:17 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/30 14:30:21 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/30 20:47:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef enum e_exit
 	VALID,
 	INVALID,
 }					t_exit;
+
+typedef struct s_inst
+{
+	int			ra;
+	int			rb;
+	int			pa;
+	int			pb;
+}				t_inst;
+
+typedef struct s_pivot
+{
+	int			p1;
+	int			p2;
+}				t_pivot;
 
 typedef struct s_node
 {
@@ -46,16 +60,26 @@ typedef struct s_mother
 	struct s_stack	*b;
 }					t_mother;
 
+void	print_stack(t_mother *m);
+
 /*
 ** -----------------------------------------------------------------------------
 ** context
 ** -----------------------------------------------------------------------------
 */
 
+bool	is_asc(int v1, int v2);
+bool	is_dsc(int v1, int v2);
+void	find_array(t_node *tmp, int *arr, int size);
+bool	find_deter(t_node *tmp, int size, bool (*f)(int, int));
+bool	find_pivot(t_node *tmp, int *p1, int *p2, int size);
+void	retrieve(t_mother *m, int ra, int rb);
+void	b_to_a(t_mother *m, int size, t_pivot *p, t_inst *i);
+void	a_to_b(t_mother *m, int size, t_pivot *p, t_inst *i);
 void	sort_under_3(t_mother *m);
 void	sort_under_5(t_mother *m, int size);
-void	b_to_a(t_mother *m);
-void	a_to_b(t_mother *m);
+void	sort_b(t_mother *m, int size);
+void	sort_a(t_mother *m, int size);
 bool	init(t_stack **stack);
 bool	insert(t_node **node, int v);
 void	show_cw(t_node *node);
