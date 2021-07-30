@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/18 22:56:46 by hyson             #+#    #+#              #
-#    Updated: 2021/07/25 14:31:00 by hyson            ###   ########.fr        #
+#    Updated: 2021/07/30 12:43:59 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ D_INST		=		instructions/
 D_TEST		=		test/
 SRC_LIST	=		main.c					\
 					$(D_CTX)logic.c			\
-					$(D_CTX)node.c			\
+					$(D_CTX)stack.c			\
 					$(D_CTX)term.c			\
 					$(D_FT)ft_atoi.c		\
 					$(D_FT)ft_calloc.c		\

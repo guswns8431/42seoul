@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node.c                                             :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 15:07:08 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/20 15:07:12 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/30 12:44:32 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	init(t_stack **stack)
+{
+	if (!ft_calloc((void **)stack, 1, sizeof(t_stack)))
+		return (false);
+	(*stack)->h = NULL;
+	(*stack)->t = NULL;
+	return (true);
+}
 
 bool	insert(t_node **node, int v)
 {

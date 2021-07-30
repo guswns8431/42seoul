@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/14 16:58:24 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:51:53 by hyson             ###   ########.fr       */
+/*   Created: 2021/07/30 14:31:04 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/30 14:31:05 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	pa(t_mother *m, char *s)
 	import(&tmp, &(m->a->h), &(m->a->t));
 	if (s)
 		ft_putendl_fd(s, STDOUT_FILENO);
+	++(m->a_len);
+	--(m->b_len);
 }
 
 void	pb(t_mother *m, char *s)
@@ -62,4 +64,6 @@ void	pb(t_mother *m, char *s)
 	import(&tmp, &(m->b->h), &(m->b->t));
 	if (s)
 		ft_putendl_fd(s, STDOUT_FILENO);
+	--(m->a_len);
+	++(m->b_len);
 }

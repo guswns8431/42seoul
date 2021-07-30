@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 18:09:10 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/20 15:30:59 by hyson            ###   ########.fr       */
+/*   Updated: 2021/07/30 14:34:06 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,46 +33,62 @@ static bool	duplicated(t_node *node)
 	return (false);
 }
 
-static bool	init(t_stack **stack)
+static t_node	**parse(char *argv, t_node **tmp, t_mother *m)
 {
-	if (!ft_calloc((void **)stack, 1, sizeof(t_stack)))
-		return (false);
-	(*stack)->h = NULL;
-	(*stack)->t = NULL;
-	return (true);
+	int			v;
+	t_node		**end;
+
+	if (!argv || !*argv)
+		return (NULL);
+	while (*argv)
+	{
+		while (ft_isspace(*argv))
+			++argv;
+		if (!ft_atoi(&argv, &v) || !insert(tmp, v))
+			return (NULL);
+		++(m->a_len);
+		end = tmp;
+		tmp = &((*tmp)->n);
+	}
+	return (end);
 }
 
 static bool	check(int argc, char **argv, t_mother *m)
 {
 	int			i;
-	int			v;
 	t_node		**tmp;
 
 	i = 0;
 	tmp = &(m->a->h);
 	while (++i < argc)
 	{
-		if (!ft_atoi(&argv[i], &v) || !insert(tmp, v))
+		tmp = parse(argv[i], tmp, m);
+		if (!tmp)
 			return (false);
 		tmp = &((*tmp)->n);
 	}
 	return (!duplicated(m->a->h));
 }
 
-static void	connect(t_stack *stack)
+static bool	connect(t_stack *stack)
 {
+	bool		asc;
 	t_node		*cur;
 	t_node		*next;
 
+	asc = false;
 	cur = stack->h;
 	next = cur->n;
 	while (cur && next)
 	{
+		if (cur->v > next->v)
+			asc = true;
 		next->p = cur;
 		cur = next;
 		next = next->n;
 	}
 	stack->t = cur;
+	return (asc);
 }
 
 int	main(int argc, char **argv)
@@ -82,8 +98,13 @@ int	main(int argc, char **argv)
 	ft_memset(&m, 0, sizeof(t_mother));
 	if (!init(&(m.a)) || !init(&(m.b)) || !check(argc, argv, &m))
 		exit_invalid(&m);
-	connect(m.a);
-	test_push(&m);
-	// logic(&m);
+	if (m.a_len <= 1 || !connect(m.a))
+		exit_valid(&m);
+	else if (m.a_len <= 3)
+		sort_under_3(&m);
+	else if (m.a_len <= 5)
+		sort_under_5(&m, m.a_len);
+	else
+		a_to_b(&m);
 	exit_valid(&m);
 }

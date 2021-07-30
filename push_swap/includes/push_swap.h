@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/14 16:55:27 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/19 22:33:24 by hyson            ###   ########.fr       */
+/*   Created: 2021/07/30 14:30:17 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/30 14:30:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# include <stdio.h>
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -38,6 +40,8 @@ typedef struct s_stack
 
 typedef struct s_mother
 {
+	int				a_len;
+	int				b_len;
 	struct s_stack	*a;
 	struct s_stack	*b;
 }					t_mother;
@@ -48,7 +52,11 @@ typedef struct s_mother
 ** -----------------------------------------------------------------------------
 */
 
-void	loigc(t_mother *m);
+void	sort_under_3(t_mother *m);
+void	sort_under_5(t_mother *m, int size);
+void	b_to_a(t_mother *m);
+void	a_to_b(t_mother *m);
+bool	init(t_stack **stack);
 bool	insert(t_node **node, int v);
 void	show_cw(t_node *node);
 void	show_ccw(t_node *node);

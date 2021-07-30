@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/14 16:55:59 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/14 18:44:50 by hyson             ###   ########.fr       */
+/*   Created: 2021/07/30 14:30:31 by hyson             #+#    #+#             */
+/*   Updated: 2021/07/30 14:33:18 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	free_mother(t_mother **m)
 {
-	// clear((*m)->a->h);
-	// clear((*m)->b->h);
+	clear((*m)->a->h);
+	clear((*m)->b->h);
 	ft_free((void **)(&((*m)->a)));
 	ft_free((void **)(&((*m)->b)));
 }
