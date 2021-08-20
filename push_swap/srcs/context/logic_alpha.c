@@ -35,7 +35,9 @@ void	sort_under_3(t_mother *m)
 				sa(m, "sa");
 		}
 		else if (m->a->h->v > m->a->h->n->v && m->a->h->n->v > m->a->h->n->n->v)
-			iter(m, 2, ra, "ra");
+			// iter(m, 2, ra, "ra");
+			ra(m, "ra");
+			sa(m, "sa");
 	}
 }
 
