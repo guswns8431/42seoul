@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 14:28:49 by hyson             #+#    #+#             */
-/*   Updated: 2021/07/30 21:17:10 by hyson            ###   ########.fr       */
+/*   Updated: 2021/09/04 16:35:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	sort_under_3(t_mother *m)
 				sa(m, "sa");
 		}
 		else if (m->a->h->v > m->a->h->n->v && m->a->h->n->v > m->a->h->n->n->v)
+		{
 			// iter(m, 2, ra, "ra");
 			ra(m, "ra");
 			sa(m, "sa");
+		}
 	}
 }
 
