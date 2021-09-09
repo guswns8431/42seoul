@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-asdf
-=======
-test.txt
->>>>>>> b90cb9b4c49e3d2e941ce6ef7a201a912c25daff
