@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/09 17:44:17 by hyson             #+#    #+#              #
-#    Updated: 2021/09/09 18:17:20 by hyson            ###   ########.fr        #
+#    Updated: 2021/09/13 19:06:00 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,15 @@
 #				I N S T  V A R				       #
 #------------------------------------------------------------------------------#
 
-CC		= 	gcc
+CC			= 	gcc
 CFLAGS		= 	-Wall -Wextra -Werror
 CDEBUG		= 	-fsanitize=address -g
-RM		= 	rm -f
+RM			= 	rm -f
 HEADER		=	./includes/
+FOLDER		=	./srcs/
 SRC_LIST	=	main.c
-SRC		=	$(addprefix $(FOLDER), $(SRC_LIST))
-OBJ		=	$(SRC:.c=.o)
+SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
+OBJ			=	$(SRC:.c=.o)
 
 #------------------------------------------------------------------------------#
 #			       	F I L E					       #
@@ -33,26 +34,26 @@ NAME		=	pipex
 #				T A R G E T				       #
 #------------------------------------------------------------------------------#
 
-%.o		:	%.c
-			@$(CC) $(CFLAGS) $(CDEBUG) -I $(HEADER) -o $@ -c $<
+%.o			:	%.c
+				@$(CC) $(CFLAGS) $(CDEBUG) -I $(HEADER) -o $@ -c $<
 
 $(NAME)		:	$(OBJ)
-			@$(CC) $(CFLAGS) $(CDEBUG) -I $(HEADER) -o $(NAME) $(OBJ)
+				@$(CC) $(CFLAGS) $(CDEBUG) -I $(HEADER) -o $(NAME) $(OBJ)
 
 #------------------------------------------------------------------------------#
 #				R U L E					       #
 #------------------------------------------------------------------------------#
 
 .PHONY		: 	all
-all		: 	$(NAME)
+all			: 	$(NAME)
 
 .PHONY		:	clean
 clean		:
-			@$(RM) $(OBJ)
+				@$(RM) $(OBJ)
 
 .PHONY		:	fclean
 fclean		: 	clean
-			@$(RM) $(NAME)
+				@$(RM) $(NAME)
 
 .PHONY		:	re
-re		:	fclean all
+re			:	fclean all
