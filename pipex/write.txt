@@ -1,0 +1,4 @@
+this is readfile
+ is readfile
+: childcommand()
+this is readfile
