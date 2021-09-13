@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/13 20:00:33 by hyson            ###   ########.fr       */
+/*   Created: 2021/07/14 16:58:02 by hyson             #+#    #+#             */
+/*   Updated: 2021/09/13 19:18:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main(void)
+size_t	ft_strlen(const char *s)
 {
-	ft_putendl_fd("hello", 1);
-	ft_putendl_fd("hi", 1);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		++i;
+	return (i);
 }

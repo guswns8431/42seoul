@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/13 20:00:33 by hyson            ###   ########.fr       */
+/*   Created: 2021/01/08 17:01:14 by hyson             #+#    #+#             */
+/*   Updated: 2021/09/13 19:18:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main(void)
+bool	ft_calloc(void **tmp, size_t cnt, size_t size)
 {
-	ft_putendl_fd("hello", 1);
-	ft_putendl_fd("hi", 1);
-	return (0);
+	*tmp = (void *)malloc(cnt * size);
+	if (!*tmp)
+		return (false);
+	ft_memset(*tmp, 0, cnt * size);
+	return (true);
 }
