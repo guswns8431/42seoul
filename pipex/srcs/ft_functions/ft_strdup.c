@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/28 17:42:25 by hyson            ###   ########.fr       */
+/*   Created: 2021/01/08 17:15:51 by hyson             #+#    #+#             */
+/*   Updated: 2021/09/28 17:37:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	t_argvlist args;
+	char	*dup;
+	size_t	len;
 
-	ft_memset(&args, 0, sizeof(t_argvlist));
-	if (argc != 5)
-		exit_invalid();
-	parser(argv, &args); 
-	return (0);
+	len = ft_strlen(s1);
+	dup = (char *)malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s1, len + 1);
+	return (dup);
 }

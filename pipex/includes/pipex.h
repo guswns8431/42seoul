@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/13 20:00:03 by hyson            ###   ########.fr       */
+/*   Updated: 2021/09/28 17:34:17 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdlib.h>
+
+typedef	enum	e_exit
+{
+	VALID,
+	INVALID
+}		t_exit;
+
+typedef	struct	s_argvlist
+{
+	char *file1;
+	char *file2;
+	char *cmd1;
+	char *cmd2;
+}		t_argvlist;
 
 /*
 ** -----------------------------------------------------------------------------
@@ -34,5 +48,17 @@ void	ft_putendl_fd(const char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(const char *s, int fd);
 size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strdup(const char *s1);
+
+/*
+**------------------------------------------------------------------------------
+**				C O N T E X T					
+**------------------------------------------------------------------------------
+*/
+
+void	exit_invalid();
+void	exit_valid();
+void	parser(char **argv, t_argvlist *args);
 
 #endif

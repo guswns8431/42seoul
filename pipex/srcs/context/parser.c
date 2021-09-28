@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/28 17:42:25 by hyson            ###   ########.fr       */
+/*   Created: 2021/09/28 17:04:13 by hyson             #+#    #+#             */
+/*   Updated: 2021/09/28 17:39:51 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv)
+void	parser(char **argv, t_argvlist *args)
 {
-	t_argvlist args;
-
-	ft_memset(&args, 0, sizeof(t_argvlist));
-	if (argc != 5)
-		exit_invalid();
-	parser(argv, &args); 
-	return (0);
+	args->file1 = ft_strdup(argv[1]);
+	args->cmd1 = ft_strdup(argv[2]);
+	args->cmd2 = ft_strdup(argv[3]);
+	args->file2 = ft_strdup(argv[4]);
 }

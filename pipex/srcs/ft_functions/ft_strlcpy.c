@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/09/28 17:42:25 by hyson            ###   ########.fr       */
+/*   Created: 2020/12/28 18:18:31 by hyson             #+#    #+#             */
+/*   Updated: 2021/09/28 17:37:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	t_argvlist args;
+	size_t i;
 
-	ft_memset(&args, 0, sizeof(t_argvlist));
-	if (argc != 5)
-		exit_invalid();
-	parser(argv, &args); 
-	return (0);
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	if (dstsize)
+	{
+		while (src[i] && (i < dstsize - 1))
+		{
+			dst[i] = src[i];
+			++i;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+		++i;
+	return (i);
 }
