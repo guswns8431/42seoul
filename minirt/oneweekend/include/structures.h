@@ -9,6 +9,7 @@ typedef struct s_camera t_camera;
 typedef struct s_canvas t_canvas;
 typedef struct s_sphere t_sphere;
 typedef int				t_bool;
+typedef struct s_hit_record t_hit_record;
 # define FALSE 0
 # define TRUE 1
 
@@ -48,6 +49,15 @@ struct s_sphere
 	t_point3 center;
 	double radius;
 	double radius2;
+};
+
+struct s_hit_record{
+	t_point3 p;
+	t_vec3 normal;
+	double tmin;
+	double tmax;
+	double t;
+	t_bool front_face;
 };
 
 #endif

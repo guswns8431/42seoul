@@ -23,7 +23,7 @@ int	main(void)
 	t_sphere sp;
 
 	canv = canvas(400, 300);
-	cam = camera(&canv, point3(0, 0, 0));
+	cam = camera(&canv, point3(4, 12, 9));
 	sp = sphere(point3(0, 0, -5), 2);
 
 	printf("P3\n%d %d\n255\n", canv.width, canv.height);
