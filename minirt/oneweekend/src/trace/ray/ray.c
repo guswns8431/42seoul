@@ -26,22 +26,28 @@ t_ray ray_primary(t_camera *cam, double u, double v)
 	return (ray);
 }
 
-t_color3 ray_color(t_ray *ray, t_object *world)
+t_hit_record record_init(void)
+{
+	t_hit_record record;
+
+	record.tmin = EPSILON;
+	record.tmax = INFINITY;
+	return (record);
+}
+
+t_color3 ray_color(t_scene *scene)
 {
 	double t;
 	t_vec3 n;
-	t_hit_record rec;
 
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
-
-	if (hit(world, ray, &rec))
+	scene->rec = record_init();
+	if (hit(scene->world, &scene->ray, &scene->rec))
 	{
-		return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
+		return (phong_lighting(scene));
 	}
 	else
 	{
-		t = 0.5 * (ray->dir.y + 1.0);
+		t = 0.5 * (scene->ray.dir.y + 1.0);
 		return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
 	}
 }
