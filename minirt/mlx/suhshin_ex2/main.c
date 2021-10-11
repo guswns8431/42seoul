@@ -32,7 +32,7 @@ int main()
 	{
 		for (int j = 0; j < 500; j++)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00FF1234);
+			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00FF0000);
 			//my_mlx_pixel_put(&image, i, j, 0x00FFFFFF);
 		}
 	}
