@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/12 17:08:27 by hyson             #+#    #+#              #
-#    Updated: 2021/10/12 18:26:00 by hyson            ###   ########.fr        #
+#    Updated: 2021/10/13 22:06:35 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ HEADER		=	./includes/
 FOLDER		=	./srcs/
 D_FT		=	./ft_functions/
 D_PARSE		=	./parse/
+D_ERROR		=	./error/
 SRC_LIST	=	main.c						\
 			$(D_PARSE)parse.c				\
 			$(D_FT)dalloc.c					\
@@ -36,7 +37,8 @@ SRC_LIST	=	main.c						\
 			$(D_FT)ft_strdup.c				\
 			$(D_FT)ft_strlcpy.c				\
 			$(D_FT)ft_strlen.c				\
-			$(D_FT)get_next_line.c			
+			$(D_FT)get_next_line.c			\
+			$(D_ERROR)error.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 

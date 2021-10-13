@@ -6,23 +6,32 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 18:19:28 by hyson             #+#    #+#             */
-/*   Updated: 2021/10/12 18:37:52 by hyson            ###   ########.fr       */
+/*   Updated: 2021/10/13 22:15:33 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+/*
+** ------------------------------------------------------------------------------#
+** D E P E N D E N C Y
+** ------------------------------------------------------------------------------#
+*/
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 
-# define ERROR -1
-# define SUCCESS 1
-# define END 0
-# define TRUE 1
-# define FALSE 0
+typedef int	t_bool;
+
+/*
+** ------------------------------------------------------------------------------#
+** G N L _ M A C R O S
+** ------------------------------------------------------------------------------#
+*/
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
@@ -32,7 +41,25 @@
 #  define OPEN_MAX 4096
 # endif
 
-typedef int	t_bool;
+/*
+** ------------------------------------------------------------------------------#
+** M A C R O S
+** ------------------------------------------------------------------------------#
+*/
+
+# define ERROR -1
+# define SUCCESS 1
+# define END 0
+# define TRUE 1
+# define FALSE 0
+# define VALID 0
+# define INVALID 0
+
+/*
+** ------------------------------------------------------------------------------#
+** F T F U N C T I O N
+** ------------------------------------------------------------------------------#
+*/
 
 int			get_next_line(int fd, char **line);
 int			ft_strlen(char *s);
@@ -40,5 +67,13 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strdup(char *s1);
 t_bool		dalloc(void **ptr, size_t cnt, size_t n);
 void		free_ptr(void **ptr);
+
+/*
+** ------------------------------------------------------------------------------#
+** E R R O R
+** ------------------------------------------------------------------------------#
+*/
+
+void		e_file_open(void);
 
 #endif
