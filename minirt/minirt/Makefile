@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/12 17:08:27 by hyson             #+#    #+#              #
-#    Updated: 2021/10/13 22:06:35 by hyson            ###   ########.fr        #
+#    Updated: 2021/10/14 15:01:33 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,14 @@ D_PARSE		=	./parse/
 D_ERROR		=	./error/
 SRC_LIST	=	main.c						\
 			$(D_PARSE)parse.c				\
+			$(D_PARSE)identifier.c			\
 			$(D_FT)dalloc.c					\
 			$(D_FT)free_ptr.c				\
 			$(D_FT)ft_strdup.c				\
 			$(D_FT)ft_strlcpy.c				\
 			$(D_FT)ft_strlen.c				\
 			$(D_FT)get_next_line.c			\
+			$(D_FT)ft_strncmp.c				\
 			$(D_ERROR)error.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
