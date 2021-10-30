@@ -1,0 +1,6 @@
+Credentials cache: API:4180D74D-EF67-429A-91AA-7DCDFE0E37FF
+        Principal: hyson@42SEOUL.KR
+
+  Issued                Expires               Principal
+Nov 19 09:09:54 2020  Nov 19 19:09:54 2020  krbtgt/42SEOUL.KR@42SEOUL.KR
+Nov 19 09:09:57 2020  Nov 19 19:09:54 2020  HTTP/student-storage.42seoul.kr@42SEOUL.KR
