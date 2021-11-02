@@ -1,9 +1,5 @@
 {
 	"files.associations": {
-		"atomic": "c",
-		"functional": "c",
-		"locale": "c",
-		"memory": "c",
-		"optional": "c"
+		"locale": "c"
 	}
 }
