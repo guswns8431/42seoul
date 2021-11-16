@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/09 17:44:17 by hyson             #+#    #+#              #
-#    Updated: 2021/09/28 17:35:40 by hyson            ###   ########.fr        #
+#    Updated: 2021/11/16 20:36:42 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,14 @@ SRC_LIST	=	main.c						\
 				$(D_FT)ft_isdigit.c			\
 				$(D_FT)ft_isspace.c			\
 				$(D_FT)ft_memset.c			\
-				$(D_FT)ft_putchar_fd.c			\
-				$(D_FT)ft_putendl_fd.c			\
-				$(D_FT)ft_putnbr_fd.c			\
-				$(D_FT)ft_putstr_fd.c			\
+				$(D_FT)ft_putchar_fd.c		\
+				$(D_FT)ft_putendl_fd.c		\
+				$(D_FT)ft_putnbr_fd.c		\
+				$(D_FT)ft_putstr_fd.c		\
 				$(D_FT)ft_strlen.c			\
 				$(D_FT)ft_strlcpy.c			\
-				$(D_FT)ft_strdup.c
+				$(D_FT)ft_strdup.c			\
+				$(D_FT)ft_strnstr.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 

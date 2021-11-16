@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/16 14:36:04 by hyson            ###   ########.fr       */
+/*   Created: 2021/11/16 20:35:26 by hyson             #+#    #+#             */
+/*   Updated: 2021/11/16 20:35:31 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	t_argvlist args;
+	size_t needle_len;
 
-	if (argc != 5)
-		exit_invalid();
-	parser(argv, &args, envp);
-	return (0);
+	needle_len = ft_strlen(needle);
+	if (!needle_len)
+		return ((char *)haystack);
+	if (!*haystack)
+		return (NULL);
+	while (needle_len <= len && len-- > 0)
+		if (ft_memcmp(haystack++, needle, needle_len) == 0)
+			return ((char *)--haystack);
+	return (NULL);
 }
