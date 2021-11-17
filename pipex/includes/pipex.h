@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/16 20:35:52 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/17 18:14:26 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-typedef int		t_bool;
+# define	SUCCESS	1
+
+typedef	int		t_bool;
 
 typedef	enum	e_exit
 {
@@ -31,6 +33,7 @@ typedef	struct	s_argvlist
 	char *file2;
 	char *cmd1;
 	char *cmd2;
+	char *envp;
 }				t_argvlist;
 
 /*
@@ -53,6 +56,9 @@ size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char			*ft_strdup(const char *s1);
 char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			**ft_split(char const *s, char c);
+int				ft_memcmp(const void *s1, const void *s2, size_t n);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
 /*
 **------------------------------------------------------------------------------
