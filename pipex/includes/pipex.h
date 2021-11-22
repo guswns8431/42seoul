@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:26 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/22 16:47:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef	struct	s_argvlist
 	char *file2;
 	char *cmd1;
 	char *cmd2;
+	char *cmd1_path;
+	char *cmd2_path;
 	char *envp;
 }				t_argvlist;
 
@@ -59,6 +61,7 @@ char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char			**ft_split(char const *s, char c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strjoin(char const *s1, char const *s2);
 
 /*
 **------------------------------------------------------------------------------

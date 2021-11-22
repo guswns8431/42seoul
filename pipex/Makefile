@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/09 17:44:17 by hyson             #+#    #+#              #
-#    Updated: 2021/11/17 16:30:52 by hyson            ###   ########.fr        #
+#    Updated: 2021/11/22 16:27:18 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC_LIST	=	main.c						\
 				$(D_FT)ft_strnstr.c			\
 				$(D_FT)ft_split.c			\
 				$(D_FT)ft_memcmp.c			\
-				$(D_FT)ft_substr.c
+				$(D_FT)ft_substr.c			\
+				$(D_FT)ft_strjoin.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 
