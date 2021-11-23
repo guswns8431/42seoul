@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 14:46:01 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/23 19:56:01 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 
 # define	SUCCESS	1
 # define	FAIL	0
+# define	ERROR	-1
+# define	READ	0
+# define	WRITE	1
 
 typedef	int		t_bool;
 
@@ -76,5 +79,6 @@ void			exit_valid();
 void			parser(char **argv, t_argvlist *args, char **envp);
 bool			redirection_stdin(char *path);
 bool			redirection_stdout(char *path);
+t_bool			exec(t_argvlist *arg, int *fd, char **envp, pid_t *pid);
 
 #endif

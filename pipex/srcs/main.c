@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 17:34:05 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/23 20:05:55 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_argvlist args;
+	t_argvlist	args;
+	int			fd[2];
+	pid_t		pid;
 
 	ft_memset(&args, 0, sizeof(t_argvlist));
 	if (argc != 5)
@@ -22,8 +24,16 @@ int	main(int argc, char **argv, char **envp)
 	parser(argv, &args, envp);
 	if (!args.cmd1_path || !args.cmd2_path)
 	{
-		ft_putstr_fd("cmd path ", 2);
+		perror("cmd path");
 		exit_invalid();
 	}
+	if(pipe(fd) == ERROR)
+	{
+		perror("pipe");
+		exit_invalid();
+	}
+	pid = fork();
+	if ((exec(&args, fd, envp, &pid)) == ERROR)
+		exit_invalid();
 	return (0);
 }
