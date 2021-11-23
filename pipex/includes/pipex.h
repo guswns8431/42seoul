@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/22 16:47:56 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/23 14:46:01 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # define	SUCCESS	1
+# define	FAIL	0
 
 typedef	int		t_bool;
 
@@ -72,5 +74,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 void			exit_invalid();
 void			exit_valid();
 void			parser(char **argv, t_argvlist *args, char **envp);
+bool			redirection_stdin(char *path);
+bool			redirection_stdout(char *path);
 
 #endif

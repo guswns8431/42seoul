@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 17:34:05 by hyson            ###   ########.fr       */
+/*   Created: 2021/11/23 14:40:03 by hyson             #+#    #+#             */
+/*   Updated: 2021/11/23 14:48:15 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+bool	redirection_stdin(char *path)
 {
-	t_argvlist args;
+	int	fd;
 
-	ft_memset(&args, 0, sizeof(t_argvlist));
-	if (argc != 5)
-		exit_invalid();
-	parser(argv, &args, envp);
-	if (!args.cmd1_path || !args.cmd2_path)
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
 	{
-		ft_putstr_fd("cmd path ", 2);
-		exit_invalid();
+		perror(path);
+		return (FAIL);
 	}
-	return (0);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (SUCCESS);
+}
+
+bool	redirection_stdout(char *path)
+{
+	int fd;
+
+	fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		perror(path);
+		return (FAIL);
+	}
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (SUCCESS);
 }

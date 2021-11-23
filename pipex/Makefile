@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/09 17:44:17 by hyson             #+#    #+#              #
-#    Updated: 2021/11/22 16:27:18 by hyson            ###   ########.fr        #
+#    Updated: 2021/11/23 14:40:29 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ D_CTX		=	./context/
 SRC_LIST	=	main.c						\
 				$(D_CTX)term.c				\
 				$(D_CTX)parser.c			\
+				$(D_CTX)redirection.c		\
 				$(D_FT)ft_atoi.c			\
 				$(D_FT)ft_calloc.c			\
 				$(D_FT)ft_free.c			\
