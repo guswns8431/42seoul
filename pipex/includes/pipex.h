@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 19:56:01 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/24 20:21:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef	struct	s_argvlist
 	char *cmd1_path;
 	char *cmd2_path;
 	char *envp;
+	char **argv1;
+	char **argv2;
 }				t_argvlist;
 
 /*
