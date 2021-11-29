@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/29 11:01:44 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:21:50 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int	main(int argc, char **argv, char **envp)
 	pid = fork();
 	if ((exec(&args, fd, envp, &pid)) == ERROR)
 		exit_invalid();
-	return (0);
+	exit_valid();
 }
