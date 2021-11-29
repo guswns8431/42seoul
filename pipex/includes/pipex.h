@@ -6,12 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 18:57:57 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/24 20:21:29 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 10:59:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PIPEX_H
+#ifndef PIPEX_H
 # define PIPEX_H
+
 # include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
@@ -24,25 +25,25 @@
 # define	READ	0
 # define	WRITE	1
 
-typedef	int		t_bool;
+typedef int	t_bool;
 
-typedef	enum	e_exit
+typedef enum e_exit
 {
 	VALID,
 	INVALID
 }				t_exit;
 
-typedef	struct	s_argvlist
+typedef struct s_argvlist
 {
-	char *file1;
-	char *file2;
-	char *cmd1;
-	char *cmd2;
-	char *cmd1_path;
-	char *cmd2_path;
-	char *envp;
-	char **argv1;
-	char **argv2;
+	char	*file1;
+	char	*file2;
+	char	*cmd1;
+	char	*cmd2;
+	char	*cmd1_path;
+	char	*cmd2_path;
+	char	*envp;
+	char	**argv1;
+	char	**argv2;
 }				t_argvlist;
 
 /*
@@ -64,7 +65,8 @@ void			ft_putstr_fd(const char *s, int fd);
 size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char			*ft_strdup(const char *s1);
-char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strnstr(const char *haystack, \
+		const char *needle, size_t len);
 char			**ft_split(char const *s, char c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
@@ -76,8 +78,8 @@ char			*ft_strjoin(char const *s1, char const *s2);
 **------------------------------------------------------------------------------
 */
 
-void			exit_invalid();
-void			exit_valid();
+void			exit_invalid(void);
+void			exit_valid(void);
 void			parser(char **argv, t_argvlist *args, char **envp);
 bool			redirection_stdin(char *path);
 bool			redirection_stdout(char *path);

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 17:57:52 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/24 20:27:39 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:03:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	void	set_pipe_write(int *fd)
 
 t_bool	exec(t_argvlist *arg, int *fd, char **envp, pid_t *pid)
 {
-	char *cmd;
+	char	*cmd;
 
 	if (*pid > 0)
 	{

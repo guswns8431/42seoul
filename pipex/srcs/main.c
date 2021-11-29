@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 19:07:55 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 20:05:55 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:01:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		perror("cmd path");
 		exit_invalid();
 	}
-	if(pipe(fd) == ERROR)
+	if (pipe(fd) == ERROR)
 	{
 		perror("pipe");
 		exit_invalid();

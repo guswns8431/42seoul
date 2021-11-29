@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 02:41:20 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/17 16:31:04 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:09:38 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *sub;
+	char	*sub;
 
 	sub = (char *)malloc(len + 1);
 	if (!sub || !s)

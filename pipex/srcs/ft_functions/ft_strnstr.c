@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 20:35:26 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/16 20:35:31 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:09:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t needle_len;
+	size_t	needle_len;
 
 	needle_len = ft_strlen(needle);
 	if (!needle_len)

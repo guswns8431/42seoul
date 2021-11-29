@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 00:31:26 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/17 16:17:47 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:08:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static size_t	ft_wordlen(char const *s, char c)
 	return (len);
 }
 
-static char		**ft_free_dptr(char **s, int i)
+static char	**ft_free_dptr(char **s, int i)
 {
 	while (--i >= 0 && s[i])
 	{
@@ -43,14 +43,15 @@ static char		**ft_free_dptr(char **s, int i)
 	return (NULL);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	char	**ret;
 	char	*tmp;
 
 	i = 0;
-	if (!s || !(ret = (char **)malloc((ft_wordlen(s, c) + 1) * sizeof(char *))))
+	ret = (char **)malloc((ft_wordlen(s, c) + 1) * sizeof(char *));
+	if (!s || !ret)
 		return (NULL);
 	while (*s)
 	{
@@ -59,7 +60,8 @@ char			**ft_split(char const *s, char c)
 			tmp = (char *)s;
 			while (*s && *s != c)
 				++s;
-			if (!(ret[i++] = ft_substr(tmp, 0, s - tmp)))
+			ret[i] = ft_substr(tmp, 0, s - tmp);
+			if (!ret[i++])
 				return (ft_free_dptr(ret, i));
 		}
 		else

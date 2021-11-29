@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:04:13 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/24 20:22:13 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:04:12 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static	void	parse_valid_path(char **arg_path, t_argvlist *args)
 {
-	int i;
-	char *cmd;
+	int		i;
+	char	*cmd;
 
 	i = 0;
 	while (arg_path[i])
@@ -41,8 +41,8 @@ static	void	parse_valid_path(char **arg_path, t_argvlist *args)
 
 static	t_bool	parse_envp(char **envp, t_argvlist *args)
 {
-	int i;
-	char **tmp;
+	int		i;
+	char	**tmp;
 
 	i = 0;
 	while (envp[i])
@@ -58,7 +58,6 @@ static	t_bool	parse_envp(char **envp, t_argvlist *args)
 
 void	parser(char **argv, t_argvlist *args, char **envp)
 {
-
 	args->file1 = *ft_split(argv[1], ' ');
 	args->cmd1 = *ft_split(argv[2], ' ');
 	args->cmd2 = *ft_split(argv[3], ' ');

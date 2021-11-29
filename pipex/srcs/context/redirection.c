@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:40:03 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/23 14:48:15 by hyson            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:04:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	redirection_stdin(char *path)
 
 bool	redirection_stdout(char *path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
