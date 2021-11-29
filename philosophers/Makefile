@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:53:17 by hyson             #+#    #+#              #
-#    Updated: 2021/11/29 14:55:59 by hyson            ###   ########.fr        #
+#    Updated: 2021/11/29 20:48:15 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,9 @@ NAME		=	philo
 HEADER		=	./includes/
 FOLDER		=	./srcs/
 D_FT		=	./ft_functions/
+D_TERM		=	./term/
 SRC_LIST	=	main.c						\
-				$(D_FT)ft_atoi.c
+				$(D_TERM)term.c	
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 
