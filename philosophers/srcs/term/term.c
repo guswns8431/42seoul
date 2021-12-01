@@ -6,16 +6,20 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 20:37:30 by hyson             #+#    #+#             */
-/*   Updated: 2021/11/29 20:54:52 by hyson            ###   ########.fr       */
+/*   Updated: 2021/12/01 20:49:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	exit_invalid(void)
+void	exit_invalid_arg(void)
 {
+	//free도 필요
+	errno = 22;
+	perror("arg");
 }
 
 void	exit_valid(void)
 {
+	//free도 필요
 }

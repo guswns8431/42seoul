@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:53:17 by hyson             #+#    #+#              #
-#    Updated: 2021/11/29 20:48:15 by hyson            ###   ########.fr        #
+#    Updated: 2021/12/01 20:37:32 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,11 @@ FOLDER		=	./srcs/
 D_FT		=	./ft_functions/
 D_TERM		=	./term/
 SRC_LIST	=	main.c						\
-				$(D_TERM)term.c	
+				$(D_TERM)term.c				\
+				$(D_FT)ft_strlen.c			\
+				$(D_FT)ft_putchar_fd.c		\
+				$(D_FT)ft_putstr.c			\
+				$(D_FT)ft_putendl_fd.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 

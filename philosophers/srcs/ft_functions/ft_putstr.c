@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 20:30:41 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/01 20:49:41 by hyson            ###   ########.fr       */
+/*   Created: 2021/12/01 19:47:12 by hyson             #+#    #+#             */
+/*   Updated: 2021/12/01 19:47:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (argc != 5 && argc != 6)
-	{
-		exit_invalid_arg();
-		return (1);
-	}
-	printf("%s\n", argv[1]);
-	return (0);
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }
