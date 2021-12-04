@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:53:17 by hyson             #+#    #+#              #
-#    Updated: 2021/12/01 20:37:32 by hyson            ###   ########.fr        #
+#    Updated: 2021/12/04 16:44:09 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 CC			= 	gcc
 CFLAGS		= 	-Wall -Wextra -Werror
-CDEBUG		= 	-fsanitize=address -g
+#CDEBUG		= 	-fsanitize=address -g
 RM			= 	rm -f
 
 #------------------------------------------------------------------------------#
