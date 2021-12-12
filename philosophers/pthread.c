@@ -14,7 +14,7 @@ void *t_function(void *data)
     char* thread_name = (char*)data;
     int i = 0;
  
-    while (i<3)   // 0,1,2 까지만 loop 돌립니다.
+    while (i<20)   // 0,1,2 까지만 loop 돌립니다.
     {
         // 넘겨받은 쓰레드 이름과 
         // 현재 process id 와 thread id 를 함께 출력
@@ -51,11 +51,16 @@ int main()
 		perror("thread create error : ");
 		exit(0);
 	}
+for (int j = 0; j < 3; j++)
+		printf("%d\n", j);
+
 
 	t_function((void *)pM);
 
-	pthread_join(p_thread[0], (void **)&status);
-	pthread_join(p_thread[1], (void **)&status);
+
+	
+	//pthread_join(p_thread[0], (void **)&status);
+	//pthread_join(p_thread[1], (void **)&status);
 
 	printf("언제 종료 될까요?\n");
 	return (0);
