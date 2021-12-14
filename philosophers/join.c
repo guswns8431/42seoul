@@ -30,7 +30,7 @@ int main()
     }
     // 쓰레드 식별자 p_thread 가 종료되길 기다렸다가 
     // 종료후에 리턴값을 받아옵니다. 
-    pthread_join(p_thread, (void *)&result);
+    //pthread_join(p_thread, (void *)&result);
     printf("thread join : %d\n", result);
  
     printf("main() 종료\n");
