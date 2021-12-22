@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:58:29 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/22 15:28:25 by hyson            ###   ########.fr       */
+/*   Updated: 2021/12/22 16:35:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define ERROR 1
 
 typedef int	t_bool;
 
@@ -52,5 +53,6 @@ void		ft_putendl_fd(char *s, int fd);
 void		*ft_memset(void *b, int c, size_t len);
 t_bool		ft_atoi(const char *str, int *result);
 int			ft_isdigit(int c);
+t_bool		ft_isspace(int c);
 
 #endif
