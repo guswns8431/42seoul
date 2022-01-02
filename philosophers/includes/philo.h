@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:58:29 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/22 16:35:16 by hyson            ###   ########.fr       */
+/*   Updated: 2021/12/29 17:47:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <errno.h>
+# include <pthread.h>
+# include <stdlib.h>
 
 # define TRUE 1
 # define FALSE 0
 # define ERROR 1
 
-typedef int	t_bool;
+typedef int		t_bool;
+typedef pthread_t	t_th;
+typedef pthread_mutex_t	t_mu;
 
 typedef struct	s_arg {
 	int	total;
@@ -31,14 +35,22 @@ typedef struct	s_arg {
 	int	time_limit;
 }		t_arg;
 
+typedef struct	s_philo {
+	int 	l;
+	int 	r;
+	t_arg	*arg;
+	t_th	th;
+}		t_philo;
+
 /*
 ** -----------------------------------------------------------------------------
-** T E R M I N A T I O N
+** C O N T E X T
 ** -----------------------------------------------------------------------------
 */
 
 void	exit_invalid_arg(void);
 void	exit_valid(void);
+void	*routine(void *arg);
 
 /*
 ** -----------------------------------------------------------------------------
@@ -52,7 +64,8 @@ void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		*ft_memset(void *b, int c, size_t len);
 t_bool		ft_atoi(const char *str, int *result);
-int			ft_isdigit(int c);
+int		ft_isdigit(int c);
 t_bool		ft_isspace(int c);
+t_bool		ft_calloc(void **ptr, size_t cnt, size_t n);
 
 #endif
