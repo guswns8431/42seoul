@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 20:30:41 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/29 18:01:56 by hyson            ###   ########.fr       */
+/*   Updated: 2022/01/03 16:30:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@ static t_bool	philo_th(t_arg args, t_philo *philo)
 
 	i = -1;
 	while (++i < args.total)
-	{
-		philo[i].arg = &args;
-		philo[i].l = i; //test
-		philo[i].r = i; //test
-		if (pthread_create(&philo[i].th, NULL, routine, (void *)(&philo[i])) || pthread_join(philo[i].th, NULL))
+		if (pthread_create(&philo[i].th, NULL, routine, (void *)(&philo[i])) || pthread_detach(philo[i].th))
 			return (FALSE);
-	}
 	return (TRUE);
 }
 
@@ -39,7 +34,7 @@ static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 	if (args->total < 0 || args->time_die < 0 || args->time_eat < 0
 		|| args->time_sleep < 0 || args->time_limit < 0)
 		return (FALSE);
-	if (!ft_calloc((void **)philo, args->total, sizeof(t_philo)))
+	if (!ft_calloc((void **)(philo), args->total, sizeof(t_philo)))
 		return (FALSE);
 	return (TRUE);
 }
@@ -49,7 +44,6 @@ int main(int argc, char **argv)
 	t_arg args;
 	t_philo *philo;
 
-	philo = NULL;
 	ft_memset(&args, 0, sizeof(t_arg));
 	if (argc != 5 && argc != 6)
 	{
