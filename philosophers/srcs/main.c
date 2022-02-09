@@ -6,26 +6,44 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 20:30:41 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/03 16:30:27 by hyson            ###   ########.fr       */
+/*   Updated: 2022/01/25 16:23:30 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool	philo_th(t_arg args, t_philo *philo)
+static t_bool	philo_th(t_arg *args, t_philo *philo)
 {
 	int	i;
 
 	i = -1;
-	while (++i < args.total)
-		if (pthread_create(&philo[i].th, NULL, routine, (void *)(&philo[i])) || pthread_detach(philo[i].th))
+	if (pthread_mutex_lock(&args->terminate_mutex) || !get_time(&args->start_time))
+		return (FALSE);
+	while (++i < args->total)
+	{
+		philo[i].id = i;
+		philo[i].arg = args;
+		philo[i].l = i;
+		philo[i].r = (i + 1) % args->total;
+		if (pthread_create(&philo[i].th, NULL, routine, (void *)(&philo[i]))
+			|| pthread_detach(philo[i].th))
 			return (FALSE);
+		if (pthread_create(&philo[i].mo, NULL, monitor, (void *)(&philo[i]))
+			|| pthread_detach(philo[i].mo))
+			return (FALSE);
+	}
+	if (pthread_mutex_lock(&args->terminate_mutex))
+		return (FALSE);
 	return (TRUE);
 }
 
 static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 {
-	if (!ft_atoi(argv[1], &args->total) || !ft_atoi(argv[2], &args->time_die)
+	int i;
+
+	i = -1;
+	if (!ft_atoi(argv[1], &args->total)
+		|| !ft_atoi(argv[2], &args->time_die)
 		|| !ft_atoi(argv[3], &args->time_eat)
 		|| !ft_atoi(argv[4], &args->time_sleep))
 		return (FALSE);
@@ -34,7 +52,14 @@ static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 	if (args->total < 0 || args->time_die < 0 || args->time_eat < 0
 		|| args->time_sleep < 0 || args->time_limit < 0)
 		return (FALSE);
-	if (!ft_calloc((void **)(philo), args->total, sizeof(t_philo)))
+	if (!ft_calloc((void **)(philo), args->total, sizeof(t_philo))
+		|| !ft_calloc((void **)(&args->fork_mutex), args->total, sizeof(t_mu)))
+		return (FALSE);
+	while (++i < args->total)
+		if (pthread_mutex_init(&args->fork_mutex[i], NULL))
+			return (FALSE);
+	if (pthread_mutex_init(&args->print_mutex, NULL)
+		|| pthread_mutex_init(&args->terminate_mutex, NULL))
 		return (FALSE);
 	return (TRUE);
 }
@@ -58,7 +83,7 @@ int main(int argc, char **argv)
 		return (ERROR);
 	}
 	//철학자 쓰레드 생성
-	philo_th(args, philo);
-	printf("%d %d %d %d %d\n", args.total, args.time_die, args.time_eat, args.time_sleep, args.time_limit);
-	return (0);
+	if (!philo_th(&args, philo))
+		return (exit_invalid(&args, &philo));
+	return (exit_valid(&args, &philo));
 }

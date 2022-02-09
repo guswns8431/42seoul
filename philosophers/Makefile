@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 14:53:17 by hyson             #+#    #+#              #
-#    Updated: 2021/12/29 17:42:43 by hyson            ###   ########.fr        #
+#    Updated: 2022/01/24 16:20:09 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,15 +31,20 @@ D_CTX		=	./context/
 SRC_LIST	=	main.c						\
 				$(D_CTX)term.c				\
 				$(D_CTX)thread.c			\
+				$(D_CTX)print_state.c			\
+				$(D_CTX)philo_state.c			\
+				$(D_CTX)check_time.c			\
 				$(D_FT)ft_strlen.c			\
-				$(D_FT)ft_putchar_fd.c		\
+				$(D_FT)ft_putchar_fd.c			\
 				$(D_FT)ft_putstr.c			\
-				$(D_FT)ft_putendl_fd.c		\
+				$(D_FT)ft_putendl_fd.c			\
 				$(D_FT)ft_memset.c			\
 				$(D_FT)ft_atoi.c			\
 				$(D_FT)ft_isdigit.c			\
 				$(D_FT)ft_isspace.c			\
-				$(D_FT)ft_calloc.c
+				$(D_FT)ft_calloc.c			\
+				$(D_FT)ft_putnbr_fd.c		\
+				$(D_FT)ft_free.c
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.c=.o)
 

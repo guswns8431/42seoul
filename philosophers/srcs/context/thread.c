@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:36:15 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/03 16:35:57 by hyson            ###   ########.fr       */
+/*   Updated: 2022/01/26 15:28:42 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,37 @@
 
 void	*routine(void *arg)
 {
-	int i = 0;
-	t_philo *philo;
-	t_th tid;
+	t_philo		*philo;
 
-	tid = pthread_self();
 	philo = (t_philo *)arg;
-	while (++i < 20)
-		printf("thread : %x %d %d %d\n", (unsigned int)tid, philo->l, philo->r, i);
+	if (!get_time(&philo->cur))
+		pthread_mutex_unlock(&philo->arg->terminate_mutex);
+	while (TRUE)
+	{
+		take_fork(philo);
+		philo_eat(philo);
+		put_fork(philo);
+		philo_sleep(philo);
+		philo_think(philo);
+	}
+	return (NULL);
+}
+
+void	*monitor(void *arg)
+{
+	t_philo		*philo;
+	long long	cur;
+
+	philo = (t_philo *)arg;
+	while (TRUE)
+	{
+		if (!get_time(&cur))
+			pthread_mutex_unlock(&philo->arg->terminate_mutex);
+		if (cur - philo->cur > (long long)philo->arg->time_die)
+		{
+			console(DEAD, philo);
+			pthread_mutex_unlock(&philo->arg->terminate_mutex);
+		}
+	}
 	return (NULL);
 }
