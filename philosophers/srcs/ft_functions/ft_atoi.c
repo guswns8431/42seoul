@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 14:42:10 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/22 16:37:31 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:53:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_bool	ft_atoi(const char *str, int *result)
 		return (FALSE);
 	while (ft_isdigit(*str))
 	{
-		if ((*result >= 0) != ((*result << 1) >= 0) ||
-			(*result >= 0) != ((*result << 2) >= 0) ||
-			(*result >= 0) != ((*result << 3) >= 0) ||
-			(*result >= 0) != (*result * 10 + (*str - '0') >= 0))
+		if ((*result >= 0) != ((*result << 1) >= 0)
+			|| (*result >= 0) != ((*result << 2) >= 0)
+			|| (*result >= 0) != ((*result << 3) >= 0)
+			|| (*result >= 0) != (*result * 10 + (*str - '0') >= 0))
 			return (FALSE);
 		*result = *result * 10 + *str++ - '0';
 	}

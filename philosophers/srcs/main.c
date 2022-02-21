@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 20:30:41 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/25 16:23:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:50:03 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static t_bool	philo_th(t_arg *args, t_philo *philo)
 	int	i;
 
 	i = -1;
-	if (pthread_mutex_lock(&args->terminate_mutex) || !get_time(&args->start_time))
+	if (pthread_mutex_lock(&args->terminate_mutex)
+		|| !get_time(&args->start_time))
 		return (FALSE);
 	while (++i < args->total)
 	{
@@ -39,7 +40,7 @@ static t_bool	philo_th(t_arg *args, t_philo *philo)
 
 static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!ft_atoi(argv[1], &args->total)
@@ -64,10 +65,10 @@ static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 	return (TRUE);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_arg args;
-	t_philo *philo;
+	t_arg	args;
+	t_philo	*philo;
 
 	ft_memset(&args, 0, sizeof(t_arg));
 	if (argc != 5 && argc != 6)
@@ -75,14 +76,11 @@ int main(int argc, char **argv)
 		exit_invalid_arg();
 		return (ERROR);
 	}
-	//초기화
-	//초기화 유효성 검증
 	if (!philo_init(argc, argv, &args, &philo))
 	{
 		exit_invalid_arg();
 		return (ERROR);
 	}
-	//철학자 쓰레드 생성
 	if (!philo_th(&args, philo))
 		return (exit_invalid(&args, &philo));
 	return (exit_valid(&args, &philo));

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:58:29 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/21 16:47:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:46:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define VALID 0
 # define INVALID 1
 
-typedef int		t_bool;
-typedef pthread_t	t_th;
+typedef int				t_bool;
+typedef pthread_t		t_th;
 typedef pthread_mutex_t	t_mu;
 
 typedef enum e_state
@@ -41,29 +41,29 @@ typedef enum e_state
 	FULL,
 }					t_state;
 
-typedef struct		s_arg {
-	int		total;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		time_limit;
-	int		meet;
-	t_mu		print_mutex;
-	t_mu		*fork_mutex;
-	t_mu		terminate_mutex;
-	long long	start_time;
-}			t_arg;
+typedef struct s_arg {
+	int				total;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				time_limit;
+	int				meet;
+	t_mu			print_mutex;
+	t_mu			*fork_mutex;
+	t_mu			terminate_mutex;
+	long long		start_time;
+}					t_arg;
 
-typedef struct		s_philo {
-	int		id;
-	int 		l;
-	int 		r;
-	int		count;
-	t_arg		*arg;
-	t_th		th;
-	t_th		mo;
+typedef struct s_philo {
+	int				id;
+	int				l;
+	int				r;
+	int				count;
+	t_arg			*arg;
+	t_th			th;
+	t_th			mo;
 	long long		cur;
-}			t_philo;
+}					t_philo;
 
 /*
 ** -----------------------------------------------------------------------------

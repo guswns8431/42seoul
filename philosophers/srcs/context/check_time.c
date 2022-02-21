@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:30:59 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/12 17:48:06 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:51:17 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	get_time(long long *time)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == ERROR)
 		return (FALSE);

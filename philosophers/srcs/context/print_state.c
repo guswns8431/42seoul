@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:24:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/17 16:57:51 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:51:41 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ t_bool	console(int state, t_philo *philo)
 		return (FALSE);
 	return (TRUE);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:36:15 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/21 17:14:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:52:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*monitor(void *arg)
 
 void	get_sleep(t_philo *philo, long long start, long long limit)
 {
-	long long current;
+	long long	current;
 
 	current = 0;
 	if (!start)

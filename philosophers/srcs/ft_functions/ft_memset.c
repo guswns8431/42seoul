@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 14:37:51 by hyson             #+#    #+#             */
-/*   Updated: 2021/12/22 14:37:58 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:54:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	*ft_memset(void *b, int c, size_t len)
 
 	i = -1;
 	while (++i < len)
-		((unsigned char*)b)[i] = c;
+		((unsigned char *)b)[i] = c;
 	return (b);
 }
