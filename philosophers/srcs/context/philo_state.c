@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_state.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:04:52 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/26 15:07:56 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:11:03 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	philo_eat(t_philo *philo)
 		|| !get_time(&philo->cur))
 		pthread_mutex_unlock(&philo->arg->terminate_mutex);
 	++(philo->count);
+	get_sleep(philo, philo->cur, philo->arg->time_eat);
 	if (philo->arg->time_limit && philo->arg->time_limit == philo->count)
 		if (++(philo->arg->meet) >= philo->arg->total)
 			if (!console(FULL, philo))
@@ -44,6 +45,7 @@ void	philo_sleep(t_philo *philo)
 {
 	if (!console(SLEEPING, philo))
 		pthread_mutex_unlock(&philo->arg->terminate_mutex);
+	get_sleep(philo, 0, philo->arg->time_sleep);
 }
 
 void	philo_think(t_philo *philo)

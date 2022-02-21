@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:58:29 by hyson             #+#    #+#             */
-/*   Updated: 2022/01/24 16:24:53 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/21 16:47:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		put_fork(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		philo_think(t_philo *philo);
 t_bool		get_time(long long *time);
+void		get_sleep(t_philo *philo, long long begin, long long limit);
 
 /*
 ** -----------------------------------------------------------------------------
