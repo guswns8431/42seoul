@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:04:52 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/21 17:11:03 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/23 18:33:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	philo_eat(t_philo *philo)
 		pthread_mutex_unlock(&philo->arg->terminate_mutex);
 	++(philo->count);
 	get_sleep(philo, philo->cur, philo->arg->time_eat);
-	if (philo->arg->time_limit && philo->arg->time_limit == philo->count)
+	if (philo->arg->must_eat && philo->arg->must_eat == philo->count)
 		if (++(philo->arg->meet) >= philo->arg->total)
 			if (!console(FULL, philo))
 				pthread_mutex_unlock(&philo->arg->terminate_mutex);

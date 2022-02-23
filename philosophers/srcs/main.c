@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 20:30:41 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/23 16:36:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/23 18:34:11 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static t_bool	philo_init(int argc, char **argv, t_arg *args, t_philo **philo)
 		|| !ft_atoi(argv[3], &args->time_eat)
 		|| !ft_atoi(argv[4], &args->time_sleep))
 		return (FALSE);
-	if (argc == 6 && !ft_atoi(argv[5], &args->time_limit))
+	if (argc == 6 && !ft_atoi(argv[5], &args->must_eat))
 		return (FALSE);
 	if (args->total < 0 || args->time_die < 0 || args->time_eat < 0
-		|| args->time_sleep < 0 || args->time_limit < 0)
+		|| args->time_sleep < 0 || args->must_eat < 0)
 		return (FALSE);
 	if (!ft_calloc((void **)(philo), args->total, sizeof(t_philo))
 		|| !ft_calloc((void **)(&args->fork_mutex), args->total, sizeof(t_mu)))

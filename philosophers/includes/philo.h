@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:58:29 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/21 17:46:16 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/23 18:33:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_arg {
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;
-	int				time_limit;
+	int				must_eat;
 	int				meet;
 	t_mu			print_mutex;
 	t_mu			*fork_mutex;
