@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_state.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:24:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/21 17:51:41 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/23 15:13:09 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	print_state(int state)
 	else if (state == THINKING)
 		ft_putstr_fd(" is thinking\n", STDOUT_FILENO);
 	else if (state == FULL)
-		ft_putstr_fd(" is finished\n", STDOUT_FILENO);
+		ft_putstr_fd("Finished\n", STDOUT_FILENO);
 }
 
 t_bool	console(int state, t_philo *philo)
@@ -37,10 +37,13 @@ t_bool	console(int state, t_philo *philo)
 		return (FALSE);
 	ft_putnbr_fd(current_time - philo->arg->start_time, STDOUT_FILENO);
 	ft_putstr_fd("\t", STDOUT_FILENO);
+	if (state == FULL || state == DEAD)
+	{
+		print_state(state);
+		return (FALSE);
+	}
 	ft_putnbr_fd(philo->id + 1, STDOUT_FILENO);
 	print_state(state);
-	if (state == FULL || state == DEAD)
-		return (FALSE);
 	if (pthread_mutex_unlock(&philo->arg->print_mutex))
 		return (FALSE);
 	return (TRUE);
