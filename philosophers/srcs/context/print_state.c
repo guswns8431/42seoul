@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:24:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/02/23 15:13:09 by hyson            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:50:11 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_bool	console(int state, t_philo *philo)
 	ft_putstr_fd("\t", STDOUT_FILENO);
 	if (state == FULL || state == DEAD)
 	{
+		if (state == DEAD)
+			ft_putnbr_fd(philo->id + 1, STDOUT_FILENO);
 		print_state(state);
 		return (FALSE);
 	}
