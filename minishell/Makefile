@@ -6,7 +6,7 @@
 #    By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 16:57:22 by jseo              #+#    #+#              #
-#    Updated: 2022/01/04 21:41:08 by hyson            ###   ########.fr        #
+#    Updated: 2022/01/06 14:22:50 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,12 +162,12 @@ OBJ				=	$(SRC:.c=.o)
 
 %.o				:	%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
-					@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $< -I $(LIB_HEADER)
+					@$(CC) $(CFLAGS) $(CDEBUG) -I $(HEADER) -o $@ -c $< -I $(LIB_HEADER)
 
 $(NAME)			:	$(OBJ)
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
-					@$(CC) $(CFALGS) -I $(HEADER) -o $(NAME) $(OBJ) -I $(LIB_HEADER) -l $(LIB_NAME) -L $(LIB_FOLDER)
+					@$(CC) $(CFALGS) $(CDEBUG) -I $(HEADER) -o $(NAME) $(OBJ) -I $(LIB_HEADER) -l $(LIB_NAME) -L $(LIB_FOLDER)
 					@echo $(GREEN) "$(NAME) is created!\n" $(EOC)
 
 # =============================================================================
