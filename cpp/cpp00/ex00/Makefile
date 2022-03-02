@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 17:29:17 by hyson             #+#    #+#              #
-#    Updated: 2022/02/24 17:36:17 by hyson            ###   ########.fr        #
+#    Updated: 2022/03/02 18:33:13 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ RM			= 	rm -f
 
 NAME		=	megaphone
 FOLDER		=	./srcs/
+SRC_LIST	=	megaphone.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
-OBJ			=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.cpp=.o)
 
 #------------------------------------------------------------------------------#
 #								T	A	RG	E	T			   #
