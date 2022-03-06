@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/05 15:12:17 by hyson             #+#    #+#              #
-#    Updated: 2022/03/05 15:14:32 by hyson            ###   ########.fr        #
+#    Updated: 2022/03/06 15:55:35 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RM			= 	rm -f
 
 NAME		=	phonebook
 FOLDER		=	./srcs/
-SRC_LIST	=	
+SRC_LIST	=	phonebook.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 
