@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/05 15:12:17 by hyson             #+#    #+#              #
-#    Updated: 2022/03/09 13:50:51 by hyson            ###   ########.fr        #
+#    Updated: 2022/03/10 20:56:46 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ RM			= 	rm -f
 NAME		=	phonebook
 FOLDER		=	./srcs/
 HEADER		=	./includes/
-SRC_LIST	=	phonebook.cpp
+SRC_LIST	=	phonebook.cpp	\
+			function.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 
