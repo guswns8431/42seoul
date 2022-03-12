@@ -10,7 +10,7 @@ int main(void)
 	while(std::getline(std::cin, cmd))
 	{
 		if (cmd == "EXIT" || cmd == "exit")
-			exit(1);
+			return (0);
 		else if (cmd == "ADD" || cmd == "add")
 		{
 			std::cout << "ADD";
@@ -39,5 +39,5 @@ int main(void)
 		else
 			std::cout << "Invalid Command" << std::endl;
 	}
-	std::cout << "FINISHED";
+	std::cout << "test";
 }

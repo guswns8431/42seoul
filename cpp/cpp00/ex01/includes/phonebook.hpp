@@ -16,6 +16,7 @@
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
 # define EOC		"\033[0;0m"
+
 class Contact {
 	private:
 		std::string first_name_;
@@ -42,6 +43,7 @@ class PhoneBook {
 		PhoneBook(void);
 		~PhoneBook(void);
 		void	ContactAdd(void);
+		std::string	CutInfo(std::string str);
 		void	PrintPhoneBook(void);
 };
 
