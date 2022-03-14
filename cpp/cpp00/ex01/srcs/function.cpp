@@ -25,13 +25,13 @@ std::string	Contact::GetDarkestSecret(void)
 	return (this->darkest_secret_);
 }
 
-void		Contact::SetInfo(int type, std::string field)
+bool		Contact::SetInfo(int type, std::string field)
 {
 	std::string str;
 
 	std::cout << field;
 	if (!std::getline(std::cin, str))
-		exit(1);
+		return (false);
 	if (type == F_N)
 		this->first_name_ = str;
 	else if (type == L_N)
@@ -42,6 +42,7 @@ void		Contact::SetInfo(int type, std::string field)
 		this->phone_number_ = str;
 	else
 		this->darkest_secret_ = str;
+	return (true);
 }
 
 PhoneBook::PhoneBook(void)
@@ -59,25 +60,28 @@ PhoneBook::~PhoneBook(void)
 	std::cout << YELLOW << "PhoneBook" << EOC << " is " << RED << "deleted" << EOC << " successfully" << std::endl;
 }
 
-void		PhoneBook::ContactAdd(void)
+bool		PhoneBook::ContactAdd(void)
 {
 	if (this->size_ < 8)
 		++this->size_;
+	std::cout << std::endl;
 	if (is_overwrite_)
 		std::cout << "Index [ " << RED << this->i_ << EOC << " / " << this->size_ << " ] " << std::endl;
 	else
 		std::cout << "Index [ " << this->i_ << " / " << this->size_ << " ] " << std::endl;
-	this->C[this->i_ - 1].SetInfo(F_N, "First Name : ");
-	this->C[this->i_ - 1].SetInfo(L_N, "Last Name : ");
-	this->C[this->i_ - 1].SetInfo(NICK, "Nickname : ");
-	this->C[this->i_ - 1].SetInfo(P_N, "Phone Number : ");
-	this->C[this->i_ - 1].SetInfo(D_S, "Darkest Secret : ");
+	if (!this->C[this->i_ - 1].SetInfo(F_N, "First Name : ")
+		|| !this->C[this->i_ - 1].SetInfo(L_N, "Last Name : ")
+		|| !this->C[this->i_ - 1].SetInfo(NICK, "Nickname : ")
+		|| !this->C[this->i_ - 1].SetInfo(P_N, "Phone Number : ")
+		|| !this->C[this->i_ - 1].SetInfo(D_S, "Darkest Secret : "))
+		return (false);
 	this->i_ = ++this->i_ % 9;
 	if (this->i_ == 0)
 	{
 		this->i_ = 1;
 		is_overwrite_ = true;
 	}
+	return (true);
 }
 
 std::string	PhoneBook::CutInfo(std::string str)
@@ -90,28 +94,69 @@ std::string	PhoneBook::CutInfo(std::string str)
 	return (str);
 }
 
-void		PhoneBook::PrintPhoneBook(void)
+int		PhoneBook::PrintDetail(int contact_size)
 {
-	int i = 0;
+	std::string 	input;
+	int		i;
+
+	std::cout << BLUE << "Type" << EOC << " Index Number(0 to Exit) : ";
+	if (!std::getline(std::cin, input))
+		return (TERM);
+	if (input == "0")
+		return (VALID);
+	i = atoi(input.c_str());
+	if (i > contact_size || i < 1)
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Wrong" << EOC << " Index. " << BLUE << "Check" << EOC << " Index Number" << std::endl;
+		return (WRONGINDEX);
+	}
+	std::cout << std::endl;
+	std::cout << "1. First Name : " << C[i - 1].GetFirstName() << std::endl;
+	std::cout << "2. Last Name : " << C[i - 1].GetLastName() << std::endl;
+	std::cout << "3. Nickname : " << C[i - 1].GetNickname() << std::endl;
+	std::cout << "4. Phone Number : " << C[i - 1].GetPhoneNumber() << std::endl;
+	std::cout << "5. Darkest Secret : " << C[i - 1].GetDarkestSecret() << std::endl;
+	std::cout << std::endl;
+	return (VALID);
+}
+
+bool		PhoneBook::PrintPhoneBook(void)
+{
+	int i;
+	int res = 0;
 
 	if (this->size_ == 0)
 	{
-		std::cout << "PhoneBook is "<< GREEN << "Empty" << EOC << std::endl;
-		return ;
+		std::cout << std::endl;
+		std::cout << YELLOW << "PhoneBook" << EOC << " is "<< GREEN << "Empty" << EOC << std::endl;
+		return (true);
 	}
-	std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << "Index" << "|"
-		<< std::setfill(' ') << std::setw(COL_WIDTH) << "First Name" << "|"
-		<< std::setfill(' ') << std::setw(COL_WIDTH) << "Last Name" << "|"
-		<< std::setfill(' ') << std::setw(COL_WIDTH) << "Nickname" << "|"
-		<< std::endl;
-	while (++i <= this->size_)
+	while (true)
 	{
-		//정렬. setw랑 setfill을 잘 써야할듯
-		//디테일 뽑는 함수
-		std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << i << "|"
-			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetFirstName()) << "|"
-			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetLastName()) << "|"
-			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetNickname()) << "|"
+		i = 0;
+		std::cout << std::endl;
+		std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << "Index" << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << "First Name" << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << "Last Name" << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << "Nickname" << "|"
 			<< std::endl;
+		while (++i <= this->size_)
+		{
+			//디테일 뽑는 함수
+			std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << i << "|"
+				<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetFirstName()) << "|"
+				<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetLastName()) << "|"
+				<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetNickname()) << "|"
+				<< std::endl;
+		}
+		res = PrintDetail(this->size_);
+		if (res == 0)
+			return (false);
+		else if (res == 1)
+			continue ;
+		else
+			break ;
 	}
+	return (true);
 }

@@ -4,6 +4,11 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <cstdlib>
+
+# define TERM		0
+# define WRONGINDEX	1
+# define VALID		2
 
 # define F_N		0
 # define L_N		1
@@ -16,6 +21,7 @@
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
 # define YELLOW		"\033[1;33m"
+# define BLUE		"\033[0;34m"
 # define EOC		"\033[0;0m"
 
 class Contact {
@@ -31,7 +37,7 @@ class Contact {
 		std::string	GetNickname(void);
 		std::string	GetPhoneNumber(void);
 		std::string	GetDarkestSecret(void);
-		void		SetInfo(int type, std::string field);
+		bool		SetInfo(int type, std::string field);
 };
 
 class PhoneBook {
@@ -43,9 +49,10 @@ class PhoneBook {
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
-		void	ContactAdd(void);
+		bool	ContactAdd(void);
 		std::string	CutInfo(std::string str);
-		void	PrintPhoneBook(void);
+		int	PrintDetail(int contact_size);
+		bool	PrintPhoneBook(void);
 };
 
 #endif

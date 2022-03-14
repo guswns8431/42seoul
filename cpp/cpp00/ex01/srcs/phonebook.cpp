@@ -6,7 +6,8 @@ int main(void)
 	std::string str;
 	PhoneBook pb;
 
-	std::cout << "Type the Command EXIT / ADD / SEARCH" << std::endl;
+	std::cout << std::endl;
+	std::cout << BLUE << "Type" << EOC << " the Command( " << BLUE << "EXIT" << EOC << " or " << BLUE << "ADD" << EOC << " or " << BLUE << "SEARCH" << EOC << " )" << std::endl;
 	while(std::getline(std::cin, cmd))
 	{
 		if (cmd == "EXIT" || cmd == "exit")
@@ -15,11 +16,16 @@ int main(void)
 			pb.ContactAdd();
 		else if (cmd == "SEARCH" || cmd == "search")
 		{
-			//비어있으면 비어있다고 출력
-			//ctrl + c 처
-			pb.PrintPhoneBook(); //전화번호부가 비어있을때도 처리해줘야함
+			if(!pb.PrintPhoneBook())
+				return (0);
 		}
 		else
-			std::cout << "Invalid Command" << std::endl;
+		{
+			std::cout << RED << "Invalid" << EOC << " Command" << std::endl;
+			continue ;
+		}
+		std::cout << std::endl;
+	std::cout << BLUE << "Type" << EOC << " the Command( " << BLUE << "EXIT" << EOC << " or " << BLUE << "ADD" << EOC << " or " << BLUE << "SEARCH" << EOC << " )" << std::endl;
 	}
+	return (0);
 }
