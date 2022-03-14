@@ -42,19 +42,21 @@ void		Contact::SetInfo(int type, std::string field)
 		this->phone_number_ = str;
 	else
 		this->darkest_secret_ = str;
-}			
+}
 
 PhoneBook::PhoneBook(void)
 {
 	this->is_overwrite_ = false;
 	this->size_ = 0;
 	this->i_ = 1;
-	std::cout << "PhoneBook is " << GREEN << "created" << EOC << " successfully" << std::endl;
+	std::cout << std::endl;
+	std::cout << YELLOW << "PhoneBook" << EOC << " is " << GREEN << "created" << EOC << " successfully" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "PhoneBook is " << RED << "deleted" << EOC << " successfully" << std::endl;
+	std::cout << std::endl;
+	std::cout << YELLOW << "PhoneBook" << EOC << " is " << RED << "deleted" << EOC << " successfully" << std::endl;
 }
 
 void		PhoneBook::ContactAdd(void)
@@ -76,7 +78,7 @@ void		PhoneBook::ContactAdd(void)
 		this->i_ = 1;
 		is_overwrite_ = true;
 	}
-}			
+}
 
 std::string	PhoneBook::CutInfo(std::string str)
 {
@@ -93,22 +95,23 @@ void		PhoneBook::PrintPhoneBook(void)
 	int i = 0;
 
 	if (this->size_ == 0)
+	{
 		std::cout << "PhoneBook is "<< GREEN << "Empty" << EOC << std::endl;
-	std::cout << "Index" << std::setw(COL_WIDTH + 6)
-		<< "|First Name" << std::setw(COL_WIDTH)
-		<< "|Last Name" << std::setw(COL_WIDTH)
-		<< "|Nickname" << std::setw(3)
-		<< "|"
+		return ;
+	}
+	std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << "Index" << "|"
+		<< std::setfill(' ') << std::setw(COL_WIDTH) << "First Name" << "|"
+		<< std::setfill(' ') << std::setw(COL_WIDTH) << "Last Name" << "|"
+		<< std::setfill(' ') << std::setw(COL_WIDTH) << "Nickname" << "|"
 		<< std::endl;
 	while (++i <= this->size_)
 	{
 		//정렬. setw랑 setfill을 잘 써야할듯
 		//디테일 뽑는 함수
-		std::cout << i << std::setw(COL_WIDTH)
-			<< "|" << CutInfo(this->C[i - 1].GetFirstName()) << std::setw(COL_WIDTH + 1)
-			<< "|" << CutInfo(this->C[i - 1].GetLastName()) << std::setw(COL_WIDTH + 1)
-			<< "|" << CutInfo(this->C[i - 1].GetNickname()) << std::setw(COL_WIDTH + 1)
-			<< "|"
+		std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << i << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetFirstName()) << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetLastName()) << "|"
+			<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetNickname()) << "|"
 			<< std::endl;
 	}
 }

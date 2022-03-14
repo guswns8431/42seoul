@@ -15,6 +15,7 @@
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
+# define YELLOW		"\033[1;33m"
 # define EOC		"\033[0;0m"
 
 class Contact {
