@@ -7,7 +7,15 @@ int main(void)
 	PhoneBook pb;
 
 	std::cout << std::endl;
-	std::cout << BLUE << "Type" << EOC << " the Command( " << BLUE << "EXIT" << EOC << " or " << BLUE << "ADD" << EOC << " or " << BLUE << "SEARCH" << EOC << " )" << std::endl;
+	std::cout << BLUE << "Type" << EOC
+		<< " the Command( "
+		<< BLUE << "EXIT" << EOC
+		<< " or "
+		<< BLUE << "ADD" << EOC
+		<< " or "
+		<< BLUE << "SEARCH" << EOC
+		<< " )"
+		<< std::endl;
 	while(std::getline(std::cin, cmd))
 	{
 		if (cmd == "EXIT" || cmd == "exit")
@@ -25,7 +33,15 @@ int main(void)
 			continue ;
 		}
 		std::cout << std::endl;
-	std::cout << BLUE << "Type" << EOC << " the Command( " << BLUE << "EXIT" << EOC << " or " << BLUE << "ADD" << EOC << " or " << BLUE << "SEARCH" << EOC << " )" << std::endl;
+		std::cout << BLUE << "Type" << EOC
+			<< " the Command( "
+			<< BLUE << "EXIT" << EOC
+			<< " or "
+			<< BLUE << "ADD" << EOC
+			<< " or "
+			<< BLUE << "SEARCH" << EOC
+			<< " )"
+			<< std::endl;
 	}
 	return (0);
 }
