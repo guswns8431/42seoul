@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 16:45:38 by hyson             #+#    #+#              #
-#    Updated: 2022/03/16 16:48:45 by hyson            ###   ########.fr        #
+#    Updated: 2022/03/16 16:51:37 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,10 @@ RM			= 	rm -f
 
 NAME		=	zombie
 FOLDER		=	./srcs/
-SRC_LIST	=	main.cpp
-				Zombie.cpp
-				Zombie.hpp
-				newZombie.cpp
+SRC_LIST	=	main.cpp		\
+				Zombie.cpp		\
+				Zombie.hpp		\
+				newZombie.cpp	\
 				randomChump.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
