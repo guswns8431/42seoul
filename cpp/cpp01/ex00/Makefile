@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 16:45:38 by hyson             #+#    #+#              #
-#    Updated: 2022/03/16 16:51:37 by hyson            ###   ########.fr        #
+#    Updated: 2022/03/18 15:03:03 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ RM			= 	rm -f
 
 NAME		=	zombie
 FOLDER		=	./srcs/
+HEADER		=	./includes/
 SRC_LIST	=	main.cpp		\
-				Zombie.cpp		\
-				Zombie.hpp		\
-				newZombie.cpp	\
-				randomChump.cpp
+			Zombie.cpp		\
+			newZombie.cpp		\
+			randomChump.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 
@@ -37,10 +37,10 @@ OBJ			=	$(SRC:.cpp=.o)
 #------------------------------------------------------------------------------#
 
 %.o			:	%.cpp
-				@$(CXX) $(CXXFLAGS) $(CDEBUG) -o $@ -c $<
+				@$(CXX) $(CXXFLAGS) $(CDEBUG) -I $(HEADER) -o $@ -c $<
 
 $(NAME)		:	$(OBJ)
-				@$(CXX) $(CXXFLAGS) $(CDEBUG) -o $(NAME) $(OBJ)
+				@$(CXX) $(CXXFLAGS) $(CDEBUG) -I $(HEADER) -o $(NAME) $(OBJ)
 
 #------------------------------------------------------------------------------#
 #								R	U	LE					       #
