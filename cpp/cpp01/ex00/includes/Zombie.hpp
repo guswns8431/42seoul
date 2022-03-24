@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:46:27 by hyson             #+#    #+#             */
-/*   Updated: 2022/03/18 14:51:33 by hyson            ###   ########.fr       */
+/*   Updated: 2022/03/24 18:50:03 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class	Zombie {
 	private:
 		std::string name_;
 	public:
-		Zombie();
-		~Zombie();
+		Zombie(void);
+		~Zombie(void);
 		void	announce(void);
 		void	setName(std::string name);
 };
