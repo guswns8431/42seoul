@@ -143,7 +143,6 @@ bool		PhoneBook::PrintPhoneBook(void)
 			<< std::endl;
 		while (++i <= this->size_)
 		{
-			//디테일 뽑는 함수
 			std::cout << std::setfill(' ') << std::setw(COL_WIDTH) << i << "|"
 				<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetFirstName()) << "|"
 				<< std::setfill(' ') << std::setw(COL_WIDTH) << CutInfo(this->C[i - 1].GetLastName()) << "|"

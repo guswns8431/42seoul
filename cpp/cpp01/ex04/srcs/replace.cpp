@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:32:08 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/01 11:54:17 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/01 22:00:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static bool	CheckInput(std::string filename, std::string s1, std::string s2)
 {
 	if (filename.empty() || s1.empty() || s2.empty())
 		return (false);
+	return (true);
 }
 
-static bool	CheckFile(std::ifstream in, std::ofstream out)
+static bool	CheckFile(std::ifstream& in, std::ofstream& out)
 {
 	if (in.fail())
 		return (false);
 	if (out.fail())
 		return (false);
+	return (true);
 }
 
 static void	OpenError(void)
@@ -33,10 +35,11 @@ static void	OpenError(void)
 	exit(1);
 }
 
-static std::string replace(std::string str, std::string s1, std::string s2)
+static std::string replace(std::string& str, std::string& s1, std::string& s2)
 {
 	std::string res = "";
-	int pos = 0;
+	std::string remainder = "";
+	size_t pos = 0;
 
 	pos = str.find(s1, pos);
 	if (pos == std::string::npos)
@@ -44,7 +47,19 @@ static std::string replace(std::string str, std::string s1, std::string s2)
 		std::cout << "not found" << std::endl;
 		exit(1);
 	}
-
+	while (true)
+	{
+		write(1, "test\n", 5);
+		if (pos == std::string::npos)
+			break ;
+		res += str.substr(0, pos) + s2;
+		remainder = str.substr(pos + s1.size());
+		pos += s2.size();
+	}
+	res += remainder;
+	std::cout << res << std::endl;
+	return (res);
+}
 
 void	ReplaceProcess(std::string filename, std::string s1, std::string s2)
 {
@@ -57,8 +72,7 @@ void	ReplaceProcess(std::string filename, std::string s1, std::string s2)
 	if (!CheckFile(in, out))
 		OpenError();
 	while (std::getline(in, str))
-		out << replace() << std::endl;
+		out << replace(str, s1, s2) << std::endl;
 	in.close();
 	out.close();
 }
-	//getline으로 입력받고 replace하고 out에 넣기

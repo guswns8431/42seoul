@@ -6,13 +6,13 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:31:48 by hyson             #+#    #+#             */
-/*   Updated: 2022/03/26 17:38:09 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/01 21:14:03 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "replace.hpp"
 
-static	void	ExitInvalidArg(void)
+void	ExitInvalidArg(void)
 {
 	errno = 22;
 	perror("arg");
