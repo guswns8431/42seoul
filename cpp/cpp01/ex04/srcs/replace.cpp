@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:32:08 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/01 22:00:13 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/02 15:55:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	OpenError(void)
 	exit(1);
 }
 
-static std::string replace(std::string& str, std::string& s1, std::string& s2)
+static std::string replace(std::string str, std::string s1, std::string s2)
 {
 	std::string res = "";
 	std::string remainder = "";
@@ -44,21 +44,21 @@ static std::string replace(std::string& str, std::string& s1, std::string& s2)
 	pos = str.find(s1, pos);
 	if (pos == std::string::npos)
 	{
-		std::cout << "not found" << std::endl;
+		std::cout << RED << "not found" << EOC << std::endl;
 		exit(1);
 	}
 	while (true)
 	{
-		write(1, "test\n", 5);
 		if (pos == std::string::npos)
 			break ;
-		res += str.substr(0, pos) + s2;
+		res = str.substr(0, pos) + s2;
 		remainder = str.substr(pos + s1.size());
 		pos += s2.size();
+		str = res + remainder;
+		pos = str.find(s1, pos);
 	}
-	res += remainder;
-	std::cout << res << std::endl;
-	return (res);
+	std::cout << YELLOW << "process" << EOC << " is " << GREEN << "done" << EOC << std::endl;
+	return (str);
 }
 
 void	ReplaceProcess(std::string filename, std::string s1, std::string s2)
