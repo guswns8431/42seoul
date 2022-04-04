@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:08:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/02 17:28:02 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/04 21:52:59 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int main(void)
 	H.complain("INFO");
 	H.complain("WARNING");
 	H.complain("ERROR");
+
+	H.complain("NOPE");
 	return (0);
 }
