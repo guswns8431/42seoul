@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:29:18 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/13 15:28:41 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/16 21:53:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	main( void )
 	std::cout << a << std::endl;
 
 	std::cout << b << std::endl;
-	
+
 	std::cout << Fixed::max(a,b) << std::endl;
 
-	return (0);
 }
