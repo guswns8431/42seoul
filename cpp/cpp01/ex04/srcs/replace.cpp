@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:32:08 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/02 15:55:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/16 20:51:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ static std::string replace(std::string str, std::string s1, std::string s2)
 	size_t pos = 0;
 
 	pos = str.find(s1, pos);
-	if (pos == std::string::npos)
-	{
-		std::cout << RED << "not found" << EOC << std::endl;
-		exit(1);
-	}
 	while (true)
 	{
 		if (pos == std::string::npos)
@@ -57,13 +52,13 @@ static std::string replace(std::string str, std::string s1, std::string s2)
 		str = res + remainder;
 		pos = str.find(s1, pos);
 	}
-	std::cout << YELLOW << "process" << EOC << " is " << GREEN << "done" << EOC << std::endl;
 	return (str);
 }
 
 void	ReplaceProcess(std::string filename, std::string s1, std::string s2)
 {
 	std::string str;
+	std::string temp;
 
 	if (!CheckInput(filename, s1, s2))
 		ExitInvalidArg();
@@ -72,7 +67,13 @@ void	ReplaceProcess(std::string filename, std::string s1, std::string s2)
 	if (!CheckFile(in, out))
 		OpenError();
 	while (std::getline(in, str))
-		out << replace(str, s1, s2) << std::endl;
+	{
+		temp = str;
+		if (!in.eof())
+			temp += "\n";
+		out << replace(temp, s1, s2);
+	}
+	std::cout << YELLOW << "process" << EOC << " is " << GREEN << "done" << EOC << std::endl;
 	in.close();
 	out.close();
 }
