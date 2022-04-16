@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:49:38 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/07 18:14:52 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/07 22:11:40 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class Fixed {
 	private:
 		int	fixed_point_;
-		static const int fractional_bits;
+		static const int fractional_bits_ = 8;
 	public:
 		Fixed(void);
 		Fixed(const Fixed& f);
