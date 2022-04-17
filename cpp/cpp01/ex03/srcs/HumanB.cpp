@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 10:31:21 by hyson             #+#    #+#             */
-/*   Updated: 2022/03/24 23:28:44 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/17 16:50:47 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 HumanB::HumanB(std::string name) : name_(name) , W(NULL)
 {
-	std::cout << YELLOW << this->name_ << EOC << GREEN << " appear" << EOC << " with hands" << std::endl;	
+	std::cout << YELLOW << this->name_ << EOC << GREEN << " appear" << EOC << " with " << BLUE << "hands" << EOC << std::endl;
 }
 
 HumanB::~HumanB(void)
@@ -25,7 +25,7 @@ HumanB::~HumanB(void)
 void	HumanB::attack(void)
 {
 	if (!W)
-		std::cout << YELLOW << this->name_ << EOC << " attacks with hands" << std::endl;
+		std::cout << YELLOW << this->name_ << EOC << " attacks with " << BLUE << "hands" << EOC << std::endl;
 	else
 		std::cout << YELLOW << this->name_ << EOC << " attacks with " << BLUE << this->W->getType() << EOC << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 10:30:42 by hyson             #+#    #+#             */
-/*   Updated: 2022/03/24 23:29:12 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/17 16:48:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 HumanA::HumanA(std::string name, Weapon &W) : name_(name) , W(W)
 {
-	std::cout << YELLOW << this->name_ << EOC << GREEN << " appear" << EOC << " with " << W.getType() << std::endl;
+	std::cout << YELLOW << this->name_ << EOC << GREEN << " appear" << EOC << " with " << BLUE << W.getType() << EOC << std::endl;
 }
 
 HumanA::~HumanA(void)
