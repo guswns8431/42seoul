@@ -6,7 +6,7 @@
 #    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 16:45:38 by hyson             #+#    #+#              #
-#    Updated: 2022/04/21 20:17:17 by hyson            ###   ########.fr        #
+#    Updated: 2022/04/22 17:08:05 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ RM			= 	rm -f
 #									F I L E   #
 #------------------------------------------------------------------------------#
 
-NAME		=	fixed
+NAME		=	claptrap
 FOLDER		=	./srcs/
 HEADER		=	./includes/
-SRC_LIST	=	main.cpp
+SRC_LIST	=	main.cpp	\
+				ClapTrap.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 
