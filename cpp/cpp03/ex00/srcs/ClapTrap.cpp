@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:19:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/22 21:19:28 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/23 13:23:38 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ ClapTrap::ClapTrap(const ClapTrap& c) : name_(c.name_), hit_points_(c.hit_points
 	std::cout << BLUE << this->name_ << EOC << " is created" << YELLOW << "(copy constructor)" << EOC << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(const std::string name)
 {
 	this->name_ = name;
 	this->hit_points_ = 10;

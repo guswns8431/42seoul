@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:18:19 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/22 20:40:17 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/23 13:23:19 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class ClapTrap {
 	public:
 		ClapTrap(void);
 		ClapTrap(const ClapTrap& c);
-		ClapTrap(std::string name);
+		ClapTrap(const std::string name);
 		~ClapTrap(void);
 		ClapTrap&	operator=(const ClapTrap& c);
 		void	attack(const std::string& target);
