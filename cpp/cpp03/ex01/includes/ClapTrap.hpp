@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:18:19 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/22 20:40:17 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/25 21:00:19 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define DMMAX		9999
 
 class ClapTrap {
-	private:
+	protected:
 		std::string		name_;
 		unsigned int	hit_points_;
 		unsigned int	energy_points_;

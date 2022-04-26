@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:19:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/23 09:44:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/26 15:41:12 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ ClapTrap::ClapTrap(void)
 	this->hit_points_ = 10;
 	this->energy_points_ = 10;
 	this->attack_damage_ = 0;
-	std::cout << BLUE << this->name_ << EOC << " is created" << GREEN << "(defalut constructor)" << EOC << std::endl;
+	std::cout << BLUE << this->name_ << EOC << " is created" << GREEN << "(default constructor)" << EOC << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& c) : name_(c.name_), hit_points_(c.hit_points_), energy_points_(c.hit_points_), attack_damage_(c.attack_damage_)
@@ -80,7 +80,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		this->hit_points_ = 0;
 	else
 		this->hit_points_ -= amount;
-	std::cout << BLUE << this->name_ << EOC << " takes " << PURPLE << amount << EOC << " damges" << std::endl;
+	std::cout << BLUE << this->name_ << EOC << " takes " << PURPLE << amount << EOC << " damages" << std::endl;
 }
 
 void	ClapTrap::berepaired(unsigned int amount)
