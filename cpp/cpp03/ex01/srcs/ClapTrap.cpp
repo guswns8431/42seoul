@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:19:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/26 15:41:12 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/26 17:15:05 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	ClapTrap::berepaired(unsigned int amount)
 	else
 		this->hit_points_ += amount;
 	--this->energy_points_;
-	std::cout << BLUE << this->name_ << EOC << " gets " << BGREEN  << amount << EOC << " energy points" << std::endl;
+	std::cout << BLUE << this->name_ << EOC << " gets " << BGREEN  << amount << EOC << " hit points" << std::endl;
 }
