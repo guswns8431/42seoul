@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 09:37:22 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/26 16:08:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/26 16:37:51 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	ScavTrap::attack(const std::string& target)
 
 void	ScavTrap::guardGate(void)
 {
-	std::cout << "ScavTrap : " << this->name_ << " is in Gate keeper mode" << std::endl;
+	std::cout << BLUE << "ScavTrap : " << this->name_ << EOC << " is in Gate keeper mode" << std::endl;
 }
