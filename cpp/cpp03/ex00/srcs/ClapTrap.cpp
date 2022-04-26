@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:19:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/23 13:23:38 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/26 16:30:42 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		this->hit_points_ = 0;
 	else
 		this->hit_points_ -= amount;
-	std::cout << BLUE << this->name_ << EOC << " takes " << PURPLE << amount << EOC << " damges" << std::endl;
+	std::cout << BLUE << this->name_ << EOC << " takes " << PURPLE << amount << EOC << " damages" << std::endl;
 }
 
 void	ClapTrap::berepaired(unsigned int amount)
