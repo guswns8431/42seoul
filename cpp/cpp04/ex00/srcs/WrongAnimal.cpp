@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:49:29 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 15:22:09 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:43:38 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ WrongAnimal& operator=(const WrongAnimal& wa)
 	return (*this);
 }
 
-std::string	WrongAnimal::setType(void)
+std::string	WrongAnimal::setType(void) const
 {
 	return (this->type);
 }
 
-void	makeSound(void)
+void	makeSound(void) const
 {
 	std::cout << BPURPLE << "WRONG WRONG WRONG ANIMALLLLLLLL" << EOC << std::endl;
 }

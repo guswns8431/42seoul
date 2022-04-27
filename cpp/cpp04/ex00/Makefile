@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 20:27:38 by hyson             #+#    #+#              #
-#    Updated: 2022/04/26 21:00:42 by hyson            ###   ########.fr        #
+#    Updated: 2022/04/27 16:45:07 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,12 @@ RM			= 	rm -f
 NAME		=	animal
 FOLDER		=	./srcs/
 HEADER		=	./includes/
-SRC_LIST	=	main.cpp
+SRC_LIST	=	main.cpp	\
+			Animal.cpp	\
+			Dog.cpp		\
+			Cat.cpp		\
+			WrongAnimal.cpp	\
+			WrongCat.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 

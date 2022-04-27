@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:06:13 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:17:55 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:43:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Dog& operator=(const Dog& d)
 	return (*this);
 }
 
-void makeSound(void)
+void makeSound(void) const
 {
 	std::cout << BPURPLE << "Wall Wall Wall" << EOC << std::endl;
 }

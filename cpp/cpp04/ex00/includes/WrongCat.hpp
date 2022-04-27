@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:53:22 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:56:40 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:42:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class WrongCat : public WrongAnimal {
 		WrongCat(const WrongCat& wc);
 		virtual ~WrongCat(void);
 		WrongCat&	operator=(const WrongCat& wc);
-		void		makeSound(void);
+		void		makeSound(void) const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:58:22 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:05:16 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:42:36 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Dog : public Animal {
 		Dog(const Dog& d);
 		~Dog(void);
 		Dog&	operator=(const Dog& d);
-		void	makeSound(void);
+		void	makeSound(void) const;
 };
 
 #endif

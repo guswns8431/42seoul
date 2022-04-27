@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:18:10 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:23:27 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:42:30 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Cat : public Animal {
 		Cat(const Cat& c);
 		~Cat(void);
 		Cat& operator=(const Cat& c);
-		void	makeSound(void);
+		void	makeSound(void) const;
 };
 
 #endif

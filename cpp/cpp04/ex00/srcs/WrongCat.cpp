@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:56:49 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:59:46 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:43:50 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ WrongCat& operator=(const WrongCat& wc)
 	return (*this);
 }
 
-void	makeSound(void)
+void	makeSound(void) const
 {
 	std::cout << BPURPLE << "WRONG WRONG WRONG Miao Miao Miao" << EOC << std::endl;
 }

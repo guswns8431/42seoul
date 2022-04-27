@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:18:02 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 14:22:55 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/27 16:42:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Cat& operator=(const Cat& c)
 	return (*this);
 }
 
-void makeSound(void)
+void makeSound(void) const
 {
 	std::cout << BPURPLE << "Miao Miao Miao" << std::endl;
 }
