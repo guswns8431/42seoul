@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:26:48 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 16:41:55 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/28 08:33:40 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Animal::~Animal(void)
 	std::cout << BLUE << "Animal" << EOC << "is " << RED << "deleted" << EOC << std::endl;
 }
 
-Animal& operator=(const Animal& a)
+Animal& Animal::operator=(const Animal& a)
 {
 	this->type = a.type;
 	return (*this);
@@ -39,7 +39,7 @@ std::string	Animal::getType(void) const
 	return (this->type);
 }
 
-void	makeSound(void) const
+void	Animal::makeSound(void) const
 {
 	std::cout << BPURPLE << "AAAAAANNNNNIIIIMMMMMAAAAALLLLLL" << EOC << std::endl;
 }
