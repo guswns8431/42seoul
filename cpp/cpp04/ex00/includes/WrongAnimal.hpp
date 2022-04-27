@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 20:31:42 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 15:20:38 by hyson            ###   ########.fr       */
+/*   Created: 2022/04/27 14:43:45 by hyson             #+#    #+#             */
+/*   Updated: 2022/04/27 15:21:07 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 # include <iostream>
 
@@ -24,16 +24,16 @@
 # define BPURPLE	"\033[0;45m"
 # define EOC		"\033[0;0m"
 
-class	Animal {
+class WrongAnimal {
 	protected:
 		std::string	type;
 	public:
-		Animal(void);
-		Animal(const Animal& a);
-		virtual ~Animal(void);
-		Animal&	operator=(const Animal& a);
-		std::string	getType(void) const;
-		virtual void	makeSound(void) const;
-};		
+		WrongAnimal(void);
+		WrongAnimal(const WrongAnimal& wa);
+		virtual	~WrongAnimal(void);
+		WrongAnimal&	operator=(const WrongAnimal& wa);
+		std::string	setType(void) const;
+		void		makeSound(void) const;
+};
 
 #endif
