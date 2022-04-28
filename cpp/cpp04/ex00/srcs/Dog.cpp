@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:06:13 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 08:52:28 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/28 20:26:18 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ Dog::Dog(void)
 	std::cout << BLUE << "Dog" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
 }
 
-Dog::Dog(const Dog& d) : Animal(d) //잘 돌아가는지 확인,type(d.type)은 왜 안 돌아가지
+Dog::Dog(const Dog& d) : Animal(d)
 {
 	std::cout << BLUE << "Dog" << EOC << YELLOW << " copy constructor " << EOC << "created" << std::endl;
 }
 
 Dog::~Dog(void)
 {
-	std::cout << BLUE << "Animal" << EOC << "is " << RED << "deleted" << EOC << std::endl;
+	std::cout << BLUE << "Dog" << EOC << " is " << RED << "deleted" << EOC << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& d)

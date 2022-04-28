@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:43:45 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/27 15:21:07 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/28 20:52:26 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class WrongAnimal {
 		WrongAnimal(const WrongAnimal& wa);
 		virtual	~WrongAnimal(void);
 		WrongAnimal&	operator=(const WrongAnimal& wa);
-		std::string	setType(void) const;
+		std::string	getType(void) const;
 		void		makeSound(void) const;
 };
 

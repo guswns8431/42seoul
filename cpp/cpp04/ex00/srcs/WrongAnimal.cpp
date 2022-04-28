@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:49:29 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 08:50:41 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/28 20:52:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal& wa) : type(wa.type)
 
 WrongAnimal::~WrongAnimal(void)
 {
-	std::cout << PURPLE << "WrongAnimal" << EOC << "is " << RED << "deleted" << EOC << std::endl;
+	std::cout << PURPLE << "WrongAnimal" << EOC << " is " << RED << "deleted" << EOC << std::endl;
 }
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& wa)
@@ -34,7 +34,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& wa)
 	return (*this);
 }
 
-std::string	WrongAnimal::setType(void) const
+std::string	WrongAnimal::getType(void) const
 {
 	return (this->type);
 }

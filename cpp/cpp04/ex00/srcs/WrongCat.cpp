@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:56:49 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 08:53:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/28 20:53:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ WrongCat::WrongCat(const WrongCat& wc) : WrongAnimal(wc)
 
 WrongCat::~WrongCat(void)
 {
-	std::cout << PURPLE << "WrongCat" << EOC << "is " << RED << "deleted" << EOC << std::endl;
+	std::cout << PURPLE << "WrongCat" << EOC << " is " << RED << "deleted" << EOC << std::endl;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& wc)
