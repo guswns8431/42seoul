@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:31:42 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 08:31:47 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/29 21:51:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class	Animal {
 		Animal&	operator=(const Animal& a);
 		std::string	getType(void) const;
 		virtual void	makeSound(void) const;
+		std::string		getType(void);
 };
 
 #endif

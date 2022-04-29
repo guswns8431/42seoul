@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 21:44:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 22:09:56 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/29 17:51:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Brain::Brain(void)
 	std::cout << BLUE << "Brain" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
 }
 
-Brain::Brain(const Brain&b b)
+Brain::Brain(const Brain& b)
 {
 	*this = b;
 	std::cout << BLUE << "Brain" << EOC << YELLOW << " copy constructor " << EOC << "created" << std::endl;

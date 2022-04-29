@@ -6,12 +6,14 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 21:19:02 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/28 22:29:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/29 19:52:42 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRAIN_HPP
 # define BRAIN_HPP
+
+# include <iostream>
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
