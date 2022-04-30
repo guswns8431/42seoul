@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:00:26 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/30 16:33:18 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 17:20:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,59 @@ int main()
 	const Animal *j = new Dog();
 	const Animal *i = new Cat();
 	const Animal meta;
+
 	std::cout << std::endl;
+	j->makeSound();
+	i->makeSound();
 	meta.makeSound();
 	std::cout << std::endl;
+
 	delete j;
 	delete i;
 
+	std::cout << std::endl;
 	int animal_cnt = 6;
-	std::cout << "--------[Constructors of List]--------" << std::endl;
-	Animal *list[animal_cnt];
-	for (int i = 0; i < animal_cnt; i++) {
+	std::cout << "[ Constructors of List ]" << std::endl;
+
+	Animal *animal_list[animal_cnt];
+	for (int i = 0; i < animal_cnt; i++)
+	{
 		if (i % 2 == 0)
-			list[i] = new Dog();
+			animal_list[i] = new Dog();
 		else
-			list[i] = new Cat();
+			animal_list[i] = new Cat();
 		std::cout << std::endl;
 	}
-	for (int i = 0; i < animal_cnt; i++) {
-		list[i]->makeSound();
-	}
-
+	for (int i = 0; i < animal_cnt; i++)
+		animal_list[i]->makeSound();
 	std::cout << std::endl;
 
 	Dog *dg = new Dog();
-	dg->getBrain()->setIdea("dg_idea");
-	*(Dog *)list[0] = *dg;
+	dg->getBrain()->setIdea("dog1");
+	*(Dog *)animal_list[0] = *dg;
 	delete dg;
-	std::cout << "******** > " << ((Dog *)list[0])->getBrain()->getIdea(10) <<std::endl;
+	std::cout << std::endl;
+	std::cout << "After delete dg class : " << ((Dog *)animal_list[0])->getBrain()->getIdea(1) <<std::endl;
+	std::cout << std::endl;
 
-	Dog nd = *(Dog *)list[0];
-	((Dog *)list[0])->getBrain()->setIdea("new_set_idea");
-	std::cout << "******** > " << ((Dog *)list[0])->getBrain()->getIdea(10) <<std::endl;
-	std::cout << "******** > " << nd.getBrain()->getIdea(10) <<std::endl;
-
-
-	std::cout << "\n--------[Destructors of List]--------" << std::endl;
-	for (int i = 0; i < animal_cnt; i++) {
-		delete list[i];
+	Dog nd = *(Dog *)animal_list[0];
+	((Dog *)animal_list[0])->getBrain()->setIdea("dog1_new_idea");
+	std::cout << std::endl;
+	std::cout << "[ After set new idea in animal list ]" << std::endl;
+	std::cout << ((Dog *)animal_list[0])->getBrain()->getIdea(1) << std::endl;
+	std::cout << nd.getBrain()->getIdea(1) << std::endl;
+	
+	std::cout << std::endl;
+	std::cout << "[ Print ideas ]" << std::endl;
+	for (int i = 0; i < 100; i++)
+	{
+		std::cout << ((Dog *)animal_list[0])->getBrain()->getIdea(i) << std::endl;
+		std::cout << nd.getBrain()->getIdea(i) << std::endl;
 	}
+
+	std::cout << std::endl;
+	std::cout << "[ Destructors of List ]" << std::endl;
+	for (int i = 0; i < animal_cnt; i++)
+		delete animal_list[i];
 	return (0);
 }
