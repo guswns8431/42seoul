@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:58:22 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/29 20:06:12 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 16:09:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ class Dog : public Animal {
 		Brain* b_;
 	public:
 		Dog(void);
+		Dog(std::string brain);
 		Dog(const Dog& d);
 		~Dog(void);
 		Dog&	operator=(const Dog& d);
 		void	makeSound(void) const;
+		Brain*	getBrain(void);
+		
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:18:10 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/29 20:06:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 15:50:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ class Cat : public Animal {
 		Brain* b_;
 	public:
 		Cat(void);
+		Cat(std::string brain);
 		Cat(const Cat& c);
 		~Cat(void);
 		Cat&	operator=(const Cat& c);
 		void	makeSound(void) const;
+		Brain*	getBrain(void);
 };
 
 #endif

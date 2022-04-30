@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 21:19:02 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/29 19:52:42 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 16:32:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ class Brain {
 		std::string ideas[100];
 	public:
 		Brain(void);
+		Brain(std::string thought);
 		Brain(const Brain& b);
 		~Brain(void);
-		Brain&	operator=(const Brain& b);
+		Brain&		operator=(const Brain& b);
+		void		setIdea(std::string str);
+		std::string	getIdea(int i);
 };
 
 #endif

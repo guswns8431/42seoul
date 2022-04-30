@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:18:02 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/29 22:19:18 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 16:19:49 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 Cat::Cat(void) : b_(NULL)
 {
 	this->b_ = new Brain();
+	this->type = "Cat";
+	std::cout << BLUE << "Cat" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
+}
+
+Cat::Cat(std::string brain) : b_(NULL)
+{
+	this->b_ = new Brain(brain);
 	this->type = "Cat";
 	std::cout << BLUE << "Cat" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
 }
@@ -48,4 +55,9 @@ Cat& Cat::operator=(const Cat& c)
 void Cat::makeSound(void) const
 {
 	std::cout << BPURPLE << "Miao Miao Miao" << EOC << std::endl;
+}
+
+Brain*	Cat::getBrain(void)
+{
+	return (this->b_);
 }

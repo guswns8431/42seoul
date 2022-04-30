@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 14:06:13 by hyson             #+#    #+#             */
-/*   Updated: 2022/04/29 22:19:21 by hyson            ###   ########.fr       */
+/*   Updated: 2022/04/30 16:19:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ Dog::Dog(void) : b_(NULL)
 	this->b_ = new Brain();
 	this->type = "Dog";
 	std::cout << BLUE << "Dog" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
+}
+
+Dog::Dog(std::string brain)
+{
+	this->b_ = new Brain(brain);
+	this->type = "Dog";
+	std::cout << BLUE << "Cat" << EOC << GREEN << " constructor " << EOC << "created" << std::endl;
 }
 
 Dog::Dog(const Dog& d) : Animal(d), b_(NULL)
@@ -49,4 +56,9 @@ Dog& Dog::operator=(const Dog& d)
 void Dog::makeSound(void) const
 {
 	std::cout << BPURPLE << "Wall Wall Wall" << EOC << std::endl;
+}
+
+Brain*	Dog::getBrain(void)
+{
+	return (this->b_);
 }
