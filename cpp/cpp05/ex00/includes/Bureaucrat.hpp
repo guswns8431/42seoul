@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:02:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 19:31:13 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 20:12:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class	Bureaucrat {
 		};
 
 		Bureaucrat(void);
-		Bureaucrat(std::string name, int grade);
+		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(const Bureaucrat& b);
 		~Bureaucrat(void);
 		Bureaucrat&	operator=(const Bureaucrat&	b);

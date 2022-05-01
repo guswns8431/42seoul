@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 19:48:59 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 20:13:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Bureaucrat::Bureaucrat(void) : name_("NONAME"), grade_(MIN_GRADE)
 {
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade)
+Bureaucrat::Bureaucrat(const std::string name, int grade) : name_(name), grade_(grade)
 {
 	if (this->grade_ > MIN_GRADE)
 		throw GradeTooLowException();
