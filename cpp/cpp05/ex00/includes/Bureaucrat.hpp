@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:02:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 20:12:54 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 20:23:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ class	Bureaucrat {
 		~Bureaucrat(void);
 		Bureaucrat&	operator=(const Bureaucrat&	b);
 
-		void		increaseGrade(void);
-		void		decreaseGrade(void);
-		std::string	getName(void) const;
-		int			getGrade(void) const;
+		void				increaseGrade(void);
+		void				decreaseGrade(void);
+		const std::string	getName(void) const;
+		int					getGrade(void) const;
 };
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& b);

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 20:13:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 20:23:08 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			Bureaucrat::decreaseGrade(void)
 	++this->grade_;
 }
 
-std::string		Bureaucrat::getName(void) const
+const std::string		Bureaucrat::getName(void) const
 {
 	return (this->name_);
 }
