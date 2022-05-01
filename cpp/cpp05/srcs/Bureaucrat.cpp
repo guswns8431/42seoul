@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 15:59:22 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 17:11:40 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ Bureaucrat::Bureaucrat(void)
 	this->grade_ = MIN_GRADE;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) throw(GradeTooHighException, GradeTooLowException)
+Bureaucrat::Bureaucrat(std::string name, int grade)
 {
 	this->name_ = name;
 	this->grade_ = grade;
-	if (grade > MIN_GRADE)
+	if (this->grade_ > MIN_GRADE)
 		throw GradeTooLowException();
-	if (grade < MAX_GRADE)
+	if (this->grade_ < MAX_GRADE)
 		throw GradeTooHighException();
 }
 
@@ -48,37 +48,33 @@ Bureaucrat::~Bureaucrat(void)
 {
 }
 
-Bureaucrat&		operator=(const Bureaucrat& b)
+Bureaucrat&		Bureaucrat::operator=(const Bureaucrat& b)
 {
 	this->name_ = b.name_;
-	this->grade_ = b.grade;
+	this->grade_ = b.grade_;
 	return (*this);
 }
 
-void			Bureaucrat::increaseGrade(int grade)
+void			Bureaucrat::increaseGrade(void)
 {
+	if (this->grade_ - 1 < MAX_GRADE)
+		throw GradeTooHighException();
 	--this->grade_;
-	if (grade > MIN_GRADE)
-		throw GradeTooLowException();
-	if (grade < MAX_GRADE)
-		throw GradeTooHighException();
 }
 
-void			Bureaucrat::decreaseGrade(int grade)
+void			Bureaucrat::decreaseGrade(void)
 {
-	++this->grade_;
-	if (grade > MIN_GRADE)
+	if (this->grade_ + 1> MIN_GRADE)
 		throw GradeTooLowException();
-	if (grade < MAX_GRADE)
-		throw GradeTooHighException();
+	++this->grade_;
 }
 
-std::string		Bureaucrat::getName(void)
+std::string		Bureaucrat::getName(void) const
 {
 	return (this->name_);
 }
 
-int				Bureaucrat::getGrade(void)
+int				Bureaucrat::getGrade(void) const
 {
 	return (this->grade_);
 }
@@ -86,9 +82,10 @@ int				Bureaucrat::getGrade(void)
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& b)
 {
 	if (b.getGrade() == MIN_GRADE)
-		std::cout << YELLOW << b.getName() << EOC << ", bureaucrat grade " << RED << b.getGrade() << EOC;
+		o << YELLOW << b.getName() << EOC << ", bureaucrat grade " << RED << b.getGrade() << EOC;
 	else if (b.getGrade() == MAX_GRADE)
-		std::cout << YELLOW << b.getName() << EOC << ", bureaucrat grade " << GREEN << b.getGrade() << EOC;
+		o << YELLOW << b.getName() << EOC << ", bureaucrat grade " << GREEN << b.getGrade() << EOC;
 	else
-		std::cout << YELLOW << b.getName() << EOC << ", bureaucrat grade " << BLUE << b.getGrade() << EOC;
+		o << YELLOW << b.getName() << EOC << ", bureaucrat grade " << BLUE << b.getGrade() << EOC;
+	return (o);
 }
