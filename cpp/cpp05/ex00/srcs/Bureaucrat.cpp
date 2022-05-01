@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 17:11:40 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 19:48:59 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,20 @@ const char* Bureaucrat::GradeTooLowException::what(void) const throw()
 	return ("Grade is too low(MIN = 150)");
 }
 
-Bureaucrat::Bureaucrat(void)
+Bureaucrat::Bureaucrat(void) : name_("NONAME"), grade_(MIN_GRADE)
 {
-	this->name_ = "NONAME";
-	this->grade_ = MIN_GRADE;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade)
 {
-	this->name_ = name;
-	this->grade_ = grade;
 	if (this->grade_ > MIN_GRADE)
 		throw GradeTooLowException();
 	if (this->grade_ < MAX_GRADE)
 		throw GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& b)
+Bureaucrat::Bureaucrat(const Bureaucrat& b) : name_(b.name_), grade_(b.grade_)
 {
-	this->name_ = b.name_;
-	this->grade_ = b.grade_;
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -50,7 +44,6 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat&		Bureaucrat::operator=(const Bureaucrat& b)
 {
-	this->name_ = b.name_;
 	this->grade_ = b.grade_;
 	return (*this);
 }

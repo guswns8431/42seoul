@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:02:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 17:23:54 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/01 19:31:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 class	Bureaucrat {
 	private:
-		std::string	name_;
+		const		std::string	name_;
 		int			grade_;
 	public:
 		class	GradeTooHighException : public std::exception {
