@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 21:31:26 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 15:43:29 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,25 @@ void			Bureaucrat::decreaseGrade(void)
 	++this->grade_;
 }
 
-const std::string		Bureaucrat::getName(void) const
+const std::string	Bureaucrat::getName(void) const
 {
 	return (this->name_);
 }
 
-int						Bureaucrat::getGrade(void) const
+int			Bureaucrat::getGrade(void) const
 {
 	return (this->grade_);
 }
+
+int			Bureaucrat::signForm(const Form& f)
+{
+	try {
+		f.beSigned(*this);
+		std::cout << YELLOW << this->name_ << EOC << " signs " << YELLOW << f.getName() << EOC << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << YELLOW << this->name_ << EOC << " couldn't sign " << YELLOW << f.getName() << EOC << " because " << e.what()
+	}
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& b)
 {
