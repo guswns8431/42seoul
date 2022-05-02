@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:57:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 21:53:11 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 15:58:51 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ class	Form {
 		
 		const std::string	getName(void) const;
 		bool				getIsSigned(void) const;
-		const int			getSignGrade(void) const;
-		const int			getExecuteGrade(void) const;
+		int			getSignGrade(void) const;
+		int			getExecuteGrade(void) const;
 		void				beSigned(const Bureaucrat& b);
 };
 

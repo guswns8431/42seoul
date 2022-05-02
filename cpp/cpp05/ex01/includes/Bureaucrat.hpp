@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:02:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 21:22:00 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 16:04:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ class	Bureaucrat {
 		void				decreaseGrade(void);
 		const std::string	getName(void) const;
 		int					getGrade(void) const;
-		void				signForm(const Form& f);
+		void				signForm(Form& f);
 };
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& b);

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:26:38 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/01 22:25:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 16:07:22 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Form::Form(void) : name_("NONAME"), is_signed_(false), sign_grade_(MIN_GRADE), e
 {
 }
 
-Form::Form(const std::string name, const int sign_grade, const int execute_grade) : name_(name), is_signed(false), sign_grade_(sign_grade), execute_grade_(execute_grade)
+Form::Form(const std::string name, const int sign_grade, const int execute_grade) : name_(name), is_signed_(false), sign_grade_(sign_grade), execute_grade_(execute_grade)
 {
 	if (this->sign_grade_ > MIN_GRADE || this->execute_grade_ > MIN_GRADE)
 		throw GradeTooLowException();
@@ -35,7 +35,7 @@ Form::Form(const std::string name, const int sign_grade, const int execute_grade
 		throw GradeTooHighException();
 }
 
-Form::Form(const Form& f) : name_(f.getName()), is_signed_(f.getIsSigned), sign_grade_(f.getSignGrade), execute_grade_(f.getExecuteGrade)
+Form::Form(const Form& f) : name_(f.getName()), is_signed_(f.getIsSigned()), sign_grade_(f.getSignGrade()), execute_grade_(f.getExecuteGrade())
 {
 }
 
@@ -59,12 +59,12 @@ bool				Form::getIsSigned(void) const
 	return (this->is_signed_);
 }
 
-const int			Form::getSignGrade(void) const
+int			Form::getSignGrade(void) const
 {
 	return (this->sign_grade_);
 }
 
-const int			Form::getExecuteGrade(void) const
+int			Form::getExecuteGrade(void) const
 {
 	return (this->execute_grade_);
 }
@@ -75,4 +75,10 @@ void				Form::beSigned(const Bureaucrat& b)
 		this->is_signed_ = true;
 	else
 		throw Bureaucrat::GradeTooLowException();
+}
+
+std::ostream&	operator<<(std::ostream& o, const Form& f)
+{
+	o << YELLOW << f.getName() << EOC << ", sign grade " << BLUE << f.getSignGrade() << EOC << ", exec grade " << BLUE << f.getExecuteGrade() <<  EOC << ", signed " << BLUE << f.getIsSigned() << EOC << std::endl;
+	return (o);
 }
