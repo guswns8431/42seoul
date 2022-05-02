@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:26:38 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/02 16:07:22 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 17:09:53 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void				Form::beSigned(const Bureaucrat& b)
 
 std::ostream&	operator<<(std::ostream& o, const Form& f)
 {
-	o << YELLOW << f.getName() << EOC << ", sign grade " << BLUE << f.getSignGrade() << EOC << ", exec grade " << BLUE << f.getExecuteGrade() <<  EOC << ", signed " << BLUE << f.getIsSigned() << EOC << std::endl;
+	o << YELLOW << f.getName() << EOC << ", sign grade " << BLUE << f.getSignGrade() << EOC << ", exec grade " << BLUE << f.getExecuteGrade() <<  EOC << ", signed " << BLUE << f.getIsSigned() << EOC;
 	return (o);
 }

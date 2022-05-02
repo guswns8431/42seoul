@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/02 16:04:12 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/02 17:04:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			Bureaucrat::signForm(Form& f)
 		std::cout << YELLOW << this->name_ << EOC << " signs " << YELLOW << f.getName() << EOC << std::endl;
 	}
 	catch (std::exception& e) {
-		std::cout << YELLOW << this->name_ << EOC << " couldn't sign " << YELLOW << f.getName() << EOC << " because " << e.what();
+		std::cout << YELLOW << this->name_ << EOC << " couldn't sign " << YELLOW << f.getName() << EOC << " because " << e.what() << std::endl;
 	}
 }
 
