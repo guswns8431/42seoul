@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 21:16:36 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 21:57:46 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 16:52:25 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(void) : Form()
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, SIGN_GRADE, EXEC_GRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, S_SIGN_GRADE, S_EXEC_GRADE)
 {
 }
 
@@ -39,7 +39,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-void			ShrubberyCreationForm::execute(Buraucrat const & executor) const
+void			ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	canExecute(executor);
 	std::ofstream output_file;
@@ -48,5 +48,5 @@ void			ShrubberyCreationForm::execute(Buraucrat const & executor) const
 	if (output_file.fail())
 		throw FileOpenError();
 	output_file << ASCII_ART_TREE;
-	out.close();
+	output_file.close();
 }

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 21:01:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 21:57:03 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 17:07:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,41 @@
 # include "Form.hpp"
 # include <fstream>
 
-# define SIGN_GRADE 145
-# define EXEC_GRADE 137
-# define ASCII_ART_TREE	\
-                                                         .		\
-                                              .         ;		\
-                 .              .              ;%     ;;		\
-                   ,           ,                :;%  %;			\
-                    :         ;                   :;%;'     .,		\
-           ,.        %;     %;            ;        %;'    ,;		\
-             ;       ;%;  %%;        ,     %;    ;%;    ,%'		\
-              %;       %;%;      ,  ;       %;  ;%;   ,%;'		\
-               ;%;      %;        ;%;        % ;%;  ,%;'		\
-                `%;.     ;%;     %;'         `;%%;.%;'			\
-                 `:;%.    ;%%. %@;        %; ;@%;%'			\
-                    `:%;.  :;bd%;          %;@%;'			\
-                      `@%:.  :;%.         ;@@%;'			\
-                        `@%.  `;@%.      ;@@%;				\
-                          `@%%. `@%%    ;@@%;				\
-                            ;@%. :@%%  %@@%;				\
-                              %@bd%%%bd%%:;				\
-                                #@%%%%%:;;				\
-                                %@@%%%::;				\
-                                %@@@%(o);  . '				\
-                                %@@@o%;:(.,'				\
-                            `.. %@@@o%::;				\
-                               `)@@@o%::;				\
-                                %@@(o)::;				\
-                               .%@@@@%::;				\
-                               ;%@@@@%::;.				\
-                              ;%@@@@%%:;;;.				\
-                          ...;%@@@@@%%:;;;;,..				
+# define S_SIGN_GRADE 145
+# define S_EXEC_GRADE 137
+# define ASCII_ART_TREE	"\n\
+                                                         .		\n\
+                                              .         ;		\n\
+                 .              .              ;%     ;;		\n\
+                   ,           ,                :;%  %;			\n\
+                    :         ;                   :;%;'     .,		\n\
+           ,.        %;     %;            ;        %;'    ,;		\n\
+             ;       ;%;  %%;        ,     %;    ;%;    ,%'		\n\
+              %;       %;%;      ,  ;       %;  ;%;   ,%;'		\n\
+               ;%;      %;        ;%;        % ;%;  ,%;'		\n\
+                `%;.     ;%;     %;'         `;%%;.%;'			\n\
+                 `:;%.    ;%%. %@;        %; ;@%;%'			\n\
+                    `:%;.  :;bd%;          %;@%;'			\n\
+                      `@%:.  :;%.         ;@@%;'			\n\
+                        `@%.  `;@%.      ;@@%;				\n\
+                          `@%%. `@%%    ;@@%;				\n\
+                            ;@%. :@%%  %@@%;				\n\
+                              %@bd%%%bd%%:;				\n\
+                                #@%%%%%:;;				\n\
+                                %@@%%%::;				\n\
+                                %@@@%(o);  . '				\n\
+                                %@@@o%;:(.,'				\n\
+                            `.. %@@@o%::;				\n\
+                               `)@@@o%::;				\n\
+                                %@@(o)::;				\n\
+                               .%@@@@%::;				\n\
+                               ;%@@@@%::;.				\n\
+                              ;%@@@@%%:;;;.				\n\
+                          ...;%@@@@@%%:;;;;,.."
 
-class ShrubberyCreationForm : public form {
+class ShrubberyCreationForm : public Form {
 	public:
-		class	FileOpenError : public std::exceptoin {
+		class	FileOpenError : public std::exception {
 			public:
 				const char* what(void) const throw();
 		};
@@ -59,8 +59,8 @@ class ShrubberyCreationForm : public form {
 		ShrubberyCreationForm(const ShrubberyCreationForm& s);
 		~ShrubberyCreationForm(void);
 		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& s);
-		
-		void		execute(Bureaucrat const & executor) const = 0;
+
+		void		execute(Bureaucrat const & executor) const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 21:58:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 22:09:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 16:46:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define ROBOTOMYREQUESTFORM_HPP
 
 # include "Form.hpp"
+# include <cstdlib>
+# include <ctime>
 
-# define SIGN_GRADE 72
-# define EXEC_GRADE 45
+# define R_SIGN_GRADE 72
+# define R_EXEC_GRADE 45
 
 class RobotomyRequestForm : public Form {
 	public:
@@ -27,6 +29,6 @@ class RobotomyRequestForm : public Form {
 		RobotomyRequestForm&	operator=(const RobotomyRequestForm& r);
 		
 		void			execute(Bureaucrat const & executor) const;
-}
+};
 
 #endif

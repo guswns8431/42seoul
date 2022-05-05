@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:57:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 20:50:06 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 17:00:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include <iostream>
 # include <exception>
+
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define PURPLE		"\033[0;35m"
+# define EOC		"\033[0;0m"
 
 class	Bureaucrat;
 
@@ -49,7 +56,7 @@ class	Form {
 		int			getSignGrade(void) const;
 		int			getExecuteGrade(void) const;
 		void				beSigned(const Bureaucrat& b);
-		void				canExecute(const Bureaucrat& b);
+		void				canExecute(const Bureaucrat& b) const;
 		virtual void			execute(Bureaucrat const & executor) const = 0;
 };
 

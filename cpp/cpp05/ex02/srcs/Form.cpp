@@ -1,4 +1,4 @@
-* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:26:38 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 20:55:32 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 16:58:31 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void				Form::beSigned(const Bureaucrat& b)
 		throw Bureaucrat::GradeTooLowException();
 }
 
-void				Form::canExecute(const Bureaucrat& b)
+void				Form::canExecute(const Bureaucrat& b) const
 {
-	if (!getIsSigned)
+	if (!getIsSigned())
 		throw FormNotSignedException();
 	if (b.getGrade() > this->execute_grade_)
 		throw GradeTooHighException();

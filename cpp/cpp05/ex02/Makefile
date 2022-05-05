@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 20:27:38 by hyson             #+#    #+#              #
-#    Updated: 2022/05/02 16:05:01 by hyson            ###   ########.fr        #
+#    Updated: 2022/05/05 17:03:01 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,15 @@ RM			= 	rm -f
 #									F I L E   #
 #------------------------------------------------------------------------------#
 
-NAME		=	form
+NAME		=	execute
 FOLDER		=	./srcs/
 HEADER		=	./includes/
-SRC_LIST	=	main.cpp	\
-				Bureaucrat.cpp	\
-				Form.cpp
+SRC_LIST	=	main.cpp					\
+				Bureaucrat.cpp				\
+				Form.cpp					\
+				ShrubberyCreationForm.cpp	\
+				RobotomyRequestForm.cpp		\
+				PresidentialPardonForm.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 

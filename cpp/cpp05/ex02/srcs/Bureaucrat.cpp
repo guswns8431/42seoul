@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/04 21:00:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 17:48:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void			Bureaucrat::signForm(Form& f)
 	}
 }
 
-void			Bureaucrat::executeForm(FOrm const & f)
+void			Bureaucrat::executeForm(Form const & f)
 {
 	try {
 		f.execute(*this);
-		std::cot << YELLOW << this->name_ << EOC << " executes " << YELLOW << f.getName() << EOC << std::endl;
+		std::cout << YELLOW << this->name_ << EOC << " executes " << YELLOW << f.getName() << EOC << std::endl;
 	} catch (std::exception& e) {
 		std::cout << YELLOW << this->name_ << EOC << " couldn't execute " << YELLOW << f.getName() << EOC << " because " << e.what() << std::endl;
 	}
