@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:22:12 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/02 17:12:13 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/05 15:26:21 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int main(void)
 {
+
 	std::cout << "[ Check B - OK , F - OK ]" << std::endl;
 	try {
 		Bureaucrat hyson("hyson", 3);
@@ -38,6 +39,7 @@ int main(void)
 	catch (std::exception &e) {
 		std::cout << PURPLE << "Error : " << EOC << e.what() << std::endl;
 	}
+	std::cout << "Here" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "[ Check B - Error(create) , F - OK ]" << std::endl;

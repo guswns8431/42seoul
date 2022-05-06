@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:36:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/05 21:12:21 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/06 15:54:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ class Intern {
 		~Intern(void);
 		Intern&	operator=(const Intern& i);
 
-		Form*	makeForm(std::string name, std::string target);
 		Form*	shrubbery(std::string name);
 		Form*	robot(std::string name);
 		Form*	presidential(std::string name);
+		Form*	makeForm(std::string name, std::string target);
 };
 
 #endif

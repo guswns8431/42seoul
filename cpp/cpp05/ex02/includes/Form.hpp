@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:57:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/05 17:00:02 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:26:35 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ class	Form {
 		Form(void);
 		Form(const std::string name, const int sign_grade, const int execute_grade);
 		Form(const Form& f);
-		~Form(void);
+		virtual ~Form(void);
 		Form&	operator=(const Form&	f);
 		
 		const std::string	getName(void) const;
