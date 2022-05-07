@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 20:27:38 by hyson             #+#    #+#              #
-#    Updated: 2022/05/06 20:30:30 by hyson            ###   ########.fr        #
+#    Updated: 2022/05/07 15:33:11 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME		=	convert
 FOLDER		=	./srcs/
 HEADER		=	./includes/
 SRC_LIST	=	main.cpp	\
+				Convert.cpp
 
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
