@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/07 20:16:39 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/07 20:19:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ Convert&	Convert::operator=(const Convert& c)
 	this->error_ = c.error_;
 
 	return (*this);
-}
-
-bool		Convert::getError(void)
-{
-	return (this->error_);
 }
 
 char		Convert::toChar(void)

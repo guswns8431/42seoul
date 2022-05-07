@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 21:40:28 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/07 20:15:21 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/07 20:19:44 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ class	Convert {
 		~Convert(void);
 		Convert&	operator=(const Convert& c);
 
-		bool		getError(void);
 		char		toChar(void);
 		int			toInt(void);
 		float		toFloat(void);
