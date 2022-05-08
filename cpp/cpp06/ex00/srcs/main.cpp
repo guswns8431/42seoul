@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/07 20:15:37 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/07 20:26:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 	{
 		Convert c(argv[1]);
 		c.printChar();
+		c.printInt();
 		//std::cout << Convert(argv[1]);
 	}
 	return (0);
