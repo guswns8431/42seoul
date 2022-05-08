@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 11:42:37 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/08 11:56:20 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ char		Convert::toChar(void)
 
 int			Convert::toInt(void)
 {
+	if (this->value_ > 2147483647 || this->value_ < -2147483648)
+		throw ImpossibleException();
+	else if (this->type_ == "Error" || this->type_ == "NaN" || this->type_ == "Inf")
+		throw ImpossibleException();
 	return (static_cast<int>(this->value_));
 }
 
