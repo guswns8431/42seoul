@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 21:40:28 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 11:30:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/08 15:45:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <cstdlib>
 # include <cctype>
 # include <cstring>
+# include <cfloat>
 
 class	Convert {
 	private:

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 11:56:20 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/08 15:44:07 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ Convert::Convert(std::string input)
 	this->input_ = input;
 	this->value_ = std::strtod(this->input_.c_str(), &pos);
 
-	if (input == "nan" || input == "nanf")
+	if (isnan(this->value_) || input == "nan" || input == "nanf")
 		this->type_ = "NaN";
-	else if (input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
+	else if (isinf(this->value_) || input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
 		this->type_ = "Inf";
-	else if (!*pos || (strlen(pos) == 1 && pos[0] == 'f' && isdigit(this->value_)))
+	else if (((strlen(pos) == 1 && pos[0] == 'f' && this->value_)) || !*pos)
 		this->type_ = "Number";
-	else if (strlen(pos) == 1 && isalpha(pos[0]))
+	else if (strlen(pos) == 1 && isalpha(pos[0]) && this->value_ == 0 && this->input_[0] != '0')
 		this->type_ = "Char";
 	else
 		this->type_ = "Error";
@@ -94,11 +94,15 @@ int			Convert::toInt(void)
 	return (static_cast<int>(this->value_));
 }
 
-/*
 float		Convert::toFloat(void)
 {
+	if (this->type_ == "Error")
+		throw ImpossibleException();
+	return (static_cast<float>(this->value_));
 }
 
+
+/*
 double		Convert::toDouble(void)
 {
 }
@@ -123,10 +127,23 @@ void		Convert::printInt(void)
 {
 	std::cout << "int : ";
 	try {
-		int i;
+		std::cout << this->toInt() << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+}
 
-		i = this->toInt();
-		std::cout << i << std::endl;
+void		Convert::printFloat(void)
+{
+	std::cout << "float : ";
+	if (this->value_ > FLT_MAX || this->value_ < FLT_MIN || this->type_ == "NaN" || this->type_ == "Inf")
+	{
+		std::cout << this->toFloat() << "f" << std::endl;
+		return ;
+	}
+	try {
+		std::cout << this->toFloat() << ".0f" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -134,10 +151,6 @@ void		Convert::printInt(void)
 }
 
 /*
-void		Convert::printFloat(void)
-{
-}
-
 void		Convert::printDouble(void)
 {
 }
