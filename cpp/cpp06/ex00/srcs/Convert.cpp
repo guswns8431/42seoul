@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 15:44:07 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:47:30 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ Convert::Convert(std::string input)
 		this->type_ = "NaN";
 	else if (isinf(this->value_) || input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
 		this->type_ = "Inf";
-	else if (((strlen(pos) == 1 && pos[0] == 'f' && this->value_)) || !*pos)
+	else if ((strlen(pos) == 1 && pos[0] == 'f' && this->value_) || !*pos )
 		this->type_ = "Number";
+	else if (!*pos && isdigit(*this->input_.end())) //여기서부터 하렴
+		this->type_ = "NumberNf";
 	else if (strlen(pos) == 1 && isalpha(pos[0]) && this->value_ == 0 && this->input_[0] != '0')
 		this->type_ = "Char";
 	else
@@ -102,12 +104,13 @@ float		Convert::toFloat(void)
 }
 
 
-/*
 double		Convert::toDouble(void)
 {
+	if (this->type_ == "Error")
+		throw ImpossibleException();
+	return (this->value_); //여기도 static_cast를 해야하나?
 }
 
-*/
 void		Convert::printChar(void)
 {
 	std::cout << "char : ";
@@ -143,7 +146,23 @@ void		Convert::printFloat(void)
 		return ;
 	}
 	try {
-		std::cout << this->toFloat() << ".0f" << std::endl;
+		if (this->type_ == "NumberNf")
+		{
+			std::cout << this->toFloat() << "f" << std::endl;
+		}
+		else
+			std::cout << this->toFloat() << ".0f" << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void		Convert::printDouble(void)
+{
+	std::cout << "double : ";
+	try {
+		std::cout << this->toDouble() << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -151,10 +170,6 @@ void		Convert::printFloat(void)
 }
 
 /*
-void		Convert::printDouble(void)
-{
-}
-
 std::ostream&	operator<<(std::ostream& o, const Convert& c)
 {
 	if (c.getError())
