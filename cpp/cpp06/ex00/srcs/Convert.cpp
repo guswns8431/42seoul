@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 16:47:30 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:49:20 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ Convert::Convert(void)
 	this->value_ = 0;
 	this->type_ = "";
 }
+
+//42.fa
+//nana
+//표현길이
+//40.0f
+//최대길이
+//최소길이
+//42.1
+//42
+//0
 
 Convert::Convert(std::string input)
 {
