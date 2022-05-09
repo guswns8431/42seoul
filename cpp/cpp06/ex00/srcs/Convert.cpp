@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 16:49:20 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/09 15:30:45 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Convert::Convert(void)
 //nana
 //표현길이
 //40.0f
-//최대길이
+//최대길이(소수점 길이도 체크해줘야함)
 //최소길이
 //42.1
 //42
@@ -52,8 +52,6 @@ Convert::Convert(std::string input)
 		this->type_ = "Inf";
 	else if ((strlen(pos) == 1 && pos[0] == 'f' && this->value_) || !*pos )
 		this->type_ = "Number";
-	else if (!*pos && isdigit(*this->input_.end())) //여기서부터 하렴
-		this->type_ = "NumberNf";
 	else if (strlen(pos) == 1 && isalpha(pos[0]) && this->value_ == 0 && this->input_[0] != '0')
 		this->type_ = "Char";
 	else
@@ -108,7 +106,7 @@ int			Convert::toInt(void)
 
 float		Convert::toFloat(void)
 {
-	if (this->type_ == "Error")
+	if (this->type_ == "Error" || this->type_ == "NaN")
 		throw ImpossibleException();
 	return (static_cast<float>(this->value_));
 }
@@ -116,9 +114,9 @@ float		Convert::toFloat(void)
 
 double		Convert::toDouble(void)
 {
-	if (this->type_ == "Error")
+	if (this->type_ == "Error" || this->type_ == "NaN")
 		throw ImpossibleException();
-	return (this->value_); //여기도 static_cast를 해야하나?
+	return (static_cast<double>(this->value_));
 }
 
 void		Convert::printChar(void)
@@ -150,16 +148,14 @@ void		Convert::printInt(void)
 void		Convert::printFloat(void)
 {
 	std::cout << "float : ";
-	if (this->value_ > FLT_MAX || this->value_ < FLT_MIN || this->type_ == "NaN" || this->type_ == "Inf")
-	{
-		std::cout << this->toFloat() << "f" << std::endl;
-		return ;
-	}
 	try {
-		if (this->type_ == "NumberNf")
+		if (this->value_ > FLT_MAX || this->value_ < (-1) * FLT_MAX || this->type_ == "NaN" || this->type_ == "Inf")
 		{
 			std::cout << this->toFloat() << "f" << std::endl;
+			return ;
 		}
+		if (this->value_ - static_cast<int>(this->value_) > 0)
+			std::cout << this->toFloat() << "f" << std::endl;
 		else
 			std::cout << this->toFloat() << ".0f" << std::endl;
 	}
