@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/09 15:30:45 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/11 21:24:14 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ Convert::Convert(void)
 	this->type_ = "";
 }
 
-//42.fa
-//nana
-//표현길이
-//40.0f
-//최대길이(소수점 길이도 체크해줘야함)
-//최소길이
-//42.1
-//42
-//0
-
 Convert::Convert(std::string input)
 {
 	char* pos = NULL;
@@ -46,9 +36,9 @@ Convert::Convert(std::string input)
 	this->input_ = input;
 	this->value_ = std::strtod(this->input_.c_str(), &pos);
 
-	if (isnan(this->value_) || input == "nan" || input == "nanf")
+	if (input == "nan" || input == "nanf")
 		this->type_ = "NaN";
-	else if (isinf(this->value_) || input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
+	else if (input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
 		this->type_ = "Inf";
 	else if ((strlen(pos) == 1 && pos[0] == 'f' && this->value_) || !*pos )
 		this->type_ = "Number";
@@ -106,7 +96,7 @@ int			Convert::toInt(void)
 
 float		Convert::toFloat(void)
 {
-	if (this->type_ == "Error" || this->type_ == "NaN")
+	if (this->type_ == "Error")
 		throw ImpossibleException();
 	return (static_cast<float>(this->value_));
 }
@@ -114,7 +104,7 @@ float		Convert::toFloat(void)
 
 double		Convert::toDouble(void)
 {
-	if (this->type_ == "Error" || this->type_ == "NaN")
+	if (this->type_ == "Error")
 		throw ImpossibleException();
 	return (static_cast<double>(this->value_));
 }
@@ -150,11 +140,8 @@ void		Convert::printFloat(void)
 	std::cout << "float : ";
 	try {
 		if (this->value_ > FLT_MAX || this->value_ < (-1) * FLT_MAX || this->type_ == "NaN" || this->type_ == "Inf")
-		{
 			std::cout << this->toFloat() << "f" << std::endl;
-			return ;
-		}
-		if (this->value_ - static_cast<int>(this->value_) > 0)
+		else if (this->value_ - static_cast<int>(this->value_) > 0)
 			std::cout << this->toFloat() << "f" << std::endl;
 		else
 			std::cout << this->toFloat() << ".0f" << std::endl;
@@ -168,22 +155,14 @@ void		Convert::printDouble(void)
 {
 	std::cout << "double : ";
 	try {
-		std::cout << this->toDouble() << std::endl;
+		if (this->type_ == "NaN" || this->type_ == "Inf")
+			std::cout << this->toDouble() << std::endl;
+		else if (this->value_ - static_cast<int>(this->value_) > 0)
+			std::cout << this->toDouble() << std::endl;
+		else
+			std::cout << this->toDouble() << ".0" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 }
-
-/*
-std::ostream&	operator<<(std::ostream& o, const Convert& c)
-{
-	if (c.getError())
-	{
-		o << "Error";
-		return (o);
-	}
-	c.printChar();
-	return (o);
-}
-*/

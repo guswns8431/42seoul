@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/08 15:57:05 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/11 21:23:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 		c.printInt();
 		c.printFloat();
 		c.printDouble();
-		//std::cout << Convert(argv[1]);
 	}
 	return (0);
 }
