@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 21:40:28 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/11 21:20:03 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 00:05:07 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,5 @@ class	Convert {
 		void		printFloat(void);
 		void		printDouble(void);
 };
-
-//std::ostream&		operator<<(std::ostream& o, const Convert& c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/13 21:52:11 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 00:05:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ const char* Convert::CanNotDisplayException::what(void) const throw()
 
 const char* Convert::ImpossibleException::what(void) const throw()
 {
-	return ("Impossible");
+	return ("impossible");
 }
 
 Convert::Convert(void)
