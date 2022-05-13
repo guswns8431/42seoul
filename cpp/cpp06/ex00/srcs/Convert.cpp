@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 00:05:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 07:52:11 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Convert::Convert(std::string input)
 		this->type_ = "Inf";
 	else if ((strlen(pos) == 1 && pos[0] == 'f' && this->value_) || !*pos )
 		this->type_ = "Number";
-	else if (strlen(pos) == 1 && isalpha(pos[0]) && this->value_ == 0 && this->input_[0] != '0')
+	else if (strlen(pos) == 1 && isascii(pos[0]) && this->value_ == 0 && this->input_[0] != '0')
 		this->type_ = "Char";
 	else
 		this->type_ = "Error";
