@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 11:28:47 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 13:48:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ Convert&	Convert::operator=(const Convert& c)
 
 char		Convert::toChar(void)
 {
-	if (this->type_ == "Number")
+	if ((this->value_ - static_cast<int>(this->value_) > 0) || (static_cast<int>(this->value_) - this->value_ > 0))
+		throw ImpossibleException();
+	else if (this->type_ == "Number")
 	{
 		if (isascii(this->value_))
 		{
@@ -143,6 +145,8 @@ void		Convert::printFloat(void)
 			std::cout << this->toFloat() << "f" << std::endl;
 		else if (this->value_ - static_cast<int>(this->value_) > 0)
 			std::cout << this->toFloat() << "f" << std::endl;
+		else if (static_cast<int>(this->value_) - this->value_ > 0)
+			std::cout << this->toFloat() << "f" << std::endl;
 		else
 			std::cout << this->toFloat() << ".0f" << std::endl;
 	}
@@ -158,6 +162,8 @@ void		Convert::printDouble(void)
 		if (this->type_ == "NaN" || this->type_ == "Inf")
 			std::cout << this->toDouble() << std::endl;
 		else if (this->value_ - static_cast<int>(this->value_) > 0)
+			std::cout << this->toDouble() << std::endl;
+		else if (static_cast<int>(this->value_) - this->value_ > 0)
 			std::cout << this->toDouble() << std::endl;
 		else
 			std::cout << this->toDouble() << ".0" << std::endl;
