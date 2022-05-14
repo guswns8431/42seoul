@@ -6,12 +6,17 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 20:27:59 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 23:21:03 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/15 01:19:06 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARRAY_HPP
 # define ARRAY_HPP
+
+# define RED		"\033[0;31m"
+# define YELLOW		"\033[0;33m"
+# define PURPLE		"\033[0;35m"
+# define EOC		"\033[0;0m"
 
 template <typename T>
 class	Array {
@@ -45,10 +50,19 @@ class	Array {
 		};
 		Array<T>& operator=(const Array& a)
 		{
-			this->size_ = a.size_;
-			this->array_ = new T[this->size_];
-			for (unsigned int i = 0; i < this->size_; i++)
-				this->array_[i] = a.array_[i];
+			if (this != &a)
+			{
+				if (this->array_ != NULL)
+				{
+					delete[] this->array_;
+					this->array_ = NULL;
+					this->size_ = 0;
+				}
+				this->size_ = a.size_;
+				this->array_ = new T[a.size_];
+				for (unsigned int i = 0; i < a.size_; i++)
+					this->array_[i] = a.array_[i];
+			}
 			return (*this);
 		};
 		T&		operator[](unsigned int i)
@@ -57,7 +71,7 @@ class	Array {
 				throw OutOfBoundsException();
 			return (this->array_[i]);
 		}
-		T&		operator[](unsigned int i) const
+		const T&	operator[](unsigned int i) const
 		{
 			if (this->size_ <= i)
 				throw OutOfBoundsException();
@@ -65,7 +79,12 @@ class	Array {
 		}
 		~Array(void)
 		{
-			delete[] this->array_;
+			if (this->array_ != NULL)
+			{
+				delete[] this->array_;
+				this->array_ = NULL;
+				this->size_ = 0;
+			}
 		}
 		unsigned int size(void) const
 		{
@@ -76,8 +95,18 @@ class	Array {
 template <typename T>
 std::ostream&	operator<<(std::ostream& o, const Array<T>& a)
 {
+	unsigned int count = 0;
 	for (unsigned int i = 0; i < a.size(); i++)
+	{
 		o << a[i] << " ";
+		count++;
+		if (count == 5)
+		{
+			std::cout << std::endl;
+			count = 0;
+		}
+	}
+		
 	return (o);
 }
 
