@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:36:26 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 20:17:25 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/15 01:54:54 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ class Test {
 		int	getVal(void) const
 		{
 			return (this->val_);
+		}
+		void setVal(int n)
+		{
+			this->val_ = n;
 		}
 };
 
@@ -75,6 +79,12 @@ int main(void)
 	iter(str, 5, print);
 
 	Test t[5];
+
+	t[0].setVal(1);
+	t[1].setVal(2);
+	t[2].setVal(3);
+	t[3].setVal(4);
+	t[4].setVal(5);
 
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ class ]" << EOC << std::endl;
