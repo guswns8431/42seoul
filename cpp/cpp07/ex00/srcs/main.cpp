@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 10:28:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 15:29:46 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 15:56:01 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Test {
 		{
 			return (this->val_ > t.val_);
 		}
-		int		getN() const
+		int		getVal() const
 		{
 			return (this->val_);
 		}
@@ -34,7 +34,7 @@ class Test {
 
 std::ostream&	operator<<(std::ostream &o, const Test &t)
 {
-	o << t.getN();
+	o << t.getVal();
 	return (o);
 }
 
