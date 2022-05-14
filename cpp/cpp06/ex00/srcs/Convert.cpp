@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:36:50 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 07:52:11 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 11:28:47 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Convert::Convert(std::string input)
 
 	if (input == "nan" || input == "nanf")
 		this->type_ = "NaN";
-	else if (isinf(this->value_) || input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
+	else if (input == "inf" || input == "-inf" || input == "inff" || input == "-inff" || input == "+inf" || input == "+inff")
 		this->type_ = "Inf";
 	else if ((strlen(pos) == 1 && pos[0] == 'f' && this->value_) || !*pos )
 		this->type_ = "Number";
