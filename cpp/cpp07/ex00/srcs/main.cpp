@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 10:28:30 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 15:56:01 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 16:19:36 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,13 @@ int main(void) {
 	std::cout << "e = " << e << ", f = " << f << std::endl;
 	std::cout << "min( e, f ) = " << ::min(e, f) << std::endl;
 	std::cout << "max( e, f ) = " << ::max(e, f) << std::endl;
+
+	const int g = 4;
+	const int h = 5;
+
+	std::cout << YELLOW << "[ const ]" << EOC << std::endl;
+	std::cout << "min( g, h ) = " << ::min(g, h) << std::endl;
+	std::cout << "max( g, h ) = " << ::max(g, h) << std::endl;
+
 	return 0;
 }
