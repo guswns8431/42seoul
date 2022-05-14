@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:19:52 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 15:52:21 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/14 20:17:01 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 # define YELLOW		"\033[1;33m"
 # define EOC		"\033[0;0m"
+
+template <typename T>
+void	iter(const T* addr, int len, void(*f)(const T&))
+{
+	for (int i = 0; i < len; i++)
+		f(addr[i]);
+	std::cout << std::endl;
+}
 
 template <typename T>
 void	iter(T* addr, int len, void(*f)(T&))
