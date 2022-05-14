@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 10:22:31 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/14 15:28:06 by hyson            ###   ########.fr       */
+/*   Created: 2022/05/14 11:19:52 by hyson             #+#    #+#             */
+/*   Updated: 2022/05/14 14:08:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
 # include <iostream>
 
@@ -19,25 +19,29 @@
 # define EOC		"\033[0;0m"
 
 template <typename T>
-void	swap(T& a, T& b)
+void	iter(T* addr, int len, void(*f)(const T&))
 {
-	T	tmp;
-
-	tmp = a;
-	a = b;
-	b = tmp;
+	for (int i = 0; i < len; i++)
+		f(addr[i]);
+	std::cout << std::endl;
 }
 
 template <typename T>
-T		min(T& a, T&b)
+void	add(const T& a)
 {
-	return (a < b ? a : b);
+	a += 10;
+}
+
+template <>
+void	add(std::string a)
+{
+	a += "10";
 }
 
 template <typename T>
-T		max(T& a, T& b)
+void	print(const T& t)
 {
-	return (a > b ? a : b);
+	std::cout << t << " ";
 }
 
 #endif
