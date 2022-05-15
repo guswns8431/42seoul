@@ -6,22 +6,58 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 05:15:15 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/15 05:25:01 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/15 19:31:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
 
-int main(void)
+#include "easyfind.hpp"
+#include <deque>
+#include <vector>
+
+int main()
 {
 	std::vector<int> v;
+	v.push_back(10);
+	v.push_back(12);
+	v.push_back(14);
+	v.push_back(15);
 
-	v.push_back(5);
-	v.push_back(2);
-	v.push_back(3);
-	v.push_back(4);
+	try
+	{
+		easyfind(v, 12);
+		std::cout << "Success!" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Not Found" << std::endl;
+	}
 
-	std::cout << *v.end() << std::endl;
-	std::cout << *easyfind(v, 6) << std::endl;
+	try
+	{
+		easyfind(v, 20);
+		std::cout << "Success!" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Not Found" << std::endl;
+	}
+
+	std::deque<char> dq;
+	dq.push_back('a');
+	dq.push_back('b');
+	dq.push_back('c');
+	dq.push_back('d');
+
+	try
+	{
+		easyfind(dq, 'a');
+		std::cout << "Success!" << std::endl;
+		easyfind(dq, 'e');
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Not Found" << std::endl;
+	}
 	return (0);
 }
