@@ -6,7 +6,7 @@
 #    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 20:27:38 by hyson             #+#    #+#              #
-#    Updated: 2022/05/15 02:36:24 by hyson            ###   ########.fr        #
+#    Updated: 2022/05/15 21:27:29 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ RM			= 	rm -f
 #									F I L E   #
 #------------------------------------------------------------------------------#
 
-NAME		=	
+NAME		=	ex01	
 FOLDER		=	./srcs/
 HEADER		=	./includes/
-SRC_LIST	=	main.cpp
+SRC_LIST	=	main.cpp	\
+				Span.cpp
 SRC			=	$(addprefix $(FOLDER), $(SRC_LIST))
 OBJ			=	$(SRC:.cpp=.o)
 
