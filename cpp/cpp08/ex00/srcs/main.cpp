@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 05:15:15 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/16 13:48:35 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 17:36:09 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int main()
 {
+	std::cout << YELLOW << "[vector]" << EOC << std::endl;
 	std::vector<int> v;
 	v.push_back(10);
 	v.push_back(12);
@@ -43,6 +44,7 @@ int main()
 		std::cout << "Not Found" << std::endl;
 	}
 
+	std::cout << YELLOW << "[deque]" << EOC << std::endl;
 	std::deque<char> dq;
 	dq.push_back('a');
 	dq.push_back('b');
@@ -53,7 +55,16 @@ int main()
 	{
 		easyfind(dq, 'a');
 		std::cout << "Success!" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Not Found" << std::endl;
+	}
+
+	try
+	{
 		easyfind(dq, 'e');
+		std::cout << "Success!" << std::endl;
 	}
 	catch(const std::exception& e)
 	{

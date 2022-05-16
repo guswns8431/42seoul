@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 04:11:01 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/15 19:29:35 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 17:40:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
+# define RED		"\033[0;31m"
+# define YELLOW		"\033[0;33m"
+# define EOC		"\033[0;0m"
 
 template <typename T>
 typename T::iterator easyfind(T& t, int n)

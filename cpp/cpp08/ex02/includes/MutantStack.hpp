@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:55:12 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/16 14:59:24 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 17:32:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ template <typename T>
 class MutantStack : public std::stack<T> {
 	public:
 		typedef typename std::stack<T>::container_type::iterator iterator;
-		MutantStack(void) : std::stack<T>() {};
+		MutantStack(void) {};
 		MutantStack(const MutantStack& m) : std::stack<T>(m) {};
 		~MutantStack(void) {};
 		MutantStack&	operator=(const MutantStack& m) {
