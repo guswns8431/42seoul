@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 19:37:55 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/15 22:09:27 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 13:47:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,14 @@ class Span {
 		unsigned int	shortestSpan(void);
 		unsigned int	longestSpan(void);
 		template <typename T>
-		void	rangeIter(T a, T b)
+		void	rangeIter(T begin, T end)
 		{
-			while (a != b)
+			if (this->vec_.size() >= this->vec_.capacity())
+				throw AlreadyStoreException();
+			while (begin != end)
 			{
-				if (this->vec_.size() < this->vec_.capacity())
-					this->vec_.push_back(*a);
-				else
-					throw AlreadyStoreException();
-				a++;
+				this->vec_.push_back(*begin);
+				begin++;
 			}
 		}
 };
