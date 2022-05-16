@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 19:38:08 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/15 21:57:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 15:44:31 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ Span&	Span::operator=(const Span& s)
 	for (unsigned int i = 0; i < s.vec_.capacity(); i++)
 		this->vec_.push_back(s.vec_[i]);
 	return (*this);
+}
+
+int 	Span::getVal(int i) const
+{
+	return (this->vec_[i]);
 }
 
 void	Span::addNumber(int n)

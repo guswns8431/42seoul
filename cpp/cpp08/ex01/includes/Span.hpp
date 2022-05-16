@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 19:37:55 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/16 13:47:04 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 16:39:57 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <iostream>
 # include <vector>
 # include <algorithm>
+
+# define RED		"\033[0;31m"
+# define YELLOW		"\033[0;33m"
+# define PURPLE		"\033[0;35m"
+# define EOC		"\033[0;0m"
 
 class Span {
 	private:
@@ -34,18 +39,18 @@ class Span {
 		Span(const Span& s);
 		~Span(void);
 		Span&	operator=(const Span& s);
-		
 
+		int				getVal(int i) const;
 		void			addNumber(int n);
 		unsigned int	shortestSpan(void);
 		unsigned int	longestSpan(void);
 		template <typename T>
 		void	rangeIter(T begin, T end)
 		{
-			if (this->vec_.size() >= this->vec_.capacity())
-				throw AlreadyStoreException();
 			while (begin != end)
 			{
+				if (this->vec_.size() >= this->vec_.capacity())
+					throw AlreadyStoreException();
 				this->vec_.push_back(*begin);
 				begin++;
 			}

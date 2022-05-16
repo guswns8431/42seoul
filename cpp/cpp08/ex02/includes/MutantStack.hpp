@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:55:12 by hyson             #+#    #+#             */
-/*   Updated: 2022/05/16 14:33:13 by hyson            ###   ########.fr       */
+/*   Updated: 2022/05/16 14:59:24 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <iostream>
 # include <stack>
+
+# define YELLOW		"\033[0;33m"
+# define PURPLE		"\033[0;35m"
+# define EOC		"\033[0;0m"
 
 template <typename T>
 class MutantStack : public std::stack<T> {
