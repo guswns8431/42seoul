@@ -10,8 +10,6 @@ services:
       - "3306"
     networks:
       - intra
-    env_file:
-      - .env
     tty: true
   nginx:
     build: ./nginx
@@ -22,8 +20,6 @@ services:
       - data:/var/www/html
     networks:
       - intra
-    env_file:
-      - .env
     tty: true
   wordpress:
     build: ./wordpress
@@ -34,8 +30,11 @@ services:
       - "9000"
     networks:
       - intra
-    env_file:
-      - .env
+    environment:
+      - MARIADB_HOST=${MARIADB_HOST}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASS=${MARIADB_PASS}
+      - MARIADB_NAME=${MARIADB_NAME}
     tty: true
 networks:
   intra:
