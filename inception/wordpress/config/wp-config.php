@@ -1,19 +1,15 @@
 <?php
-define( 'DB_NAME', getenv('MARIADB_NAME') );
-define( 'DB_USER', getenv('MARIADB_USER') );
-define( 'DB_PASSWORD', getenv('MARIADB_PASS') );
-define( 'DB_HOST', getenv('MARIADB_HOST') );
 /** The name of the database for WordPress */
-//define( 'DB_NAME',  'wordpress');
+define( 'DB_NAME', getenv('MARIADB_NAME') );
 
 /** MySQL database username */
-//define( 'DB_USER', 'hyson' );
+define( 'DB_USER', getenv('MARIADB_USER') );
 
 /** MySQL database password */
-//define( 'DB_PASSWORD', 'hyson' );
+define( 'DB_PASSWORD', getenv('MARIADB_PASS') );
 
 /** MySQL hostname */
-//define( 'DB_HOST', 'mariadb' );
+define( 'DB_HOST', getenv('MARIADB_HOST') );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
