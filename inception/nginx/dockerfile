@@ -1,5 +1,11 @@
 FROM debian:buster
 
 RUN apt-get update && apt-get install -y 	\
-		vim									\
-		nginx
+		vim				\
+		nginx				\
+		openssl
+
+COPY ./script.sh ./tmp
+COPY ./config/default ./tmp
+
+CMD bash ./tmp/script.sh
