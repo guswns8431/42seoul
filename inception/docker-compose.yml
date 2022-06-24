@@ -10,7 +10,7 @@ services:
       - "3306"
     networks:
       - intra
-    tty: true
+    tty: true # 결국 bash 처럼 빼줘야할듯
   nginx:
     build: ./nginx
     restart: always
@@ -20,7 +20,7 @@ services:
       - data:/var/www/html
     networks:
       - intra
-    tty: true
+    tty: true # 결국 bash 처럼 빼줘야할듯
   wordpress:
     build: ./wordpress
     restart: always
@@ -35,7 +35,7 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASS=${MARIADB_PASS}
       - MARIADB_NAME=${MARIADB_NAME}
-    tty: true
+    tty: true # 결국 bash 처럼 빼줘야할듯
 networks:
   intra:
     driver: bridge

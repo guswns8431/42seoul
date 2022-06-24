@@ -8,4 +8,5 @@ COPY ./config/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./config/init_mariadb.sql ./tmp
 COPY ./script.sh ./tmp
 
-CMD bash ./tmp/script.sh
+RUN chmod +x ./tmp/script.sh
+CMD [ "./tmp/script.sh" ]
