@@ -7,5 +7,5 @@ RUN apt-get update && apt-get install -y 	\
 
 COPY ./script.sh ./tmp
 COPY ./config/default ./tmp
-
-CMD bash ./tmp/script.sh
+RUN chmod +x ./tmp/script.sh
+CMD [ "./tmp/script.sh" ]
