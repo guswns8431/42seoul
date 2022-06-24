@@ -8,11 +8,11 @@ rm -r /wordpress latest.tar.gz
 mv ./tmp/wp-config.php /var/www/html/wp-config.php
 mv ./tmp/www.conf /etc/php/7.3/fpm/pool.d
 
-
 echo "env[MARIADB_NAME] = $MARIADB_NAME" >> /etc/php/7.3/fpm/pool.d/www.conf
 echo "env[MARIADB_USER] = $MARIADB_USER" >> /etc/php/7.3/fpm/pool.d/www.conf
 echo "env[MARIADB_PASS] = $MARIADB_PASS" >> /etc/php/7.3/fpm/pool.d/www.conf
 echo "env[MARIADB_HOST] = $MARIADB_HOST" >> /etc/php/7.3/fpm/pool.d/www.conf
-service php7.3-fpm start
 
-bash #지워야함
+mkdir -p /run/php/
+touch /run/php/php7.3-fpm.pid
+/usr/sbin/php-fpm7.3 -F

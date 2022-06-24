@@ -16,5 +16,6 @@ RUN apt-get update && apt-get install -y \
 COPY ./script.sh ./tmp
 COPY ./config/wp-config.php ./tmp
 COPY ./config/www.conf ./tmp
-
-CMD bash ./tmp/script.sh
+RUN chmod +x ./tmp/script.sh
+ENTRYPOINT [ "./tmp/script.sh" ]
+#CMD ["/usr/sbin/php-fpm7.3", "--nodaemonize"]
