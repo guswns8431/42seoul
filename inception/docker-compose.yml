@@ -22,6 +22,8 @@ services:
       - wordpress_volume:/var/www/html
     networks:
       - intra
+    depends_on:
+      - wordpress
   wordpress:
     build: ./wordpress
     restart: always
@@ -36,6 +38,8 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASS=${MARIADB_PASS}
       - MARIADB_NAME=${MARIADB_NAME}
+    depends_on:
+      - mariadb
 networks:
   intra:
     driver: bridge
