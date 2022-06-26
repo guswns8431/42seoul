@@ -1,13 +1,14 @@
 version: '3'
 
 volumes:
-  data: {}
+  mariadb_volume: {}
+  wordpress_volume: {}
 services:
   mariadb:
     build: ./mariadb
     restart: always
     volumes:
-      - data:/var/www/html
+      - mariadb_volume:/var/lib/mysql
     expose:
       - "3306"
     networks:
@@ -18,14 +19,14 @@ services:
     ports:
       - "443:443"
     volumes:
-      - data:/var/www/html
+      - wordpress_volume:/var/www/html
     networks:
       - intra
   wordpress:
     build: ./wordpress
     restart: always
     volumes:
-      - data:/var/www/html
+      - wordpress_volume:/var/www/html
     expose:
       - "9000"
     networks:
