@@ -5,7 +5,6 @@ RUN apt-get update && apt-get install -y \
 	    php7.3		\
 	    php-fpm		\
 	    wget		\
-	    curl		\
 	    php-mysql		\
 	    vim
 

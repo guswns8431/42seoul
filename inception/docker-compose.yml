@@ -22,6 +22,8 @@ services:
       - wordpress_volume:/var/www/html
     networks:
       - intra
+    environment:
+      - USER=${MARIADB_USER}
     depends_on:
       - wordpress
   wordpress:
@@ -38,6 +40,11 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASS=${MARIADB_PASS}
       - MARIADB_NAME=${MARIADB_NAME}
+      - WORDPRESS_TITLE=${WORDPRESS_TITLE}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
+      - WORDPRESS_USER_LOGIN=${WORDPRESS_USER_LOGIN}
+      - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
+      - WORDPRESS_USER_PASS=${WORDPRESS_USER_PASS}
     depends_on:
       - mariadb
 networks:
