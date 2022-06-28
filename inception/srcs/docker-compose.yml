@@ -1,8 +1,5 @@
 version: '3'
 
-volumes:
-  mariadb_volume: {}
-  wordpress_volume: {}
 services:
   mariadb:
     build: ./mariadb
@@ -50,4 +47,19 @@ services:
 networks:
   intra:
     driver: bridge
+volumes:
+  mariadb_volume:
+    name: mariadb_volume
+    driver: local
+    driver_opts:
+      o: bind
+      type: volume
+      device: ${VOLUME_PATH}/mariadb
+  wordpress_volume:
+    name: wordpress_volume
+    driver: local
+    driver_opts:
+      o: bind
+      type: volume
+      device: ${VOLUME_PATH}/wordpress
 
