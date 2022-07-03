@@ -3,6 +3,7 @@ version: '3'
 services:
   mariadb:
     build: ./mariadb
+    image: mariadb:hyson
     restart: always
     volumes:
       - mariadb_volume:/var/lib/mysql
@@ -12,6 +13,7 @@ services:
       - intra
   nginx:
     build: ./nginx
+    image: nginx:hyson
     restart: always
     ports:
       - "443:443"
@@ -25,6 +27,7 @@ services:
       - wordpress
   wordpress:
     build: ./wordpress
+    image: wordpress:hyson
     restart: always
     volumes:
       - wordpress_volume:/var/www/html
