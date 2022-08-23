@@ -11,7 +11,7 @@
     <content>
       <h1>webserv</h1>
 
-      <?php echo '<p>You know? This is made by php cgi</p>'; ?>
+      <?php echo '<p>You Use php cgi</p>'; ?>
 
     </content>
   </div>

@@ -1,13 +1,20 @@
-// Copyright  @bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Client.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 11:17:16 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/08/18 05:52:08 by sanjeon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the client of the server
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_CLIENT_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_CLIENT_HPP_
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
-// Standard Library Inclusion
 #include <string>
 
-// Class Headers Inclusion
 #include "./Utilizer.hpp"
 #include "./Request.hpp"
 #include "./Response.hpp"
@@ -57,4 +64,4 @@ class Client {
   Response *get_response(void) const;
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_CLIENT_HPP_
+#endif

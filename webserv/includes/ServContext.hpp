@@ -1,26 +1,24 @@
-// Copyright @ bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ServContext.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 08:15:16 by hyson             #+#    #+#             */
+/*   Updated: 2022/08/18 05:21:49 by sanjeon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the context of the server
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_SERVCONTEXT_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_SERVCONTEXT_HPP_
+#ifndef SERVCONTEXT_HPP
+# define SERVCONTEXT_HPP
 
-// Standard Library Inclusion
-#include <map>
-#include <string>
-#include <vector>
+# include <map>
+# include <string>
+# include <vector>
 
-// Class Headers Inclusion
-#include "./Utilizer.hpp"
-#include "./Exception.hpp"
-
-// Enum Location Match
-enum location_match {
-  none_match,
-  exact_match,
-  case_sensitive_match,
-  case_insensitive_match,
-  longest_match
-};
+# include "./Utilizer.hpp"
+# include "./Exception.hpp"
 
 class ServContext {
  private:
@@ -31,7 +29,6 @@ class ServContext {
   bool _is_location_started;
 
   std::string _uri;
-  location_match _modifier;
 
   bool _is_autoindex_on;
 
@@ -70,7 +67,6 @@ class ServContext {
   void parse_server_name(Tokens::iterator *it);
 
   bool is_demultiplexable(Tokens::iterator it);
-  bool is_location_modifier(const std::string& str) const;
 
   void init_directive_converter(void);
 
@@ -85,7 +81,7 @@ class ServContext {
   void set_internal_directives(Tokens::iterator *it);
 
   Listens& get_listens(void);
-  const ServerNames& get_server_names(void) const;
+  ServerNames& get_server_names(void);
 
   friend class ReqContext;
   friend std::ostream& operator<<(std::ostream& o,
@@ -97,26 +93,22 @@ class ServContext {
   friend std::ostream& operator<<(std::ostream& o,
                               const Listens& l);
   friend std::ostream& operator<<(std::ostream& o,
-                              const location_match& l);
-  friend std::ostream& operator<<(std::ostream& o,
                               const Locations& l);
   friend std::ostream& operator<<(std::ostream& o,
                               const ServContext& s);
 };
 
-std::ostream& operator<<(std::ostream& o,
-                      const std::vector<std::string>& vs);
-std::ostream& operator<<(std::ostream& o,
-                      const std::map<int, std::string>& mis);
-std::ostream& operator<<(std::ostream& o,
-                      const std::map<std::string, std::string>& mss);
-std::ostream& operator<<(std::ostream& o,
-                      const Listens& l);
-std::ostream& operator<<(std::ostream& o,
-                      const location_match& l);
-std::ostream& operator<<(std::ostream& o,
-                      const Locations& l);
-std::ostream& operator<<(std::ostream& o,
-                      const ServContext& s);
+std::ostream &operator<<(std::ostream &o,
+						 const std::vector<std::string> &vs);
+std::ostream &operator<<(std::ostream &o,
+						 const std::map<int, std::string> &mis);
+std::ostream &operator<<(std::ostream &o,
+						 const std::map<std::string, std::string> &mss);
+std::ostream &operator<<(std::ostream &o,
+						 const Listens &l);
+std::ostream &operator<<(std::ostream &o,
+						 const Locations &l);
+std::ostream &operator<<(std::ostream &o,
+						 const ServContext &s);
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_SERVCONTEXT_HPP_
+#endif

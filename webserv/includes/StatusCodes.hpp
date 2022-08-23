@@ -1,13 +1,20 @@
-// Copyright @bigple66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   StatusCodes.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/17 18:51:18 by hyson             #+#    #+#             */
+/*   Updated: 2022/08/17 18:52:15 by hyson            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the status code of http response
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_STATUSCODES_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_STATUSCODES_HPP_
+#ifndef STATUSCODES_HPP
+#define STATUSCODES_HPP
 
-// Standard Library Inclusion
 #include <string>
 
-// Class Headers Inclusion
 #include "./Utilizer.hpp"
 
 class StatusCodes {
@@ -24,4 +31,4 @@ class StatusCodes {
   const std::string& operator[](int code);
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_STATUSCODES_HPP_
+#endif

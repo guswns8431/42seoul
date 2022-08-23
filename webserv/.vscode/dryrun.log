@@ -1,0 +1,42 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/sanjeon/Desktop/webserv'
+echo "\033[1;33m" "Compiling...\t" srcs/main.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/main.o -c srcs/main.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/CGI.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/CGI.o -c srcs/CGI.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Client.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Client.o -c srcs/Client.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Engine.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Engine.o -c srcs/Engine.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Exception.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Exception.o -c srcs/Exception.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/File.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/File.o -c srcs/File.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Logger.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Logger.o -c srcs/Logger.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Mimes.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Mimes.o -c srcs/Mimes.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Mutex.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Mutex.o -c srcs/Mutex.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Parser.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Parser.o -c srcs/Parser.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/ReqContext.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/ReqContext.o -c srcs/ReqContext.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Request.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Request.o -c srcs/Request.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Response.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Response.o -c srcs/Response.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/ServContext.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/ServContext.o -c srcs/ServContext.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Server.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Server.o -c srcs/Server.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/StatusCodes.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/StatusCodes.o -c srcs/StatusCodes.cpp
+echo "\033[1;33m" "Compiling...\t" srcs/Utilizer.cpp "\033[0;0m" "\x1b[1A\x1b[M"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o srcs/Utilizer.o -c srcs/Utilizer.cpp
+echo "\033[0;32m" "Source files are compiled!\n\n" "\033[0;0m"
+echo "\033[1;33m" "Building executable webserv" "\033[0;0m"
+clang++ -Wall -Werror -Wextra -std=c++98 -I ./includes/ -o webserv ./srcs/main.o ./srcs/CGI.o ./srcs/Client.o ./srcs/Engine.o ./srcs/Exception.o ./srcs/File.o ./srcs/Logger.o ./srcs/Mimes.o ./srcs/Mutex.o ./srcs/Parser.o ./srcs/ReqContext.o ./srcs/Request.o ./srcs/Response.o ./srcs/ServContext.o ./srcs/Server.o ./srcs/StatusCodes.o ./srcs/Utilizer.o
+echo "\033[0;32m" "webserv is created!\n" "\033[0;0m"
+make: Leaving directory `/Users/sanjeon/Desktop/webserv'
+ 

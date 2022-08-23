@@ -1,23 +1,29 @@
-// Copyright @bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Request.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 11:16:59 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/08/18 05:40:09 by sanjeon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 // Header for the request from the client
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_REQUEST_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_REQUEST_HPP_
+#ifndef REQUEST_HPP
+#define REQUEST_HPP
 
-// Standard Library Inclusion
-#include <string>
-
-// Class Headers Inclusion
 #include "./Utilizer.hpp"
 
-// Enum Request Progress
-enum request_progress {
+enum request_progress
+{
   on_continuous,
   on_finish
 };
 
-// Enum Request Status
-enum request_status {
+enum request_status
+{
   on_request_line,
   on_headers,
   on_validating_headers,
@@ -27,14 +33,15 @@ enum request_status {
   on_error
 };
 
-// Enum Chunk Status
-enum chunk_status {
+enum chunk_status
+{
   on_chunk_size,
   on_chunk_body
 };
 
-class Request {
- private:
+class Request
+{
+private:
   std::string _data;
   Headers _headers;
   std::string _method;
@@ -44,7 +51,6 @@ class Request {
   std::string _protocol;
 
   std::size_t _chunk_size;
-  std::size_t _body_offset;
   std::size_t _content_length;
 
   struct timeval _header_timer;
@@ -84,19 +90,19 @@ class Request {
   bool is_method_HEAD(void) const;
   bool is_method_PUT(void) const;
   bool is_method_DELETE(void) const;
-  bool is_valid_method(const std::string& method) const;
+  bool is_valid_method(const std::string &method) const;
   bool is_valid_target(void) const;
   bool is_valid_pair_on_colon_separated(void) const;
   bool is_valid_host_on_header(void) const;
   bool is_chunk_transfer(void) const;
-  bool is_body_transfer(void) const;
+  bool check_content_length_exist(void) const;
   bool is_target_begin_with_separator(void) const;
   bool is_target_length_too_long(void) const;
   bool is_target_queried(void) const;
-  bool is_header_too_long(const std::string& key,
-                          const std::string& val) const;
+  bool is_header_too_long(const std::string &key,
+                          const std::string &val) const;
   bool is_data_separatable(void) const;
-  bool is_host_duplicated(const std::string& key) const;
+  bool is_host_duplicated(const std::string &key) const;
   bool is_request_status_completable(int code) const;
   bool is_body_ready_to_be_sent(void) const;
   bool is_on_request_line(void) const;
@@ -110,15 +116,15 @@ class Request {
   bool is_on_chunk_body(void) const;
   bool is_chunk_size_empty(void) const;
 
-  Request(const Request& r);
-  Request& operator=(const Request& r);
+  Request(const Request &r);
+  Request &operator=(const Request &r);
 
- public:
+public:
   Request(void);
   ~Request(void);
 
   bool is_header_validated(void) const;
-  bool is_timeout(void);
+  bool is_req_recv_complete(void);
 
   int parse(const std::string &data);
 
@@ -128,4 +134,4 @@ class Request {
   friend class ReqContext;
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_REQUEST_HPP_
+#endif

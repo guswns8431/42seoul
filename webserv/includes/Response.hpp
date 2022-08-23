@@ -1,13 +1,20 @@
-// Copyright @bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Response.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 18:31:45 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/08/18 05:53:02 by sanjeon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the response to the client
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_RESPONSE_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_RESPONSE_HPP_
+#ifndef RESPONSE_HPP
+#define RESPONSE_HPP
 
-// Standard Library Inclusion
 #include <string>
 
-// Class Headers Inclusion
 #include "./CGI.hpp"
 #include "./File.hpp"
 #include "./Mimes.hpp"
@@ -82,4 +89,4 @@ class Response {
   int send(int fd);
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_RESPONSE_HPP_
+#endif

@@ -1,27 +1,35 @@
-// Copyright @bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Mimes.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/17 18:47:01 by hyson             #+#    #+#             */
+/*   Updated: 2022/08/17 18:50:14 by hyson            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the content type according to the extension
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_MIMES_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_MIMES_HPP_
+#ifndef MIMES_HPP
+# define MIMES_HPP
 
-// Standard Library Inclusion
-#include <string>
+# include <string>
 
-// Class Headers Inclusion
-#include "./Utilizer.hpp"
+# include "./Utilizer.hpp"
 
-class Mimes {
- private:
-  MimeMapper _mapper;
+class Mimes
+{
+private:
+	MimeMapper _mapper;
 
-  Mimes(const Mimes& m);
-  Mimes& operator=(const Mimes& m);
+	Mimes(const Mimes &m);
+	Mimes &operator=(const Mimes &m);
 
- public:
-  Mimes(void);
-  ~Mimes(void);
+public:
+	Mimes(void);
+	~Mimes(void);
 
-  const std::string& get_type(const std::string& extension);
+	const std::string &get_type(const std::string &extension);
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_MIMES_HPP_
+#endif

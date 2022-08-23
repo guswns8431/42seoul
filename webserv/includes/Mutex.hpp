@@ -1,27 +1,34 @@
-// Copyright @bigpel66
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Mutex.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/17 18:50:20 by hyson             #+#    #+#             */
+/*   Updated: 2022/08/17 18:50:58 by hyson            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Header for the mutex to control the concurrency
-#ifndef CIRCLE_05_WEBSERV_INCLUDES_MUTEX_HPP_
-#define CIRCLE_05_WEBSERV_INCLUDES_MUTEX_HPP_
+#ifndef MUTEX_HPP
+# define MUTEX_HPP
 
-// Standard Library Inclusion
-#include <pthread.h>
+# include <pthread.h>
 
-class Mutex {
- private:
-  pthread_mutex_t _mutex;
+class Mutex
+{
+private:
+	pthread_mutex_t _mutex;
+	Mutex(const Mutex &m);
+	Mutex &operator=(const Mutex &m);
 
-  // Prevent to call directly
-  Mutex(const Mutex& m);
-  Mutex& operator=(const Mutex& m);
+public:
+	Mutex(void);
+	~Mutex(void);
 
- public:
-  Mutex(void);
-  ~Mutex(void);
-
-  void lock(void);
-  void unlock(void);
-  bool try_lock(void);
+	void lock(void);
+	void unlock(void);
+	bool try_lock(void);
 };
 
-#endif  // CIRCLE_05_WEBSERV_INCLUDES_MUTEX_HPP_
+#endif
