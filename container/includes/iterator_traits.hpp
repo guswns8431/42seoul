@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_traits.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:57:43 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/02 15:01:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/02 15:04:28 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 #include <cstddef>
 #include <iterator>
-
 /*------------------------------------------------------------------------------*/
-/*			I T E R A T O R _ T R A I T S				*/
+/*						I T E R A T O R _ T R A I T S							*/
 /*------------------------------------------------------------------------------*/
 namespace ft {
 
@@ -30,7 +29,6 @@ namespace ft {
   		typedef typename Iterator::reference reference;
   		typedef typename Iterator::iterator_category iterator_category;
 	};
-
 	template <typename T>
 	struct iterator_traits<T*>
 	{
