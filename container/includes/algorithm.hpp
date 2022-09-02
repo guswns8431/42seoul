@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:24:09 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/02 17:29:58 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/02 17:51:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ namespace ft
 /*					L E X I C O G R A P H I C A L _ C O M P A R E				*/
 /*------------------------------------------------------------------------------*/
 	template <class InputIt1, class InputIt2>
-	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
+	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) //두 컨테이너의 요소를 사전식 순으로 비교, 두번째 컨테이너의 요소가 더 크면 참
 	{
 		while (first2 != last2) //FIXED for문에서 while문으로 바꿈
 		{
