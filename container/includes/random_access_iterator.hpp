@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:55:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/04 19:57:26 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/04 23:23:13 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ namespace ft
 			random_access_iterator(const random_access_iterator<U>& i) : __i(i.base()) {}
 			~random_access_iterator(void) {}
 
+/*------------------------------------------------------------------------------*/
+/*							M E M B E R _ F U N C T I O N						*/
+/*------------------------------------------------------------------------------*/
 			template <typename U>
 			random_access_iterator& operator=(const random_access_iterator<U>& i)
 			{
@@ -98,6 +101,9 @@ namespace ft
 			pointer __i;
 	};
 
+/*------------------------------------------------------------------------------*/
+/*						N O N _ M E M B E R _ F U N C T I O N					*/
+/*------------------------------------------------------------------------------*/
 	template <typename T>
 	random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n, const random_access_iterator<T>& i) //COMMENT n + iter
 	{
