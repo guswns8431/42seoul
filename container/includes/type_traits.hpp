@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_traits.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:09:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/02 14:52:31 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/06 21:20:33 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,21 @@
 namespace ft
 {
 
+//TODO nil 처리 어떻게 할지 생각
+const class nullptr_t {
+ private:
+  void operator&(void) const;
+
+ public:
+  template <typename T>
+  operator T*(void) const { return 0; }
+
+  template <typename T, typename U>
+  operator T U::*(void) const { return 0; }
+} nil = {};
+
 /*------------------------------------------------------------------------------*/
-/*				E N A B L E _ I F				*/
+/*							E N A B L E _ I F									*/
 /*------------------------------------------------------------------------------*/
 
 	template <bool, typename = void>
@@ -32,7 +45,7 @@ namespace ft
 	};
 
 /*------------------------------------------------------------------------------*/
-/*			I N T E G R A L _ C O N S T A N T			*/
+/*						I N T E G R A L _ C O N S T A N T						*/
 /*------------------------------------------------------------------------------*/
 
 	template <typename T, T v>
@@ -95,7 +108,7 @@ namespace ft
 	struct is_integral_base<std::int64_t> : public true_type {};
 
 	template <>
-	struct is_integral_base<std::uint64_t> : public true_type {};	
+	struct is_integral_base<std::uint64_t> : public true_type {};
 
 	template <typename T>
 	struct is_integral : public is_integral_base<typename remove_cv<T>::type> {};

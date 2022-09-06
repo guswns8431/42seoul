@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:55:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/04 23:23:13 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/07 00:32:23 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "iterator.hpp"
 # include "iterator_traits.hpp"
 # include "type_traits.hpp"
-# include <iterator>
+# include <iterator> //TODO 이거 iterator에서 tag들을 내가 구현하는게 맞을지 가져다 써도될지.
 
 namespace ft
 {
@@ -25,17 +25,21 @@ namespace ft
 /*				R A N D O M _ A C C E S S _ I T E R A T O R					*/
 /*--------------------------------------------------------------------------*/
 	template <typename T>
-	class random_access_iterator : public ft::iterator<std::random_access_iterator_tag, T>
+	class random_access_iterator : public ft::iterator<ft::random_access_iterator_tag, T>
 	{
 		public:
+			//COMMENT 포인터로 들어올 경우도 처리를 해주기 위해
+			//TODO 근데 굳이 왜 T*를 썼을까
 			typedef T* iterator_type;
+
 			typedef typename ft::iterator_traits<iterator_type>::value_type value_type;
 			typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
 			typedef typename ft::iterator_traits<iterator_type>::pointer pointer;
 			typedef typename ft::iterator_traits<iterator_type>::reference reference;
 			typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
 
-			random_access_iterator(void): __i(ft::nil) {} //TODO nil 어떻게 처리할지 고민
+			//TODO nil 어떻게 처리할지 고민
+			random_access_iterator(void): __i(ft::nil) {}
 			random_access_iterator(T* pointer) : __i(pointer) {}
 			template <typename U>
 			random_access_iterator(const random_access_iterator<U>& i) : __i(i.base()) {}
@@ -50,9 +54,12 @@ namespace ft
 				__i = i.base();
 				return (*this);
 			}
+			//COMMENT getter느낌으로 생각해도 좋을듯
 			iterator_type base(void) const { return __i; }
 			pointer operator->(void) const { return __i; }
 			reference operator*(void) const { return *__i; }
+
+			//COMMENT difference_type으로 둔 이유는 주소의 시작부터 끝까지
 			reference operator[](difference_type n) const { return __i[n]; }
 
 			random_access_iterator& operator++(void)
