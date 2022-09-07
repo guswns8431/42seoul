@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 20:36:59 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/07 22:43:07 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ namespace ft {
 				{
 					if (__begin == ft::nil)
 					{
-						return;
+						return ;
 					}
 					size_type pre_capacity = capacity();
 					__destruct(__begin);
@@ -101,63 +101,60 @@ namespace ft {
 					{
 						assign(v.__begin, v.__end);
 					}
-					return *this;
+					return (*this);
 				}
-
-				iterator begin(void)
+				template <class InputIterator>
+				void assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil)
 				{
-					return iterator(__begin);
+					size_type n = std::distance(first, last);
+					if (capacity() < n)
+					{
+						reserve(n);
+					}
+					std::copy(first, last, __begin);
+					__end = __begin + n;
 				}
-				const_iterator begin(void) const
+				void assign(size_type n, const value_type& value)
 				{
-					return const_iterator(__begin);
+					if (capacity() < n)
+					{
+						reserve(n);
+					}
+					std::fill_n(__begin, n, value);
+					__end = __begin + n;
 				}
-				iterator end(void)
+				//COMMENT allocator를 받아와서 custom을 할때 필요하지 않을까
+				allocator_type get_allocator(void) const
 				{
-					return iterator(__end);
+					return (__alloc);
 				}
-				const_iterator end(void) const
-				{
-					return const_iterator(__end);
-				}
-				reverse_iterator rbegin(void)
-				{
-					return reverse_iterator(end());
-				}
-				const_reverse_iterator rbegin(void) const
-				{
-					return const_reverse_iterator(end());
-				}
-				reverse_iterator rend(void)
-				{
-					return reverse_iterator(begin());
-				}
-				const_reverse_iterator rend(void) const
-				{
-					return const_reverse_iterator(begin());
-				}
+/*--------------------------------------------------------------------------*/
+/*						E L E M E N T _ A C C E S S							*/
+/*--------------------------------------------------------------------------*/
 				//COMMENT at과의 다른점. []연산은 범위에 관한 예외처리를 해주지 않음
 				reference operator[](size_type n)
 				{
-					return __begin[n];
+					return (__begin[n]);
 				}
 				const_reference operator[](size_type n) const
 				{
-					return __begin[n];
+					return (__begin[n]);
 				}
 				reference at(size_type n)
 				{
-					if (n >= size()) {
+					if (n >= size())
+					{
 						throw std::out_of_range("index out of range");
 					}
-					return __begin[n];
+					return (__begin[n]);
 				}
 				const_reference at(size_type n) const
 				{
-					if (n >= size()) {
+					if (n >= size())
+					{
 						throw std::out_of_range("index out of range");
 					}
-					return __begin[n];
+					return (__begin[n]);
 				}
 				reference front(void)
 				{
@@ -165,67 +162,83 @@ namespace ft {
 				}
 				const_reference front(void) const
 				{
-					return *__begin;
+					return (*__begin);
 				}
 				//COMMENT __end는 배열의 끝 다음을 가리키기 때문에 그 전을 뽑아주기 위해선 -1
 				reference back(void)
 				{
-					return *(__end - 1);
+					return (*(__end - 1));
 				}
 				const_reference back(void) const
 				{
-					return *(__end - 1);
+					return (*(__end - 1));
 				}
 				//COMMENT 첫 데이터의 주소값 리턴
 				//어차피 iterator도 pointer이기 때문에 직접 그 위치를 받아올 수는 있지만, 안전하게 reinterpret_cast를 통해서 원본을 가져오자
 				T* data(void) throw()
 				{
-					return reinterpret_cast<T*>(__begin);
+					return (reinterpret_cast<T*>(__begin));
 				}
 				const T* data(void) const throw()
 				{
-					return reinterpret_cast<const T*>(__begin);
+					return (reinterpret_cast<const T*>(__begin));
 				}
+/*--------------------------------------------------------------------------*/
+/*								I T E R A T O R								*/
+/*--------------------------------------------------------------------------*/
+				iterator begin(void)
+				{
+					return (iterator(__begin));
+				}
+				const_iterator begin(void) const
+				{
+					return (const_iterator(__begin));
+				}
+				iterator end(void)
+				{
+					return (iterator(__end));
+				}
+				const_iterator end(void) const
+				{
+					return (const_iterator(__end));
+				}
+				reverse_iterator rbegin(void)
+				{
+					return (reverse_iterator(end()));
+				}
+				const_reverse_iterator rbegin(void) const
+				{
+					return (const_reverse_iterator(end()));
+				}
+				reverse_iterator rend(void)
+				{
+					return (reverse_iterator(begin()));
+				}
+				const_reverse_iterator rend(void) const
+				{
+					return (const_reverse_iterator(begin()));
+				}
+/*--------------------------------------------------------------------------*/
+/*								C A P A C I T Y								*/
+/*--------------------------------------------------------------------------*/
+				bool empty(void) const { return (__begin == __end); }
 				size_type size(void) const
 				{
-					return static_cast<size_type>(__end - __begin);
+					return (static_cast<size_type>(__end - __begin));
 				}
 				//COMMENT max_size vector가 할당될 수 있는 최대 크기 return
 				//자료형 최대와 할당할 수 있는 크기의 최대를 비교하여 둘 중 최소값을 찾으면 그것이 할당될 수 있는 최대크기
 				size_type max_size(void) const
 				{
-					return std::min<size_type>(std::numeric_limits<size_type>::max(), type_traits::max_size(type_allocator()));
+					return (std::min<size_type>(std::numeric_limits<size_type>::max(), type_traits::max_size(type_allocator())));
 				}
-				void resize(size_type n, value_type value = value_type())
-				{
-					//COMMENT 새로 늘리려는 크기 n이 원래 사이즈보다 작다면 잘라야 작은만큼은 잘라냄.
-					if (size() > n)
-					{
-						size_type diff = size() - n;
-						__destruct(diff);
-					}
-					else if (size() < n)
-					{
-						size_type diff = n - size();
-						if (capacity() < n)
-						{
-							reserve(n);
-						}
-						__construct(diff, value);
-					}
-				}
-				size_type capacity(void) const
-				{
-					return static_cast<size_type>(__cap - __begin);
-				}
-				bool empty(void) const { return __begin == __end; }
 				void reserve(size_type n)
 				{
 					//TODO n <= size()가 없어도 되나?? 어차피 size()가 capacity()보다 클 리가 없음
 					//COMMENT reserve는 resize와 다르게 재지정할 크기가 현재보다 작으면 아무런 작업을 하지 않음
 					if (n <= size() || n <= capacity())
 					{
-						return;
+						return ;
 					}
 					//COMMENT 2배 공간 할당 할 수 있는지 보고 할당
 					if (n < capacity() * 2)
@@ -245,26 +258,89 @@ namespace ft {
 					__end = __begin + pre_size;
 					__cap = __begin + n;
 				}
+				size_type capacity(void) const
+				{
+					return (static_cast<size_type>(__cap - __begin));
+				}
+/*--------------------------------------------------------------------------*/
+/*							M O D I F I E R	S								*/
+/*--------------------------------------------------------------------------*/
+				void clear(void)
+				{
+					__destruct(__begin);
+				}
 
-		/* modifiers */
-		template <class InputIterator>
-		void assign(InputIterator first,
-								InputIterator last,
-								typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil) {
-			size_type n = std::distance(first, last);
-			if (capacity() < n) {
-				reserve(n);
-			}
-			std::copy(first, last, __begin);
-			__end = __begin + n;
-		}
-		void assign(size_type n, const value_type& value) {
-			if (capacity() < n) {
-				reserve(n);
-			}
-			std::fill_n(__begin, n, value);
-			__end = __begin + n;
-		}
+				iterator insert(iterator position, const value_type& value)
+				{
+					difference_type diff = position - begin();
+					if (capacity() < size() + 1)
+					{
+						reserve(size() + 1);
+					}
+					pointer ptr = __begin + diff;
+					__construct(1);
+					//COMMENT copy는 first에서부터 시작해서 last로 이동하면서 한 요소씩 순서대로 복사하는데,
+					//원본과 목적 구간이 겹쳐 있으면 원본이 앞쪽 복사에 의해 읽기도 전에 파괴되는 문제가 있다.
+					//그래서 역방향으로 진행하면서 복사하는 copy_backward 함수가 따로 마련됨
+					//복사를 시작할 위치 ptr, 복사를 끝낼 위치 __end - 1, 새롭게 복사를 할 위치 __end(끝에서부터 복사를 함)
+					//넣을 위치 공간을 찾고 먼저 그 공간뒤까지 맨 뒤에서부터 복사를 함
+					//넣을 위치 값 넣고 반환
+					std::copy_backward(ptr, __end - 1, __end);
+					*ptr = value;
+					return (iterator(ptr));
+				}
+				//COMMENT n크기만큼 value를 넣어줌
+				void insert(iterator position, size_type n, const value_type& value)
+				{
+					difference_type diff = position - begin();
+					if (capacity() < size() + n)
+					{
+						reserve(size() + n);
+					}
+					pointer ptr = __begin + diff;
+					__construct(n);
+					std::copy_backward(ptr, __end - n, __end);
+					for (size_type i = 0 ; i < n ; i++)
+					{
+						ptr[i] = value;
+					}
+				}
+				//COMMENT first, last 범위에 넣어줌
+				template <class InputIterator>
+				void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil)
+				{
+					difference_type n = std::distance(first, last);
+					difference_type diff = position - begin();
+					if (capacity() < size() + n)
+					{
+						reserve(size() + n);
+					}
+					pointer ptr = __begin + diff;
+					__construct(n);
+					std::copy_backward(ptr, __end - n, __end);
+					for (InputIterator i = first ; i != last ; i++, ptr++)
+					{
+						*ptr = *i;
+					}
+				}
+				void resize(size_type n, value_type value = value_type())
+				{
+					//COMMENT 새로 늘리려는 크기 n이 원래 사이즈보다 작다면 잘라야 작은만큼은 잘라냄.
+					if (size() > n)
+					{
+						size_type diff = size() - n;
+						__destruct(diff);
+					}
+					else if (size() < n)
+					{
+						size_type diff = n - size();
+						if (capacity() < n)
+						{
+							reserve(n);
+						}
+						__construct(diff, value);
+					}
+				}
 		void push_back(const value_type& value) {
 			size_type n = size() + 1;
 			if (capacity() < n) {
@@ -275,46 +351,6 @@ namespace ft {
 		}
 		void pop_back(void) {
 			__destruct(1);
-		}
-		iterator insert(iterator position, const value_type& value) {
-			difference_type diff = position - begin();
-			if (capacity() < size() + 1) {
-				reserve(size() + 1);
-			}
-			pointer ptr = __begin + diff;
-			__construct(1);
-			std::copy_backward(ptr, __end - 1, __end);
-			*ptr = value;
-			return iterator(ptr);
-		}
-		void insert(iterator position, size_type n, const value_type& value) {
-			difference_type diff = position - begin();
-			if (capacity() < size() + n) {
-				reserve(size() + n);
-			}
-			pointer ptr = __begin + diff;
-			__construct(n);
-			std::copy_backward(ptr, __end - n, __end);
-			for (size_type i = 0 ; i < n ; i++) {
-				ptr[i] = value;
-			}
-		}
-		template <class InputIterator>
-		void insert(iterator position,
-									InputIterator first,
-									InputIterator last,
-									typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil) {
-			difference_type n = std::distance(first, last);
-			difference_type diff = position - begin();
-			if (capacity() < size() + n) {
-				reserve(size() + n);
-			}
-			pointer ptr = __begin + diff;
-			__construct(n);
-			std::copy_backward(ptr, __end - n, __end);
-			for (InputIterator i = first ; i != last ; i++, ptr++) {
-				*ptr = *i;
-			}
 		}
 		iterator erase(iterator position)
 		{
@@ -336,14 +372,6 @@ namespace ft {
 			std::swap(__end, v.__end);
 			std::swap(__cap, v.__cap);
 			std::swap(__alloc, v.__alloc);
-		}
-		void clear(void) {
-			__destruct(__begin);
-		}
-
-		//COMMENT allocator를 받아와서 custom을 할때 필요하지 않을까
-		allocator_type get_allocator(void) const {
-			return __alloc;
 		}
 
 		private:
