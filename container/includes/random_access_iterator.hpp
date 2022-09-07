@@ -6,17 +6,16 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:55:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 00:32:23 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/07 20:19:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RANDOM_ACCESS_ITERATOR_HPP
 # define RANDOM_ACCESS_ITERATOR_HPP
 
-# include "iterator.hpp"
 # include "iterator_traits.hpp"
 # include "type_traits.hpp"
-# include <iterator> //TODO 이거 iterator에서 tag들을 내가 구현하는게 맞을지 가져다 써도될지.
+# include <iterator>
 
 namespace ft
 {
@@ -25,7 +24,7 @@ namespace ft
 /*				R A N D O M _ A C C E S S _ I T E R A T O R					*/
 /*--------------------------------------------------------------------------*/
 	template <typename T>
-	class random_access_iterator : public ft::iterator<ft::random_access_iterator_tag, T>
+	class random_access_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	{
 		public:
 			//COMMENT 포인터로 들어올 경우도 처리를 해주기 위해

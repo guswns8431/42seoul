@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 00:22:06 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/07 20:36:59 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <algorithm>
 //COMMENT numeric_limits
 # include <limits>
-# include <iterator>
 //COMMENT allocator, uninitialized_copy
 # include <memory>
 //COMMENT std::out_of_range
@@ -94,11 +93,12 @@ namespace ft {
 				}
 
 /*--------------------------------------------------------------------------*/
-/*							M E M B E R _ F U N C T I O N					*/
+/*						M E M B E R _ F U N C T I O N						*/
 /*--------------------------------------------------------------------------*/
 				vector& operator=(const vector& v)
 				{
-					if (this != &v) {
+					if (this != &v)
+					{
 						assign(v.__begin, v.__end);
 					}
 					return *this;
@@ -177,6 +177,7 @@ namespace ft {
 					return *(__end - 1);
 				}
 				//COMMENT 첫 데이터의 주소값 리턴
+				//어차피 iterator도 pointer이기 때문에 직접 그 위치를 받아올 수는 있지만, 안전하게 reinterpret_cast를 통해서 원본을 가져오자
 				T* data(void) throw()
 				{
 					return reinterpret_cast<T*>(__begin);
@@ -197,6 +198,7 @@ namespace ft {
 				}
 				void resize(size_type n, value_type value = value_type())
 				{
+					//COMMENT 새로 늘리려는 크기 n이 원래 사이즈보다 작다면 잘라야 작은만큼은 잘라냄.
 					if (size() > n)
 					{
 						size_type diff = size() - n;
@@ -212,24 +214,30 @@ namespace ft {
 						__construct(diff, value);
 					}
 				}
-				size_type capacity(void) const {
+				size_type capacity(void) const
+				{
 					return static_cast<size_type>(__cap - __begin);
 				}
 				bool empty(void) const { return __begin == __end; }
 				void reserve(size_type n)
 				{
 					//TODO n <= size()가 없어도 되나?? 어차피 size()가 capacity()보다 클 리가 없음
+					//COMMENT reserve는 resize와 다르게 재지정할 크기가 현재보다 작으면 아무런 작업을 하지 않음
 					if (n <= size() || n <= capacity())
 					{
 						return;
 					}
-					if (n < capacity() * 2) {
+					//COMMENT 2배 공간 할당 할 수 있는지 보고 할당
+					if (n < capacity() * 2)
+					{
 						n = capacity() * 2;
 					}
 					size_type pre_size = size();
 					size_type pre_capacity = capacity();
 					pointer begin = __alloc.allocate(n);
-					//TODO 그냥 copy쓰면 안되나
+					//COMMENT copy와 다른것은 copy는 그냥 값 복사, uninitialized_copy를 하면 생성자 호출
+					//new 과정이 일어남. 위에서 공간을 할당을 해줬기 때문에 new가 일어나면 공간할당은 이미 되어 있어 그 과정은 넘어가고 생성자 호출
+					//만약 불러오는 녀석이 상속이 되어 있는 경우, 생성자를 호출해서 가져오면 잘 가져오는데 그게 아니면, 상속된 녀석들은 공간할당이 안 되기 때문에 문제 발생
 					std::uninitialized_copy(__begin, __end, begin);
 					__destruct(__begin);
 					__alloc.deallocate(__begin, pre_capacity);
@@ -333,7 +341,7 @@ namespace ft {
 			__destruct(__begin);
 		}
 
-		/* allocator */
+		//COMMENT allocator를 받아와서 custom을 할때 필요하지 않을까
 		allocator_type get_allocator(void) const {
 			return __alloc;
 		}
