@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 22:43:07 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/07 23:04:19 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,6 +323,25 @@ namespace ft {
 						*ptr = *i;
 					}
 				}
+				//COMMENT 특정 위치를 제거
+				iterator erase(iterator position)
+				{
+					difference_type diff = position - begin();
+					pointer ptr = __begin + diff;
+					//TODO 아래와 뭐가 다르길래 __end로만 돌아갈까
+					std::copy(ptr + 1, __end, ptr);
+					__destruct(1);
+					return (iterator(ptr));
+				}
+				//COMMENT 범위를 지울거기 때문에 first위치에 last 다음 녀석이 옴
+				iterator erase(iterator first, iterator last)
+				{
+					difference_type n = std::distance(first, last);
+					//TODO __end랑 (iterator)__end랑 처리가 어떻게 다르길래 end()는 돌아가고 __end는 안 돌아갈까
+					std::copy(last, end(), first);
+					__destruct(n);
+					return (first);
+				}
 				void resize(size_type n, value_type value = value_type())
 				{
 					//COMMENT 새로 늘리려는 크기 n이 원래 사이즈보다 작다면 잘라야 작은만큼은 잘라냄.
@@ -352,21 +371,7 @@ namespace ft {
 		void pop_back(void) {
 			__destruct(1);
 		}
-		iterator erase(iterator position)
-		{
-			difference_type diff = position - begin();
-			pointer ptr = __begin + diff;
-			std::copy(ptr + 1, __end, ptr);
-			__destruct(1);
-			return iterator(ptr);
-		}
-		iterator erase(iterator first, iterator last)
-		{
-			difference_type n = std::distance(first, last);
-			std::copy(last, end(), first);
-			__destruct(n);
-			return first;
-		}
+
 		void swap(vector& v) {
 			std::swap(__begin, v.__begin);
 			std::swap(__end, v.__end);
