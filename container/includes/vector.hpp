@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 23:04:19 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/08 00:16:02 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,8 @@ namespace ft {
 
 				iterator insert(iterator position, const value_type& value)
 				{
+					//COMMENT begin(), __begin 사용의 차이
+					// begin()은 iterator, __begin은 포인터. 따라서 자료형을 같게 하기 위해 사용.
 					difference_type diff = position - begin();
 					if (capacity() < size() + 1)
 					{
@@ -328,7 +330,7 @@ namespace ft {
 				{
 					difference_type diff = position - begin();
 					pointer ptr = __begin + diff;
-					//TODO 아래와 뭐가 다르길래 __end로만 돌아갈까
+					//COMMENT 매개변수 통일이 되어야 하기 때문에, ptr여서 __end(포인터)를 넣어줌
 					std::copy(ptr + 1, __end, ptr);
 					__destruct(1);
 					return (iterator(ptr));
@@ -337,7 +339,7 @@ namespace ft {
 				iterator erase(iterator first, iterator last)
 				{
 					difference_type n = std::distance(first, last);
-					//TODO __end랑 (iterator)__end랑 처리가 어떻게 다르길래 end()는 돌아가고 __end는 안 돌아갈까
+					//COMMENT 매개변수 통일이 되어야 하기 때문에, last가 iterator라서 iterator로 통일
 					std::copy(last, end(), first);
 					__destruct(n);
 					return (first);
