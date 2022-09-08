@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/08 21:24:44 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/08 22:21:51 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,6 +378,7 @@ namespace ft
 					__construct(diff, value);
 				}
 			}
+			//COMMENT v1.swap(v2)
 			void swap(vector& v)
 			{
 				std::swap(__begin, v.__begin);
@@ -482,6 +483,7 @@ namespace ft
 		return (x == y || x > y);
 	}
 
+	//COMMENT swap(vector, vector)
 	template <typename T, class Allocator>
 	void swap(ft::vector<T, Allocator>& x, ft::vector<T, Allocator>& y)
 	{
