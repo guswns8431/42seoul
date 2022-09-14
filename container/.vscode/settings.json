@@ -70,6 +70,7 @@
 		"tuple": "cpp",
 		"typeinfo": "cpp",
 		"variant": "cpp",
-		"__functional_base": "cpp"
+		"__functional_base": "cpp",
+		"set": "cpp"
 	}
 }
