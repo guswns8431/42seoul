@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/15 20:28:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/15 20:46:40 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,16 +143,22 @@ namespace ft
 		return (ptr->parent_);
 	}
 
+	//COMMENT BST에서 이전 노드로 가는 법
 	template <class NodePtr>
-	NodePtr get_prev_node(NodePtr ptr, NodePtr nil) {
-	if (ptr->left_ != nil) {
-		return get_max_node(ptr->left_, nil);
-	}
-	//FIXED !is_right_child에서 변경
-	while (is_left_child(ptr)) {
-		ptr = ptr->parent_;
-	}
-	return ptr->parent_;
+	NodePtr get_prev_node(NodePtr ptr, NodePtr nil)
+	{
+		//COMMENT 일단 먼저 왼쪽 자식 노드가 있는지 확인을 함
+		//자식 노드의 가장 오른쪽 노드가 이전 노드
+		if (ptr->left_ != nil)
+		{
+			return get_max_node(ptr->left_, nil);
+		}
+		//FIXED !is_right_child에서 변경
+		while (is_left_child(ptr))
+		{
+			ptr = ptr->parent_;
+		}
+		return (ptr->parent_);
 	}
 
 	//COMMENT comp에 뭐가 들어올지 모르겠지만, comp를 기준으로 두 개가 같은지를 확인해줌
