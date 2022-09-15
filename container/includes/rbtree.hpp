@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/14 23:09:32 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/15 20:28:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,26 @@ namespace ft
 		return (ptr);
 	}
 
+	//COMMENT BST의 다음 노드로 가는 법
+	//다음 노드는 다음으로 큰 수를 가리킴
 	template <class NodePtr>
 	NodePtr get_next_node(NodePtr ptr, NodePtr nil)
 	{
+		//COMMENT BST에서 오른쪽이 자기 자신보다 큰 수
+		//자기의 오른쪽 자식이 비어있지 않다면 그 자식의 가장 왼쪽에 있는 녀석이 다음 요소
 		if (ptr->right_ != nil)
 		{
 			return (get_min_node(ptr->right_, nil));
 		}
-		while (!is_left_child(ptr))
+		//COMMENT 자식 노드에서 찾을 수 있는 최대 노드는 부모 노드 보다 클 수 없음
+		//만약 현재 오른쪽 자식 노드라면 왼쪽 자식 노드가 될때까지 올라가고,
+		//그 왼쪽 자식 노드의 부모 노드가 다음 요소
+		//FIXED !is_left_child에서 변경
+		while (is_right_child(ptr))
 		{
 			ptr = ptr->parent_;
 		}
+		//COMMENT 이미 왼쪽 자식 노드라면 부모 노드가 다음 노드
 		return (ptr->parent_);
 	}
 
@@ -139,7 +148,8 @@ namespace ft
 	if (ptr->left_ != nil) {
 		return get_max_node(ptr->left_, nil);
 	}
-	while (!is_right_child(ptr)) {
+	//FIXED !is_right_child에서 변경
+	while (is_left_child(ptr)) {
 		ptr = ptr->parent_;
 	}
 	return ptr->parent_;
