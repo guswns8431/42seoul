@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/15 20:46:40 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/16 17:00:45 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // #include <algorithm>
 // #include <limits>
 // #include <memory>
-// #include "./iterator_traits.hpp"
+#include "./iterator_traits.hpp"
 // #include "./pair.hpp"
 #include "./type_traits.hpp"
 
@@ -168,92 +168,116 @@ namespace ft
 		return (!comp(u, v) && !comp(v, u));
 	}
 
-	/* tree_iterator */
+/*------------------------------------------------------------------------------*/
+/*							T R E E _ I T E R A T O R							*/
+/*------------------------------------------------------------------------------*/
+	//COMMENT map에서도 iterator가 필요. map에서는 rbtree.hpp에 구현된 iterator를 가져와서 사용
+	//tree_iterator를 구현할때 참고한 reference가 있는건가?
 	template <typename U, typename V>
-	class TreeIterator {
-	public:
-	typedef U value_type;
-	typedef value_type* pointer;
-	typedef value_type& reference;
-	typedef V* iterator_type;
-	typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
-	typedef typename ft::iterator_traits<iterator_type>::value_type node_type;
-	typedef typename ft::iterator_traits<iterator_type>::pointer node_pointer;
-	typedef typename ft::iterator_traits<iterator_type>::reference node_reference;
-	typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
+	class TreeIterator
+	{
+		public:
+			typedef U value_type;
+			typedef value_type* pointer;
+			typedef value_type& reference;
+			typedef V* iterator_type;
+			typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
+			typedef typename ft::iterator_traits<iterator_type>::value_type node_type;
+			typedef typename ft::iterator_traits<iterator_type>::pointer node_pointer;
+			typedef typename ft::iterator_traits<iterator_type>::reference node_reference;
+			typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
 
-	/* constructor & destructor */
-	TreeIterator(void) : __cur(ft::nil), __nil(ft::nil) {}
-	TreeIterator(node_pointer cur, node_pointer nil)
-		: __cur(cur), __nil(nil) {}
-	TreeIterator(const TreeIterator& i)
-		: __cur(i.__cur), __nil(i.__nil) {}
-	~TreeIterator(void) {}
+/*--------------------------------------------------------------------------*/
+/*				C O N S T R U C T O R _ & _ D E S T R U C T O R				*/
+/*--------------------------------------------------------------------------*/
+			TreeIterator(void) : cur_(ft::nil), nil_(ft::nil) {}
+			TreeIterator(node_pointer cur, node_pointer nil) : cur_(cur), nil_(nil) {}
+			TreeIterator(const TreeIterator& i) : cur_(i.cur_), nil_(i.nil_) {}
+			~TreeIterator(void) {}
 
-	/* member function for util */
-	TreeIterator& operator=(const TreeIterator& i) {
-		if (this != &i) {
-		__cur = i.__cur;
-		__nil = i.__nil;
+/*--------------------------------------------------------------------------*/
+/*						M E M B E R _ F U N C T I O N						*/
+/*--------------------------------------------------------------------------*/
+			TreeIterator& operator=(const TreeIterator& i)
+			{
+				if (this != &i)
+				{
+					cur_ = i.cur_;
+					nil_ = i.nil_;
+				}
+				return (*this);
+			}
+
+/*--------------------------------------------------------------------------*/
+/*						E L E M E N T _ A C C E S S							*/
+/*--------------------------------------------------------------------------*/
+		node_pointer base(void) const
+		{
+			return (cur_);
 		}
-		return *this;
-	}
+		pointer operator->(void) const
+		{
+			return (&cur_->value_);
+		}
+		reference operator*(void) const { return cur_->value_; }
 
-	/* element access */
-	node_pointer base(void) const { return __cur; }
-	pointer operator->(void) const { return &__cur->value_; }
-	reference operator*(void) const { return __cur->value_; }
+		//COMMENT 우리는 nil 객체를 넣어주게 되는데, tree당 모든 nil은 하나의 nil을 가리킨다 생각하면됨
+		TreeIterator& operator++(void)
+		{
+			cur_ = ft::get_next_node(cur_, nil_);
+			return (*this);
+		}
+		TreeIterator& operator--(void)
+		{
+			cur_ = ft::get_prev_node(cur_, nil_);
+			return (*this);
+		}
+		TreeIterator operator++(int)
+		{
+			TreeIterator tmp(*this);
+			++(*this);
+			return (tmp);
+		}
+		TreeIterator operator--(int)
+		{
+			TreeIterator tmp(*this);
+			--(*this);
+			return (tmp);
+		}
 
-	/* increment & decrement */
-	//COMMENT 우리는 nil 객체를 넣어주게 되는데, tree당 모든 nil은 하나의 nil을 가리킨다 생각하면됨
-	//
-	TreeIterator& operator++(void) {
-		__cur = ft::get_next_node(__cur, __nil);
-		return *this;
-	}
-	TreeIterator& operator--(void) {
-		__cur = ft::get_prev_node(__cur, __nil);
-		return *this;
-	}
-	TreeIterator operator++(int) {
-		TreeIterator tmp(*this);
-		++(*this);
-		return tmp;
-	}
-	TreeIterator operator--(int) {
-		TreeIterator tmp(*this);
-		--(*this);
-		return tmp;
-	}
+		template <typename T>
+		bool operator==(const TreeIterator<T, node_type>& i) const
+		{
+			return (cur_ == i.base());
+		}
+		template <typename T>
+		bool operator!=(const TreeIterator<T, node_type>& i) const
+		{
+			return (!(*this == i));
+		}
 
-	/* relational operators */
-	template <typename T>
-	bool operator==(const TreeIterator<T, node_type>& i) const {
-		return __cur == i.base();
-	}
-	template <typename T>
-	bool operator!=(const TreeIterator<T, node_type>& i) const {
-		return !(*this == i);
-	}
+		//COMMENT node_type의 경우 iterator_traits를 받아서 const 처리가 되는데,
+		//value_type은 특수화라서 const 오버로딩을 따로 해줘야함
+		operator TreeIterator<const value_type, node_type>(void) const
+		{
+			return (TreeIterator<const value_type, node_type>(cur_, nil_));
+		}
 
-	/* const type overloading */
-	//COMMENT node_type의 경우 iterator_traits를 받아서 const 처리가 되는데,
-	//value_type은 특수화라서 const 오버로딩을 따로 해줘야함
-	operator TreeIterator<const value_type, node_type>(void) const {
-		return TreeIterator<const value_type, node_type>(__cur, __nil);
-	}
+		//COMMENT non member function으로 구현
+		//it1 == it2 와 it2 == it1 둘다 비교가능하게 하려고 구현
+		//밖으로 빼도 되지만 밑 부분은 rbtree구현해야돼서 복잡할까봐 안에다가 구현
+		friend bool operator==(const TreeIterator& x, const TreeIterator& y)
+		{
+			return (x.cur_ == y.cur_);
+		}
+		friend bool operator!=(const TreeIterator& x, const TreeIterator& y)
+		{
+			return (!(x == y));
+		}
 
-	/* non member function for util */
-	friend bool operator==(const TreeIterator& x, const TreeIterator& y) {
-		return x.__cur == y.__cur;
-	}
-	friend bool operator!=(const TreeIterator& x, const TreeIterator& y) {
-		return !(x == y);
-	}
-
-	private:
-	node_pointer __cur;
-	node_pointer __nil;
+		private:
+			node_pointer cur_;
+			node_pointer nil_;
 	};
 
 }
