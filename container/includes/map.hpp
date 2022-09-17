@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 16:03:11 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 16:12:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,23 @@ namespace ft
 			map(const map& m) : key_comp_(m.key_comp_), value_comp_(m.value_comp_), tree_(m.tree_) {}
 			~map(void) {}
 
-  /* member function for util */
-  map& operator=(const map& m) {
-    if (this != &m) {
-      key_comp_ = m.key_comp_;
-      value_comp_ = m.value_comp_;
-      tree_ = m.tree_;
-    }
-    return *this;
-  }
+/*------------------------------------------------------------------------------*/
+/*							M E M B E R _ F U N C T I O N						*/
+/*------------------------------------------------------------------------------*/
+			map& operator=(const map& m)
+			{
+				if (this != &m)
+				{
+					key_comp_ = m.key_comp_;
+					value_comp_ = m.value_comp_;
+					tree_ = m.tree_;
+				}
+				return (*this);
+			}
+			allocator_type get_allocator(void) const
+			{
+    			return (tree_.get_allocator());
+			}
 
   /* iterators */
   iterator begin(void) {
@@ -240,12 +248,7 @@ namespace ft
     return tree_.equal_range(key);
   }
 
-  /* allocator */
-  allocator_type get_allocator(void) const {
-    return tree_.get_allocator();
-  }
-
- private:
+private:
   key_compare key_comp_;
   value_compare value_comp_;
   ft::RBTree<value_type, key_type, value_compare, allocator_type> tree_;
