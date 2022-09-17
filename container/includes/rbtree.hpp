@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 13:46:34 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 14:04:39 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ namespace ft
 
 /* rbtree */
 template <typename T, class Key, class Comp, class Allocator>
-class __rbtree {
+class RBTree {
  public:
   typedef T value_type;
   typedef Key key_type;
@@ -302,7 +302,7 @@ class __rbtree {
   typedef std::ptrdiff_t difference_type;
 
   /* constructor & destructor */
-  __rbtree(const compare_type& comp, const allocator_type& alloc)
+  RBTree(const compare_type& comp, const allocator_type& alloc)
     : __comp(comp), __alloc(alloc), __size(size_type()) {
     nil_ = __alloc.allocate(1);
     __alloc.construct(nil_, value_type());
@@ -314,7 +314,7 @@ class __rbtree {
     __end->is_black_ = true;
     __begin = __end;
   }
-  __rbtree(const __rbtree& t)
+  RBTree(const RBTree& t)
     : __comp(t.__comp), __alloc(t.__alloc), __size(size_type()) {
     nil_ = __alloc.allocate(1);
     __alloc.construct(nil_, value_type());
@@ -327,15 +327,15 @@ class __rbtree {
     __begin = __end;
     insert(t.begin(), t.end());
   }
-  ~__rbtree(void) {
+  ~RBTree(void) {
     __destruct_node_recursive(__end);
     __destruct_node(nil_);
   }
 
   /* member function for util */
-  __rbtree& operator=(const __rbtree& t) {
+  RBTree& operator=(const RBTree& t) {
     if (this != &t) {
-      __rbtree tmp(t);
+      RBTree tmp(t);
       swap(tmp);
     }
     return *this;
@@ -426,7 +426,7 @@ class __rbtree {
       first = erase(first);
     }
   }
-  void swap(__rbtree& t) {
+  void swap(RBTree& t) {
     std::swap(nil_, t.nil_);
     std::swap(__begin, t.__begin);
     std::swap(__end, t.__end);
@@ -435,7 +435,7 @@ class __rbtree {
     std::swap(__size, t.__size);
   }
   void clear(void) {
-    __rbtree tmp(__comp, __alloc);
+    RBTree tmp(__comp, __alloc);
     swap(tmp);
   }
 

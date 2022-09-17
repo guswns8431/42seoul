@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 13:35:58 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 14:05:48 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,26 @@ namespace ft
 					value_compare(key_compare c) : comp(c) {}
 					~value_compare(void) {}
 
+					//COMMENT key값들을 비교
+					//COMMENT pair와 pair가 들어왔을 경우
 					bool operator()(const value_type& x, const value_type& y) const
 					{
 						return (comp(x.first, y.first));
 					}
+					//COMMENT pair와 키가 들어왔을 경우
 					bool operator()(const value_type& x, const key_type& y) const
 					{
 						return (comp(x.first, y));
 					}
+					//COMMENT key와 pair가 들어왔을 경우
 					bool operator()(const key_type& x, const value_type& y) const
 					{
 						return (comp(x, y.first));
 					}
 			};
 
-			typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::iterator iterator;
-	 		typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::const_iterator const_iterator;
+			typedef typename ft::RBTree<value_type, key_type, value_compare, allocator_type>::iterator iterator;
+	 		typedef typename ft::RBTree<value_type, key_type, value_compare, allocator_type>::const_iterator const_iterator;
 			typedef ft::reverse_iterator<iterator> reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -94,44 +98,44 @@ namespace ft
   /* constructor & destructor */
   explicit map(const key_compare& comp = key_compare(),
                const allocator_type& alloc = allocator_type())
-    : __key_comp(comp), __value_comp(comp), __tree(__value_comp, alloc) {}
+    : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc) {}
   template <class InputIterator>
   map(InputIterator first,
       InputIterator last,
       const key_compare& comp = key_compare(),
       const allocator_type& alloc = allocator_type(),
       typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil)
-    : __key_comp(comp), __value_comp(comp), __tree(__value_comp, alloc) {
+    : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc) {
     insert(first, last);
   }
   map(const map& m)
-    : __key_comp(m.__key_comp),
-      __value_comp(m.__value_comp),
-      __tree(m.__tree) {}
+    : key_comp_(m.key_comp_),
+      value_comp_(m.value_comp_),
+      tree_(m.tree_) {}
   ~map(void) {}
 
   /* member function for util */
   map& operator=(const map& m) {
     if (this != &m) {
-      __key_comp = m.__key_comp;
-      __value_comp = m.__value_comp;
-      __tree = m.__tree;
+      key_comp_ = m.key_comp_;
+      value_comp_ = m.value_comp_;
+      tree_ = m.tree_;
     }
     return *this;
   }
 
   /* iterators */
   iterator begin(void) {
-    return __tree.begin();
+    return tree_.begin();
   }
   const_iterator begin(void) const {
-    return __tree.begin();
+    return tree_.begin();
   }
   iterator end(void) {
-    return __tree.end();
+    return tree_.end();
   }
   const_iterator end(void) const {
-    return __tree.end();
+    return tree_.end();
   }
   reverse_iterator rbegin(void) {
     return reverse_iterator(end());
@@ -148,13 +152,13 @@ namespace ft
 
   /* capacity */
   bool empty(void) const {
-    return __tree.empty();
+    return tree_.empty();
   }
   size_type size(void) const {
-    return __tree.size();
+    return tree_.size();
   }
   size_type max_size(void) const {
-    return __tree.max_size();
+    return tree_.max_size();
   }
 
   /* element access */
@@ -179,77 +183,77 @@ namespace ft
 
   /* modifiers */
   ft::pair<iterator, bool> insert(const value_type& value) {
-    return __tree.insert(value);
+    return tree_.insert(value);
   }
   iterator insert(iterator position, const value_type& value) {
-    return __tree.insert(position, value);
+    return tree_.insert(position, value);
   }
   template <class InputIterator>
   void insert(InputIterator first, InputIterator last) {
-    __tree.insert(first, last);
+    tree_.insert(first, last);
   }
   void erase(iterator position) {
-    __tree.erase(position);
+    tree_.erase(position);
   }
   size_type erase(const key_type& key) {
-    return __tree.erase(key);
+    return tree_.erase(key);
   }
   void erase(iterator first, iterator last) {
-    __tree.erase(first, last);
+    tree_.erase(first, last);
   }
   void swap(map& m) {
-    __tree.swap(m.__tree);
+    tree_.swap(m.tree_);
   }
   void clear(void) {
-    __tree.clear();
+    tree_.clear();
   }
 
   /* observers */
   key_compare key_comp(void) const {
-    return __key_comp;
+    return key_comp_;
   }
   value_compare value_comp(void) const {
-    return __value_comp;
+    return value_comp_;
   }
 
   /* lookup operations */
   iterator find(const key_type& key) {
-    return __tree.find(key);
+    return tree_.find(key);
   }
   const_iterator find(const key_type& key) const {
-    return __tree.find(key);
+    return tree_.find(key);
   }
   size_type count(const key_type& key) const {
     return !(find(key) == end());
   }
   iterator lower_bound(const key_type& key) {
-    return __tree.lower_bound(key);
+    return tree_.lower_bound(key);
   }
   const_iterator lower_bound(const key_type& key) const {
-    return __tree.lower_bound(key);
+    return tree_.lower_bound(key);
   }
   iterator upper_bound(const key_type& key) {
-    return __tree.upper_bound(key);
+    return tree_.upper_bound(key);
   }
   const_iterator upper_bound(const key_type& key) const {
-    return __tree.upper_bound(key);
+    return tree_.upper_bound(key);
   }
   ft::pair<iterator, iterator> equal_range(const key_type& key) {
-    return __tree.equal_range(key);
+    return tree_.equal_range(key);
   }
   ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
-    return __tree.equal_range(key);
+    return tree_.equal_range(key);
   }
 
   /* allocator */
   allocator_type get_allocator(void) const {
-    return __tree.get_allocator();
+    return tree_.get_allocator();
   }
 
  private:
-  key_compare __key_comp;
-  value_compare __value_comp;
-  ft::__rbtree<value_type, key_type, value_compare, allocator_type> __tree;
+  key_compare key_comp_;
+  value_compare value_comp_;
+  ft::RBTree<value_type, key_type, value_compare, allocator_type> tree_;
 };
 
 /* relational operators */
