@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 16:12:04 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 16:20:26 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,31 +127,41 @@ namespace ft
     			return (tree_.get_allocator());
 			}
 
-  /* iterators */
-  iterator begin(void) {
-    return tree_.begin();
-  }
-  const_iterator begin(void) const {
-    return tree_.begin();
-  }
-  iterator end(void) {
-    return tree_.end();
-  }
-  const_iterator end(void) const {
-    return tree_.end();
-  }
-  reverse_iterator rbegin(void) {
-    return reverse_iterator(end());
-  }
-  const_reverse_iterator rbegin(void) const {
-    return reverse_iterator(end());
-  }
-  reverse_iterator rend(void) {
-    return reverse_iterator(begin());
-  }
-  const_reverse_iterator rend(void) const {
-    return reverse_iterator(begin());
-  }
+/*------------------------------------------------------------------------------*/
+/*								I T E R A T O R S								*/
+/*------------------------------------------------------------------------------*/
+			iterator begin(void)
+			{
+				return (tree_.begin());
+			}
+			const_iterator begin(void) const
+			{
+				return (tree_.begin());
+			}
+			iterator end(void)
+			{
+				return (tree_.end());
+			}
+			const_iterator end(void) const
+			{
+				return (tree_.end());
+			}
+			reverse_iterator rbegin(void)
+			{
+				return (reverse_iterator(end()));
+			}
+			const_reverse_iterator rbegin(void) const
+			{
+				return (reverse_iterator(end()));
+			}
+			reverse_iterator rend(void)
+			{
+				return (reverse_iterator(begin()));
+			}
+			const_reverse_iterator rend(void) const
+			{
+				return (reverse_iterator(begin()));
+			}
 
   /* capacity */
   bool empty(void) const {

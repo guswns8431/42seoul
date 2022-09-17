@@ -71,6 +71,7 @@
 		"typeinfo": "cpp",
 		"variant": "cpp",
 		"__functional_base": "cpp",
-		"set": "cpp"
+		"set": "cpp",
+		"list": "cpp"
 	}
 }
