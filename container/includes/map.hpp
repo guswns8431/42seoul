@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 14:05:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 16:03:11 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,19 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 
-  /* constructor & destructor */
-  explicit map(const key_compare& comp = key_compare(),
-               const allocator_type& alloc = allocator_type())
-    : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc) {}
-  template <class InputIterator>
-  map(InputIterator first,
-      InputIterator last,
-      const key_compare& comp = key_compare(),
-      const allocator_type& alloc = allocator_type(),
-      typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil)
-    : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc) {
-    insert(first, last);
-  }
-  map(const map& m)
-    : key_comp_(m.key_comp_),
-      value_comp_(m.value_comp_),
-      tree_(m.tree_) {}
-  ~map(void) {}
+/*--------------------------------------------------------------------------*/
+/*				C O N S T R U C T O R _ & _ D E S T R U C T O R				*/
+/*--------------------------------------------------------------------------*/
+			//COMMENT explicit 암묵적 형변환
+			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc) {}
+			template <class InputIterator>
+			//COMMENT enable_if 필요한 이유 vector 생성자쪽에 주석 달았으니 궁금하면 확인.
+			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil) : key_comp_(comp), value_comp_(comp), tree_(value_comp_, alloc)
+			{
+				insert(first, last);
+			}
+			map(const map& m) : key_comp_(m.key_comp_), value_comp_(m.value_comp_), tree_(m.tree_) {}
+			~map(void) {}
 
   /* member function for util */
   map& operator=(const map& m) {

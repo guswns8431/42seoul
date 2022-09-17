@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/08 22:21:51 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 16:01:59 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ namespace ft
 /*--------------------------------------------------------------------------*/
 /*				C O N S T R U C T O R _ & _ D E S T R U C T O R				*/
 /*--------------------------------------------------------------------------*/
-			explicit vector(const allocator_type& alloc = allocator_type()): __begin(ft::nil), __end(ft::nil), __cap(ft::nil), __alloc(alloc) {} //TODO nil에 대해서 고민
+			//TODO nil에 대해서 고민
+			explicit vector(const allocator_type& alloc = allocator_type()): __begin(ft::nil), __end(ft::nil), __cap(ft::nil), __alloc(alloc) {}
 			explicit vector(size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type()) : __alloc(alloc)
 			{
 				__init(n);
@@ -67,6 +68,11 @@ namespace ft
 			}
 			template <class InputIterator>
 			//COMMENT enable_if에 숫자가 들어가 가면 안 되기 때문에 is_ingral이 나오면 !를 통해서 false가 됨
+			//enable_if가 없으면 InputIterator자리에 숫자가 들어올 경우 문제가 생김.
+			//예를 들어, vector<int>(10,3) 이런식이면 우리는 3으로 10칸만큼 초기화라는 뜻을 원한건데,
+			//enable_if가 없으면 template 함수는 함수가 호출될때 만들어지는 것이 아니라 컴파일러에 의해 컴파일 단계에 미리 구체화되기 때문에,
+			//위의 생성자로 찾아가는 것이 아니라, 아래의 생성자로 찾아가기 때문에 의도하지 않은 동작을 하게 됨.
+			//reference에는 enable_if가 없는 이유는 뭘까? 사용자 입장에서는 굳이 알 필요없는 부분이라 그러지 않았을까? std::vector안에 타고 들어가면 enable_if로 구현해둠
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil) : __alloc(alloc)
 			{
 				size_type n = std::distance(first, last);
