@@ -6,18 +6,18 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/16 19:47:33 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 13:46:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RBTREE_HPP
 # define RBTREE_HPP
 
-// #include <algorithm>
-// #include <limits>
-// #include <memory>
+#include <algorithm>
+#include <limits>
+#include <memory>
 #include "./iterator_traits.hpp"
-// #include "./pair.hpp"
+#include "./pair.hpp"
 #include "./type_traits.hpp"
 
 namespace ft
@@ -289,10 +289,10 @@ class __rbtree {
   typedef Key key_type;
   typedef Comp compare_type;
 
-  typedef __tree_node<value_type> node_type;
-  typedef __tree_node<value_type>* node_pointer;
-  typedef __tree_iterator<value_type, node_type> iterator;
-  typedef __tree_iterator<const value_type, node_type> const_iterator;
+  typedef TreeNode<value_type> node_type;
+  typedef TreeNode<value_type>* node_pointer;
+  typedef TreeIterator<value_type, node_type> iterator;
+  typedef TreeIterator<const value_type, node_type> const_iterator;
 
   typedef Allocator allocator_type;
   typedef typename allocator_type::template rebind<node_type>::other node_allocator;
@@ -304,32 +304,32 @@ class __rbtree {
   /* constructor & destructor */
   __rbtree(const compare_type& comp, const allocator_type& alloc)
     : __comp(comp), __alloc(alloc), __size(size_type()) {
-    __nil = __alloc.allocate(1);
-    __alloc.construct(__nil, value_type());
-    __nil->__is_black = true;
-    __nil->__parent = __nil;
-    __nil->__left = __nil;
-    __nil->__right = __nil;
+    nil_ = __alloc.allocate(1);
+    __alloc.construct(nil_, value_type());
+    nil_->is_black_ = true;
+    nil_->parent_ = nil_;
+    nil_->left_ = nil_;
+    nil_->right_ = nil_;
     __end = __construct_node(value_type());
-    __end->__is_black = true;
+    __end->is_black_ = true;
     __begin = __end;
   }
   __rbtree(const __rbtree& t)
     : __comp(t.__comp), __alloc(t.__alloc), __size(size_type()) {
-    __nil = __alloc.allocate(1);
-    __alloc.construct(__nil, value_type());
-    __nil->__is_black = true;
-    __nil->__parent = __nil;
-    __nil->__left = __nil;
-    __nil->__right = __nil;
+    nil_ = __alloc.allocate(1);
+    __alloc.construct(nil_, value_type());
+    nil_->is_black_ = true;
+    nil_->parent_ = nil_;
+    nil_->left_ = nil_;
+    nil_->right_ = nil_;
     __end = __construct_node(value_type());
-    __end->__is_black = true;
+    __end->is_black_ = true;
     __begin = __end;
     insert(t.begin(), t.end());
   }
   ~__rbtree(void) {
     __destruct_node_recursive(__end);
-    __destruct_node(__nil);
+    __destruct_node(nil_);
   }
 
   /* member function for util */
@@ -343,16 +343,16 @@ class __rbtree {
 
   /* iterators */
   iterator begin(void) {
-    return iterator(__begin, __nil);
+    return iterator(__begin, nil_);
   }
   const_iterator begin(void) const {
-    return const_iterator(__begin, __nil);
+    return const_iterator(__begin, nil_);
   }
   iterator end(void) {
-    return iterator(__end, __nil);
+    return iterator(__end, nil_);
   }
   const_iterator end(void) const {
-    return const_iterator(__end, __nil);
+    return const_iterator(__end, nil_);
   }
 
   /* capacity */
@@ -372,18 +372,18 @@ class __rbtree {
   ft::pair<iterator, bool> insert(const value_type& value) {
     node_pointer ptr = __search_parent(value);
 	//COMMENT 같은 key가 이미 존재할때
-    if (ptr != __end && __is_equal(ptr->__value, value, __comp)) {
-      return ft::make_pair(iterator(ptr, __nil), false);
+    if (ptr != __end && is_equal(ptr->value_, value, __comp)) {
+      return ft::make_pair(iterator(ptr, nil_), false);
     }
 	//COMMENT key가 존재하지 않을때 key 삽입
-    return ft::make_pair(iterator(__insert_internal(value, ptr), __nil), true);
+    return ft::make_pair(iterator(__insert_internal(value, ptr), nil_), true);
   }
   iterator insert(iterator position, const value_type& value) {
     node_pointer ptr = __search_parent(value, position.base());
-    if (ptr != __end && __is_equal(ptr->__value, value, __comp)) {
-      return iterator(ptr, __nil);
+    if (ptr != __end && is_equal(ptr->value_, value, __comp)) {
+      return iterator(ptr, nil_);
     }
-    return iterator(__insert_internal(value, ptr), __nil);
+    return iterator(__insert_internal(value, ptr), nil_);
   }
   template <class InputIterator>
   void insert(InputIterator first, InputIterator last) {
@@ -393,7 +393,7 @@ class __rbtree {
   }
   iterator erase(iterator position) {
     if (__size == 0) {
-      return iterator(__nil, __nil);
+      return iterator(nil_, nil_);
     }
     iterator tmp(position);
     ++tmp;
@@ -407,7 +407,7 @@ class __rbtree {
   }
   template <typename U>
   size_type erase(const U& value) {
-    iterator i(__find_internal(value), __nil);
+    iterator i(__find_internal(value), nil_);
     if (i == end()) {
       return 0;
     }
@@ -427,7 +427,7 @@ class __rbtree {
     }
   }
   void swap(__rbtree& t) {
-    std::swap(__nil, t.__nil);
+    std::swap(nil_, t.nil_);
     std::swap(__begin, t.__begin);
     std::swap(__end, t.__end);
     std::swap(__comp, t.__comp);
@@ -441,24 +441,24 @@ class __rbtree {
 
   /* lookup operations */
   iterator find(const key_type& key) {
-    return iterator(__find_internal(key), __nil);
+    return iterator(__find_internal(key), nil_);
   }
   const_iterator find(const key_type& key) const {
-    return const_iterator(__find_internal(key), __nil);
+    return const_iterator(__find_internal(key), nil_);
   }
   iterator lower_bound(const key_type& key) {
-    return iterator(__lower_bound_internal(key), __nil);
+    return iterator(__lower_bound_internal(key), nil_);
   }
   //TODO lower_bound / upper_bound 다시 찾아보기
   const_iterator lower_bound(const key_type& key) const {
-    return const_iterator(__lower_bound_internal(key), __nil);
+    return const_iterator(__lower_bound_internal(key), nil_);
   }
   //COMMENT 초과
   iterator upper_bound(const key_type& key) {
-    return iterator(__upper_bound_internal(key), __nil);
+    return iterator(__upper_bound_internal(key), nil_);
   }
   const_iterator upper_bound(const key_type& key) const {
-    return const_iterator(__upper_bound_internal(key), __nil);
+    return const_iterator(__upper_bound_internal(key), nil_);
   }
   ft::pair<iterator, iterator> equal_range(const key_type& key) {
     return __equal_range_internal(key);
@@ -473,7 +473,7 @@ class __rbtree {
   }
 
  private:
-  node_pointer __nil;
+  node_pointer nil_;
   node_pointer __begin;
   node_pointer __end;
   compare_type __comp;
@@ -483,11 +483,11 @@ class __rbtree {
   /* root */
   //COMMENT end의 왼쪽 자식이 루트다
   node_pointer __get_root(void) const {
-    return __end->__left;
+    return __end->left_;
   }
   void __set_root(const node_pointer ptr) {
-    ptr->__parent = __end;
-    __end->__left = ptr;
+    ptr->parent_ = __end;
+    __end->left_ = ptr;
   }
 
   /* modifiers */
@@ -495,10 +495,10 @@ class __rbtree {
   node_pointer __construct_node(const value_type& value) {
     node_pointer ptr = __alloc.allocate(1);
     __alloc.construct(ptr, value);
-    ptr->__parent = __nil;
-    ptr->__left = __nil;
-    ptr->__right = __nil;
-    ptr->__is_black = false;
+    ptr->parent_ = nil_;
+    ptr->left_ = nil_;
+    ptr->right_ = nil_;
+    ptr->is_black_ = false;
     return ptr;
   }
   void __destruct_node(node_pointer ptr) {
@@ -507,11 +507,11 @@ class __rbtree {
   }
   //COMMENT 재귀 돌리면서 노드 왼쪽 오른쪽 방문하면서 삭제
   void __destruct_node_recursive(node_pointer ptr) {
-    if (ptr == __nil) {
+    if (ptr == nil_) {
       return;
     }
-    __destruct_node_recursive(ptr->__left);
-    __destruct_node_recursive(ptr->__right);
+    __destruct_node_recursive(ptr->left_);
+    __destruct_node_recursive(ptr->right_);
     __destruct_node(ptr);
   }
   //COMMENT 부모가 될 노드 찾기
@@ -519,13 +519,13 @@ class __rbtree {
   //유효한 위치가 아니면 부모에서부터 찾음
   node_pointer __search_parent(const value_type& value, node_pointer position = ft::nil) {
     if (position && position != __end) {
-      if (__comp(value, position->__value) && position->__left == __nil) {
-        iterator prev = iterator(position, __nil);
+      if (__comp(value, position->value_) && position->left_ == nil_) {
+        iterator prev = iterator(position, nil_);
         if (prev == begin() || __comp(*--prev, value)) {
           return position;
         }
-      } else if (position->__right == __nil) {
-        iterator next = iterator(position, __nil);
+      } else if (position->right_ == nil_) {
+        iterator next = iterator(position, nil_);
         if (next == end() || __comp(value, *++next)) {
           return position;
         }
@@ -534,12 +534,12 @@ class __rbtree {
 	//COMMENT position이 유효하지 않을때 상황
     node_pointer cur = __get_root();
     node_pointer tmp = __end;
-    for ( ; cur != __nil ; ) {
+    for ( ; cur != nil_ ; ) {
       tmp = cur;
-      if (__comp(value, cur->__value)) {
-        cur = cur->__left;
-      } else if (__comp(cur->__value, value)) {
-        cur = cur->__right;
+      if (__comp(value, cur->value_)) {
+        cur = cur->left_;
+      } else if (__comp(cur->value_, value)) {
+        cur = cur->right_;
       } else {
         return cur;
       }
@@ -550,64 +550,64 @@ class __rbtree {
     node_pointer ptr = __construct_node(value);
     if (parent == __end) {
       __set_root(ptr);
-    } else if (__comp(value, parent->__value)) {
-      parent->__left = ptr;
+    } else if (__comp(value, parent->value_)) {
+      parent->left_ = ptr;
     } else {
-      parent->__right = ptr;
+      parent->right_ = ptr;
     }
-    ptr->__parent = parent;
+    ptr->parent_ = parent;
     __insert_fixup(ptr);
     __insert_update(ptr);
     return ptr;
   }
   void __insert_fixup(node_pointer ptr) {
-    while (__is_red_color(ptr->__parent)) {
-      if (__is_left_child(ptr->__parent)) {
+    while (is_red_color(ptr->parent_)) {
+      if (is_left_child(ptr->parent_)) {
         __insert_fixup_left(ptr);
       } else {
         __insert_fixup_right(ptr);
       }
     }
-    __get_root()->__is_black = true;
+    __get_root()->is_black_ = true;
   }
   //COMMENT 해당 부모의 노드가 왼쪽 자식일 경우
   void __insert_fixup_left(node_pointer& ptr) {
-    node_pointer uncle = ptr->__parent->__parent->__right;
-    if (__is_red_color(uncle)) {
-      ptr->__parent->__is_black = true;
-      uncle->__is_black = true;
-      uncle->__parent->__is_black = false;
-      ptr = uncle->__parent;
+    node_pointer uncle = ptr->parent_->parent_->right_;
+    if (is_red_color(uncle)) {
+      ptr->parent_->is_black_ = true;
+      uncle->is_black_ = true;
+      uncle->parent_->is_black_ = false;
+      ptr = uncle->parent_;
     } else {
-      if (__is_right_child(ptr)) {
-        ptr = ptr->__parent;
+      if (is_right_child(ptr)) {
+        ptr = ptr->parent_;
         __rotate_left(ptr);
       }
-      ptr->__parent->__is_black = true;
-      ptr->__parent->__parent->__is_black = false;
-      __rotate_right(ptr->__parent->__parent);
+      ptr->parent_->is_black_ = true;
+      ptr->parent_->parent_->is_black_ = false;
+      __rotate_right(ptr->parent_->parent_);
     }
   }
   //COMMENT 해당 부모의 노드가 오른쪽 자식일 경우
   void __insert_fixup_right(node_pointer& ptr) {
-    node_pointer uncle = ptr->__parent->__parent->__left;
-    if (__is_red_color(uncle)) {
-      ptr->__parent->__is_black = true;
-      uncle->__is_black = true;
-      uncle->__parent->__is_black = false;
-      ptr = uncle->__parent;
+    node_pointer uncle = ptr->parent_->parent_->left_;
+    if (is_red_color(uncle)) {
+      ptr->parent_->is_black_ = true;
+      uncle->is_black_ = true;
+      uncle->parent_->is_black_ = false;
+      ptr = uncle->parent_;
     } else {
-      if (__is_left_child(ptr)) {
-        ptr = ptr->__parent;
+      if (is_left_child(ptr)) {
+        ptr = ptr->parent_;
         __rotate_right(ptr);
       }
-      ptr->__parent->__is_black = true;
-      ptr->__parent->__parent->__is_black = false;
-      __rotate_left(ptr->__parent->__parent);
+      ptr->parent_->is_black_ = true;
+      ptr->parent_->parent_->is_black_ = false;
+      __rotate_left(ptr->parent_->parent_);
     }
   }
   void __insert_update(const node_pointer ptr) {
-    if (__begin == __end || __comp(ptr->__value, __begin->__value)) {
+    if (__begin == __end || __comp(ptr->value_, __begin->value_)) {
       __begin = ptr;
     }
     __size++;
@@ -615,149 +615,149 @@ class __rbtree {
   void __remove_internal(node_pointer ptr) {
     node_pointer recolor_node;
     node_pointer fixup_node = ptr;
-    bool original_color = __is_black_color(ptr);
-    if (ptr->__left == __nil) {
-      recolor_node = ptr->__right;
-      __transplant(ptr, ptr->__right);
-    } else if (ptr->__right == __nil) {
-      recolor_node = ptr->__left;
-      __transplant(ptr, ptr->__left);
+    bool original_color = is_black_color(ptr);
+    if (ptr->left_ == nil_) {
+      recolor_node = ptr->right_;
+      __transplant(ptr, ptr->right_);
+    } else if (ptr->right_ == nil_) {
+      recolor_node = ptr->left_;
+      __transplant(ptr, ptr->left_);
     } else {
-      fixup_node = __get_min_node(ptr->__right, __nil);
-      original_color = __is_black_color(fixup_node);
-      recolor_node = fixup_node->__right;
-      if (fixup_node->__parent == ptr) {
-        recolor_node->__parent = fixup_node;
+      fixup_node = get_min_node(ptr->right_, nil_);
+      original_color = is_black_color(fixup_node);
+      recolor_node = fixup_node->right_;
+      if (fixup_node->parent_ == ptr) {
+        recolor_node->parent_ = fixup_node;
       } else {
-        __transplant(fixup_node, fixup_node->__right);
-        fixup_node->__right = ptr->__right;
-        fixup_node->__right->__parent = fixup_node;
+        __transplant(fixup_node, fixup_node->right_);
+        fixup_node->right_ = ptr->right_;
+        fixup_node->right_->parent_ = fixup_node;
       }
       __transplant(ptr, fixup_node);
-      fixup_node->__left = ptr->__left;
-      fixup_node->__left->__parent = fixup_node;
-      fixup_node->__is_black = __is_black_color(ptr);
+      fixup_node->left_ = ptr->left_;
+      fixup_node->left_->parent_ = fixup_node;
+      fixup_node->is_black_ = is_black_color(ptr);
     }
     if (original_color) {
       __remove_fixup(recolor_node);
     }
   }
   void __remove_fixup(node_pointer ptr) {
-    while (ptr != __get_root() && __is_black_color(ptr)) {
-      if (__is_left_child(ptr)) {
+    while (ptr != __get_root() && is_black_color(ptr)) {
+      if (is_left_child(ptr)) {
         __remove_fixup_left(ptr);
       } else {
         __remove_fixup_right(ptr);
       }
     }
-    ptr->__is_black = true;
+    ptr->is_black_ = true;
   }
   void __remove_fixup_left(node_pointer& ptr) {
-    node_pointer sibling = ptr->__parent->__right;
-    if (__is_red_color(sibling)) {
-      sibling->__is_black = true;
-      ptr->__parent->__is_black = false;
-      __rotate_left(ptr->__parent);
-      sibling = ptr->__parent->__right;
+    node_pointer sibling = ptr->parent_->right_;
+    if (is_red_color(sibling)) {
+      sibling->is_black_ = true;
+      ptr->parent_->is_black_ = false;
+      __rotate_left(ptr->parent_);
+      sibling = ptr->parent_->right_;
     }
-    if (__is_black_color(sibling->__left) && __is_black_color(sibling->__right)) {
-      sibling->__is_black = false;
-      ptr = ptr->__parent;
-    } else if (__is_black_color(sibling->__right)) {
-      sibling->__left->__is_black = true;
-      sibling->__is_black = false;
+    if (is_black_color(sibling->left_) && is_black_color(sibling->right_)) {
+      sibling->is_black_ = false;
+      ptr = ptr->parent_;
+    } else if (is_black_color(sibling->right_)) {
+      sibling->left_->is_black_ = true;
+      sibling->is_black_ = false;
       __rotate_right(sibling);
-      sibling = ptr->__parent->__right;
+      sibling = ptr->parent_->right_;
     }
-    if (__is_red_color(sibling->__right)) {
-      sibling->__is_black = __is_black_color(ptr->__parent);
-      ptr->__parent->__is_black = true;
-      sibling->__right->__is_black = true;
-      __rotate_left(ptr->__parent);
+    if (is_red_color(sibling->right_)) {
+      sibling->is_black_ = is_black_color(ptr->parent_);
+      ptr->parent_->is_black_ = true;
+      sibling->right_->is_black_ = true;
+      __rotate_left(ptr->parent_);
       ptr = __get_root();
     }
   }
   void __remove_fixup_right(node_pointer& ptr) {
-    node_pointer sibling = ptr->__parent->__left;
-    if (__is_red_color(sibling)) {
-      sibling->__is_black = true;
-      ptr->__parent->__is_black = false;
-      __rotate_right(ptr->__parent);
-      sibling = ptr->__parent->__left;
+    node_pointer sibling = ptr->parent_->left_;
+    if (is_red_color(sibling)) {
+      sibling->is_black_ = true;
+      ptr->parent_->is_black_ = false;
+      __rotate_right(ptr->parent_);
+      sibling = ptr->parent_->left_;
     }
-    if (__is_black_color(sibling->__right) && __is_black_color(sibling->__left)) {
-      sibling->__is_black = false;
-      ptr = ptr->__parent;
-    } else if (__is_black_color(sibling->__left)) {
-      sibling->__right->__is_black = true;
-      sibling->__is_black = false;
+    if (is_black_color(sibling->right_) && is_black_color(sibling->left_)) {
+      sibling->is_black_ = false;
+      ptr = ptr->parent_;
+    } else if (is_black_color(sibling->left_)) {
+      sibling->right_->is_black_ = true;
+      sibling->is_black_ = false;
       __rotate_left(sibling);
-      sibling = ptr->__parent->__left;
+      sibling = ptr->parent_->left_;
     }
-    if (__is_red_color(sibling->__left)) {
-      sibling->__is_black = __is_black_color(ptr->__parent);
-      ptr->__parent->__is_black = true;
-      sibling->__left->__is_black = true;
-      __rotate_right(ptr->__parent);
+    if (is_red_color(sibling->left_)) {
+      sibling->is_black_ = is_black_color(ptr->parent_);
+      ptr->parent_->is_black_ = true;
+      sibling->left_->is_black_ = true;
+      __rotate_right(ptr->parent_);
       ptr = __get_root();
     }
   }
   void __transplant(node_pointer former, node_pointer latter) {
-    if (former->__parent == __end) {
+    if (former->parent_ == __end) {
       __set_root(latter);
-    } else if (__is_left_child(former)) {
-      former->__parent->__left = latter;
+    } else if (is_left_child(former)) {
+      former->parent_->left_ = latter;
     } else {
-      former->__parent->__right = latter;
+      former->parent_->right_ = latter;
     }
-    latter->__parent = former->__parent;
+    latter->parent_ = former->parent_;
   }
   void __rotate_left(node_pointer ptr) {
-    node_pointer child = ptr->__right;
-    ptr->__right = child->__left;
-    if (ptr->__right != __nil) {
-      ptr->__right->__parent = ptr;
+    node_pointer child = ptr->right_;
+    ptr->right_ = child->left_;
+    if (ptr->right_ != nil_) {
+      ptr->right_->parent_ = ptr;
     }
-    node_pointer parent = ptr->__parent;
-    child->__parent = parent;
+    node_pointer parent = ptr->parent_;
+    child->parent_ = parent;
     if (parent == __end) {
       __set_root(child);
-    } else if (__is_left_child(ptr)) {
-      parent->__left = child;
+    } else if (is_left_child(ptr)) {
+      parent->left_ = child;
     } else {
-      parent->__right = child;
+      parent->right_ = child;
     }
-    child->__left = ptr;
-    ptr->__parent = child;
+    child->left_ = ptr;
+    ptr->parent_ = child;
   }
   void __rotate_right(node_pointer ptr) {
-    node_pointer child = ptr->__left;
-    ptr->__left = child->__right;
-    if (ptr->__left != __nil) {
-      ptr->__left->__parent = ptr;
+    node_pointer child = ptr->left_;
+    ptr->left_ = child->right_;
+    if (ptr->left_ != nil_) {
+      ptr->left_->parent_ = ptr;
     }
-    node_pointer parent = ptr->__parent;
-    child->__parent = parent;
+    node_pointer parent = ptr->parent_;
+    child->parent_ = parent;
     if (parent == __end) {
       __set_root(child);
-    } else if (__is_left_child(ptr)) {
-      parent->__left = child;
+    } else if (is_left_child(ptr)) {
+      parent->left_ = child;
     } else {
-      parent->__right = child;
+      parent->right_ = child;
     }
-    child->__right = ptr;
-    ptr->__parent = child;
+    child->right_ = ptr;
+    ptr->parent_ = child;
   }
 
   /* lookup operations */
   template <typename U>
   node_pointer __find_internal(const U& value) const {
     node_pointer ptr = __get_root();
-    while (ptr != __nil) {
-      if (__comp(value, ptr->__value)) {
-        ptr = ptr->__left;
-      } else if (__comp(ptr->__value, value)) {
-        ptr = ptr->__right;
+    while (ptr != nil_) {
+      if (__comp(value, ptr->value_)) {
+        ptr = ptr->left_;
+      } else if (__comp(ptr->value_, value)) {
+        ptr = ptr->right_;
       } else {
         return ptr;
       }
@@ -767,12 +767,12 @@ class __rbtree {
   node_pointer __lower_bound_internal(const key_type& key) const {
     node_pointer ptr = __get_root();
     node_pointer tmp = __end;
-    while (ptr != __nil) {
-      if (!__comp(ptr->__value, key)) {
+    while (ptr != nil_) {
+      if (!__comp(ptr->value_, key)) {
         tmp = ptr;
-        ptr = ptr->__left;
+        ptr = ptr->left_;
       } else {
-        ptr = ptr->__right;
+        ptr = ptr->right_;
       }
     }
     return tmp;
@@ -780,12 +780,12 @@ class __rbtree {
   node_pointer __upper_bound_internal(const key_type& key) const {
     node_pointer ptr = __get_root();
     node_pointer tmp = __end;
-    while (ptr != __nil) {
-      if (__comp(key, ptr->__value)) {
+    while (ptr != nil_) {
+      if (__comp(key, ptr->value_)) {
         tmp = ptr;
-        ptr = ptr->__left;
+        ptr = ptr->left_;
       } else {
-        ptr = ptr->__right;
+        ptr = ptr->right_;
       }
     }
     return tmp;
@@ -794,39 +794,39 @@ class __rbtree {
   ft::pair<iterator, iterator> __equal_range_internal(const U& value) {
     node_pointer ptr = __get_root();
     node_pointer tmp = __end;
-    while (ptr != __nil) {
-      if (__comp(value, ptr->__value)) {
+    while (ptr != nil_) {
+      if (__comp(value, ptr->value_)) {
         tmp = ptr;
-        ptr = ptr->__left;
-      } else if (__comp(ptr->__value, value)) {
-        ptr = ptr->__right;
+        ptr = ptr->left_;
+      } else if (__comp(ptr->value_, value)) {
+        ptr = ptr->right_;
       } else {
-        if (ptr->__right != __nil) {
-          tmp = __get_min_node(ptr->__right, __nil);
+        if (ptr->right_ != nil_) {
+          tmp = get_min_node(ptr->right_, nil_);
         }
-        return ft::make_pair(iterator(ptr, __nil), iterator(tmp, __nil));
+        return ft::make_pair(iterator(ptr, nil_), iterator(tmp, nil_));
       }
     }
-    return ft::make_pair(iterator(tmp, __nil), iterator(tmp, __nil));
+    return ft::make_pair(iterator(tmp, nil_), iterator(tmp, nil_));
   }
   template <typename U>
   ft::pair<const_iterator, const_iterator> __equal_range_internal(const U& value) const {
     node_pointer ptr = __get_root();
     node_pointer tmp = __end;
-    while (ptr != __nil) {
-      if (__comp(value, ptr->__value)) {
+    while (ptr != nil_) {
+      if (__comp(value, ptr->value_)) {
         tmp = ptr;
-        ptr = ptr->__left;
-      } else if (__comp(ptr->__value, value)) {
-        ptr = ptr->__right;
+        ptr = ptr->left_;
+      } else if (__comp(ptr->value_, value)) {
+        ptr = ptr->right_;
       } else {
-        if (ptr->__right != __nil) {
-          tmp = __get_min_node(ptr->__right, __nil);
+        if (ptr->right_ != nil_) {
+          tmp = get_min_node(ptr->right_, nil_);
         }
-        return ft::make_pair(const_iterator(ptr, __nil), const_iterator(tmp, __nil));
+        return ft::make_pair(const_iterator(ptr, nil_), const_iterator(tmp, nil_));
       }
     }
-    return ft::make_pair(const_iterator(tmp, __nil), const_iterator(tmp, __nil));
+    return ft::make_pair(const_iterator(tmp, nil_), const_iterator(tmp, nil_));
   }
 };
 }

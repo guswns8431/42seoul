@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 13:19:57 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/17 13:35:58 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <functional>
 //COMMENT allocator
 # include <memory>
-// # include "./algorithm.hpp"
+# include "./algorithm.hpp"
 # include "./pair.hpp"
 # include "./random_access_iterator.hpp"
 # include "./rbtree.hpp"
@@ -56,11 +56,6 @@ namespace ft
 			typedef std::size_t size_type;
 			typedef std::ptrdiff_t difference_type;
 
-			typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::iterator iterator;
-	 		typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::const_iterator const_iterator;
-			typedef ft::reverse_iterator<iterator> reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
-
 /*------------------------------------------------------------------------------*/
 /*							M E M B E R _ C L A S S								*/
 /*------------------------------------------------------------------------------*/
@@ -90,6 +85,10 @@ namespace ft
 					}
 			};
 
+			typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::iterator iterator;
+	 		typedef typename ft::__rbtree<value_type, key_type, value_compare, allocator_type>::const_iterator const_iterator;
+			typedef ft::reverse_iterator<iterator> reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 
   /* constructor & destructor */
