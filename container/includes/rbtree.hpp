@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 14:04:39 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/19 23:00:04 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,555 +280,718 @@ namespace ft
 			node_pointer nil_;
 	};
 
+/*--------------------------------------------------------------------------*/
+/*								R B T R E E									*/
+/*--------------------------------------------------------------------------*/
+	template <typename T, class Key, class Comp, class Allocator>
+	class RBTree
+	{
+		public:
+			typedef T value_type;
+			typedef Key key_type;
+			typedef Comp compare_type;
 
-/* rbtree */
-template <typename T, class Key, class Comp, class Allocator>
-class RBTree {
- public:
-  typedef T value_type;
-  typedef Key key_type;
-  typedef Comp compare_type;
+			typedef TreeNode<value_type> node_type;
+			typedef TreeNode<value_type>* node_pointer;
+			typedef TreeIterator<value_type, node_type> iterator;
+			typedef TreeIterator<const value_type, node_type> const_iterator;
 
-  typedef TreeNode<value_type> node_type;
-  typedef TreeNode<value_type>* node_pointer;
-  typedef TreeIterator<value_type, node_type> iterator;
-  typedef TreeIterator<const value_type, node_type> const_iterator;
+			typedef Allocator allocator_type;
+			typedef typename allocator_type::template rebind<node_type>::other node_allocator;
+			typedef std::allocator_traits<node_allocator> node_traits;
 
-  typedef Allocator allocator_type;
-  typedef typename allocator_type::template rebind<node_type>::other node_allocator;
-  typedef std::allocator_traits<node_allocator> node_traits;
+			typedef std::size_t size_type;
+			typedef std::ptrdiff_t difference_type;
 
-  typedef std::size_t size_type;
-  typedef std::ptrdiff_t difference_type;
+/*--------------------------------------------------------------------------*/
+/*				C O N S T R U C T O R _ & _ D E S T R U C T O R				*/
+/*--------------------------------------------------------------------------*/
+			RBTree(const compare_type& comp, const allocator_type& alloc) : comp_(comp), alloc_(alloc), size_(size_type())
+			{
+				nil_ = alloc_.allocate(1);
+				alloc_.construct(nil_, value_type());
+				nil_->is_black_ = true;
+				nil_->parent_ = nil_;
+				nil_->left_ = nil_;
+				nil_->right_ = nil_;
+				end_ = ConstructNode(value_type());
+				end_->is_black_ = true;
+				begin_ = end_;
+			}
+			RBTree(const RBTree& t) : comp_(t.comp_), alloc_(t.alloc_), size_(size_type())
+			{
+				nil_ = alloc_.allocate(1);
+				alloc_.construct(nil_, value_type());
+				nil_->is_black_ = true;
+				nil_->parent_ = nil_;
+				nil_->left_ = nil_;
+				nil_->right_ = nil_;
+				end_ = ConstructNode(value_type());
+				end_->is_black_ = true;
+				begin_ = end_;
+				insert(t.begin(), t.end());
+			}
+			~RBTree(void)
+			{
+				DestructNodeRecursive(end_);
+				DestructNode(nil_);
+			}
 
-  /* constructor & destructor */
-  RBTree(const compare_type& comp, const allocator_type& alloc)
-    : __comp(comp), __alloc(alloc), __size(size_type()) {
-    nil_ = __alloc.allocate(1);
-    __alloc.construct(nil_, value_type());
-    nil_->is_black_ = true;
-    nil_->parent_ = nil_;
-    nil_->left_ = nil_;
-    nil_->right_ = nil_;
-    __end = __construct_node(value_type());
-    __end->is_black_ = true;
-    __begin = __end;
-  }
-  RBTree(const RBTree& t)
-    : __comp(t.__comp), __alloc(t.__alloc), __size(size_type()) {
-    nil_ = __alloc.allocate(1);
-    __alloc.construct(nil_, value_type());
-    nil_->is_black_ = true;
-    nil_->parent_ = nil_;
-    nil_->left_ = nil_;
-    nil_->right_ = nil_;
-    __end = __construct_node(value_type());
-    __end->is_black_ = true;
-    __begin = __end;
-    insert(t.begin(), t.end());
-  }
-  ~RBTree(void) {
-    __destruct_node_recursive(__end);
-    __destruct_node(nil_);
-  }
+/*--------------------------------------------------------------------------*/
+/*						M E M B E R _ F U N C T I O N						*/
+/*--------------------------------------------------------------------------*/
+			RBTree& operator=(const RBTree& t)
+			{
+				if (this != &t)
+				{
+					RBTree tmp(t);
+					swap(tmp);
+				}
+				return (*this);
+			}
 
-  /* member function for util */
-  RBTree& operator=(const RBTree& t) {
-    if (this != &t) {
-      RBTree tmp(t);
-      swap(tmp);
-    }
-    return *this;
-  }
+/*--------------------------------------------------------------------------*/
+/*								I T E R A T O R	S							*/
+/*--------------------------------------------------------------------------*/
+			iterator begin(void)
+			{
+				return (iterator(begin_, nil_));
+			}
+			const_iterator begin(void) const
+			{
+				return (const_iterator(begin_, nil_));
+			}
+			iterator end(void)
+			{
+				return (iterator(end_, nil_));
+			}
+			const_iterator end(void) const
+			{
+				return (const_iterator(end_, nil_));
+			}
 
-  /* iterators */
-  iterator begin(void) {
-    return iterator(__begin, nil_);
-  }
-  const_iterator begin(void) const {
-    return const_iterator(__begin, nil_);
-  }
-  iterator end(void) {
-    return iterator(__end, nil_);
-  }
-  const_iterator end(void) const {
-    return const_iterator(__end, nil_);
-  }
+/*------------------------------------------------------------------------------*/
+/*								C A P A C I T Y									*/
+/*------------------------------------------------------------------------------*/
+			size_type size(void) const
+			{
+				return (size_);
+			}
+			size_type max_size(void) const
+			{
+				return (std::min<size_type>(std::numeric_limits<size_type>::max(), node_traits::max_size(node_allocator())));
+			}
+			bool empty(void) const
+			{
+				return (size_ == 0);
+			}
 
-  /* capacity */
-  size_type size(void) const {
-    return __size;
-  }
-  size_type max_size(void) const {
-    return std::min<size_type>(std::numeric_limits<size_type>::max(),
-                               node_traits::max_size(node_allocator()));
-  }
-  bool empty(void) const {
-    return __size == 0;
-  }
+/*--------------------------------------------------------------------------*/
+/*								M O D I F I E R	S							*/
+/*--------------------------------------------------------------------------*/
+			//COMMENT map에서 insert를 할때 Key가 이미 존재하면 key 넣지 않음
+			ft::pair<iterator, bool> insert(const value_type& value)
+			{
+				node_pointer ptr = SearchParent(value);
+				//COMMENT 같은 key가 이미 존재할때
+				if (ptr != end_ && is_equal(ptr->value_, value, comp_))
+				{
+					return (ft::make_pair(iterator(ptr, nil_), false));
+				}
+				//COMMENT key가 존재하지 않을때 key 삽입
+				return (ft::make_pair(iterator(InsertInternal(value, ptr), nil_), true));
+			}
+			iterator insert(iterator position, const value_type& value)
+			{
+				node_pointer ptr = SearchParent(value, position.base());
+				if (ptr != end_ && is_equal(ptr->value_, value, comp_))
+				{
+					return (iterator(ptr, nil_));
+				}
+				return (iterator(InsertInternal(value, ptr), nil_));
+			}
+			template <class InputIterator>
+			void insert(InputIterator first, InputIterator last)
+			{
+				for ( ; first != last ; first++)
+				{
+					insert(*first);
+				}
+			}
+			iterator erase(iterator position)
+			{
+				if (size_ == 0)
+				{
+					return (iterator(nil_, nil_));
+				}
+				iterator tmp(position);
+				++tmp;
+				if (position == begin())
+				{
+					begin_ = tmp.base();
+				}
+				--size_;
+				RemoveInternal(position.base());
+				DestructNode(position.base());
+				return (tmp);
+			}
+			template <typename U>
+			size_type erase(const U& value)
+			{
+				iterator i(FindInternal(value), nil_);
+				if (i == end())
+				{
+					return (0);
+				}
+				if (i == begin())
+				{
+					iterator tmp(i);
+					++tmp;
+					begin_ = tmp.base();
+				}
+				--size_;
+				RemoveInternal(i.base());
+				DestructNode(i.base());
+				return (1);
+			}
+			void erase(iterator first, iterator last)
+			{
+				for ( ; first != last ; )
+				{
+					first = erase(first);
+				}
+			}
+			void swap(RBTree& t)
+			{
+				std::swap(nil_, t.nil_);
+				std::swap(begin_, t.begin_);
+				std::swap(end_, t.end_);
+				std::swap(comp_, t.comp_);
+				std::swap(alloc_, t.alloc_);
+				std::swap(size_, t.size_);
+			}
+			void clear(void)
+			{
+				RBTree tmp(comp_, alloc_);
+				swap(tmp);
+			}
+			iterator find(const key_type& key)
+			{
+				return (iterator(FindInternal(key), nil_));
+			}
+			const_iterator find(const key_type& key) const
+			{
+				return (const_iterator(FindInternal(key), nil_));
+			}
+			iterator LowerBound(const key_type& key)
+			{
+				return (iterator(LowerBoundInternal(key), nil_));
+			}
+			//TODO LowerBound / UpperBound 다시 찾아보기
+			const_iterator LowerBound(const key_type& key) const
+			{
+				return (const_iterator(LowerBoundInternal(key), nil_));
+			}
+			//COMMENT 초과
+			iterator UpperBound(const key_type& key)
+			{
+				return (iterator(UpperBoundInternal(key), nil_));
+			}
+			const_iterator UpperBound(const key_type& key) const
+			{
+				return (const_iterator(UpperBoundInternal(key), nil_));
+			}
+			ft::pair<iterator, iterator> equal_range(const key_type& key)
+			{
+				return (EqualRangeInternal(key));
+			}
+			ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const
+			{
+				return (EqualRangeInternal(key));
+			}
 
-  /* modifiers */
-  //COMMENT map에서 insert를 할때 Key가 이미 존재하면 key 넣지 않음
-  ft::pair<iterator, bool> insert(const value_type& value) {
-    node_pointer ptr = __search_parent(value);
-	//COMMENT 같은 key가 이미 존재할때
-    if (ptr != __end && is_equal(ptr->value_, value, __comp)) {
-      return ft::make_pair(iterator(ptr, nil_), false);
-    }
-	//COMMENT key가 존재하지 않을때 key 삽입
-    return ft::make_pair(iterator(__insert_internal(value, ptr), nil_), true);
-  }
-  iterator insert(iterator position, const value_type& value) {
-    node_pointer ptr = __search_parent(value, position.base());
-    if (ptr != __end && is_equal(ptr->value_, value, __comp)) {
-      return iterator(ptr, nil_);
-    }
-    return iterator(__insert_internal(value, ptr), nil_);
-  }
-  template <class InputIterator>
-  void insert(InputIterator first, InputIterator last) {
-    for ( ; first != last ; first++) {
-      insert(*first);
-    }
-  }
-  iterator erase(iterator position) {
-    if (__size == 0) {
-      return iterator(nil_, nil_);
-    }
-    iterator tmp(position);
-    ++tmp;
-    if (position == begin()) {
-      __begin = tmp.base();
-    }
-    --__size;
-    __remove_internal(position.base());
-    __destruct_node(position.base());
-    return tmp;
-  }
-  template <typename U>
-  size_type erase(const U& value) {
-    iterator i(__find_internal(value), nil_);
-    if (i == end()) {
-      return 0;
-    }
-    if (i == begin()) {
-      iterator tmp(i);
-      ++tmp;
-      __begin = tmp.base();
-    }
-    --__size;
-    __remove_internal(i.base());
-    __destruct_node(i.base());
-    return 1;
-  }
-  void erase(iterator first, iterator last) {
-    for ( ; first != last ; ) {
-      first = erase(first);
-    }
-  }
-  void swap(RBTree& t) {
-    std::swap(nil_, t.nil_);
-    std::swap(__begin, t.__begin);
-    std::swap(__end, t.__end);
-    std::swap(__comp, t.__comp);
-    std::swap(__alloc, t.__alloc);
-    std::swap(__size, t.__size);
-  }
-  void clear(void) {
-    RBTree tmp(__comp, __alloc);
-    swap(tmp);
-  }
+			allocator_type get_allocator(void) const
+			{
+				return (alloc_);
+			}
 
-  /* lookup operations */
-  iterator find(const key_type& key) {
-    return iterator(__find_internal(key), nil_);
-  }
-  const_iterator find(const key_type& key) const {
-    return const_iterator(__find_internal(key), nil_);
-  }
-  iterator lower_bound(const key_type& key) {
-    return iterator(__lower_bound_internal(key), nil_);
-  }
-  //TODO lower_bound / upper_bound 다시 찾아보기
-  const_iterator lower_bound(const key_type& key) const {
-    return const_iterator(__lower_bound_internal(key), nil_);
-  }
-  //COMMENT 초과
-  iterator upper_bound(const key_type& key) {
-    return iterator(__upper_bound_internal(key), nil_);
-  }
-  const_iterator upper_bound(const key_type& key) const {
-    return const_iterator(__upper_bound_internal(key), nil_);
-  }
-  ft::pair<iterator, iterator> equal_range(const key_type& key) {
-    return __equal_range_internal(key);
-  }
-  ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
-    return __equal_range_internal(key);
-  }
+		private:
+			node_pointer nil_;
+			node_pointer begin_;
+			node_pointer end_;
+			compare_type comp_;
+			node_allocator alloc_;
+			size_type size_;
 
-  /* allocator */
-  allocator_type get_allocator(void) const {
-    return __alloc;
-  }
+		//COMMENT end의 왼쪽 자식이 루트다
+		node_pointer GetRoot(void) const
+		{
+			return (end_->left_);
+		}
+		void SetRoot(const node_pointer ptr)
+		{
+			ptr->parent_ = end_;
+			end_->left_ = ptr;
+		}
 
- private:
-  node_pointer nil_;
-  node_pointer __begin;
-  node_pointer __end;
-  compare_type __comp;
-  node_allocator __alloc;
-  size_type __size;
+		//COMMENT 노드 생성 후 주소 반환
+		node_pointer ConstructNode(const value_type& value)
+		{
+			node_pointer ptr = alloc_.allocate(1);
+			alloc_.construct(ptr, value);
+			ptr->parent_ = nil_;
+			ptr->left_ = nil_;
+			ptr->right_ = nil_;
+			ptr->is_black_ = false;
+			return (ptr);
+		}
+		void DestructNode(node_pointer ptr)
+		{
+			alloc_.destroy(ptr);
+			alloc_.deallocate(ptr, 1);
+		}
+		//COMMENT 재귀 돌리면서 노드 왼쪽 오른쪽 방문하면서 삭제
+		void DestructNodeRecursive(node_pointer ptr)
+		{
+			if (ptr == nil_)
+			{
+				return;
+			}
+			DestructNodeRecursive(ptr->left_);
+			DestructNodeRecursive(ptr->right_);
+			DestructNode(ptr);
+		}
+		//COMMENT 부모가 될 노드 찾기
+		//position을 넣어주면 그 position이 유효한지 확인하고 더 빨리 넣어주고,
+		//유효한 위치가 아니면 부모에서부터 찾음
+		node_pointer SearchParent(const value_type& value, node_pointer position = ft::nil)
+		{
+			if (position && position != end_)
+			{
+				if (comp_(value, position->value_) && position->left_ == nil_)
+				{
+					iterator prev = iterator(position, nil_);
+					if (prev == begin() || comp_(*--prev, value))
+					{
+						return (position);
+					}
+				}
+				else if (position->right_ == nil_)
+				{
+					iterator next = iterator(position, nil_);
+					if (next == end() || comp_(value, *++next))
+					{
+						return (position);
+					}
+				}
+			}
+			//COMMENT position이 유효하지 않을때 상황
+			node_pointer cur = GetRoot();
+			node_pointer tmp = end_;
+			for ( ; cur != nil_ ; )
+			{
+				tmp = cur;
+				if (comp_(value, cur->value_))
+				{
+					cur = cur->left_;
+				}
+				else if (comp_(cur->value_, value))
+				{
+					cur = cur->right_;
+				}
+				else
+				{
+					return (cur);
+				}
+			}
+			return (tmp);
+		}
+		node_pointer InsertInternal(const value_type& value, node_pointer parent)
+		{
+			node_pointer ptr = ConstructNode(value);
+			if (parent == end_)
+			{
+				SetRoot(ptr);
+			}
+			else if (comp_(value, parent->value_))
+			{
+				parent->left_ = ptr;
+			}
+			else
+			{
+				parent->right_ = ptr;
+			}
+			ptr->parent_ = parent;
+			InsertFixup(ptr);
+			InsertUpdate(ptr);
+			return (ptr);
+		}
+		void InsertFixup(node_pointer ptr)
+		{
+			while (is_red_color(ptr->parent_))
+			{
+				if (is_left_child(ptr->parent_))
+				{
+					InsertFixupLeft(ptr);
+				}
+				else
+				{
+					InsertFixupRight(ptr);
+				}
+			}
+			GetRoot()->is_black_ = true;
+		}
+		//COMMENT 해당 부모의 노드가 왼쪽 자식일 경우
+		void InsertFixupLeft(node_pointer& ptr)
+		{
+			node_pointer uncle = ptr->parent_->parent_->right_;
+			if (is_red_color(uncle))
+			{
+				ptr->parent_->is_black_ = true;
+				uncle->is_black_ = true;
+				uncle->parent_->is_black_ = false;
+				ptr = uncle->parent_;
+			}
+			else
+			{
+				if (is_right_child(ptr))
+				{
+					ptr = ptr->parent_;
+					RotateLeft(ptr);
+				}
+				ptr->parent_->is_black_ = true;
+				ptr->parent_->parent_->is_black_ = false;
+				RotateRight(ptr->parent_->parent_);
+			}
+		}
+		//COMMENT 해당 부모의 노드가 오른쪽 자식일 경우
+		void InsertFixupRight(node_pointer& ptr)
+		{
+			node_pointer uncle = ptr->parent_->parent_->left_;
+			if (is_red_color(uncle))
+			{
+				ptr->parent_->is_black_ = true;
+				uncle->is_black_ = true;
+				uncle->parent_->is_black_ = false;
+				ptr = uncle->parent_;
+			}
+			else
+			{
+				if (is_left_child(ptr))
+				{
+					ptr = ptr->parent_;
+					RotateRight(ptr);
+				}
+				ptr->parent_->is_black_ = true;
+				ptr->parent_->parent_->is_black_ = false;
+				RotateLeft(ptr->parent_->parent_);
+			}
+		}
+		void InsertUpdate(const node_pointer ptr)
+		{
+			if (begin_ == end_ || comp_(ptr->value_, begin_->value_))
+			{
+				begin_ = ptr;
+			}
+			size_++;
+		}
+		void RemoveInternal(node_pointer ptr)
+		{
+			node_pointer recolor_node;
+			node_pointer fixup_node = ptr;
+			bool original_color = is_black_color(ptr);
+			if (ptr->left_ == nil_)
+			{
+				recolor_node = ptr->right_;
+				Transplant(ptr, ptr->right_);
+			}
+			else if (ptr->right_ == nil_)
+			{
+				recolor_node = ptr->left_;
+				Transplant(ptr, ptr->left_);
+			}
+			else
+			{
+				fixup_node = get_min_node(ptr->right_, nil_);
+				original_color = is_black_color(fixup_node);
+				recolor_node = fixup_node->right_;
+				if (fixup_node->parent_ == ptr)
+				{
+					recolor_node->parent_ = fixup_node;
+				}
+				else
+				{
+					Transplant(fixup_node, fixup_node->right_);
+					fixup_node->right_ = ptr->right_;
+					fixup_node->right_->parent_ = fixup_node;
+				}
+				Transplant(ptr, fixup_node);
+				fixup_node->left_ = ptr->left_;
+				fixup_node->left_->parent_ = fixup_node;
+				fixup_node->is_black_ = is_black_color(ptr);
+			}
+			if (original_color)
+			{
+			RemoveFixup(recolor_node);
+			}
+		}
+		void RemoveFixup(node_pointer ptr)
+		{
+			while (ptr != GetRoot() && is_black_color(ptr))
+			{
+				if (is_left_child(ptr))
+				{
+					RemoveFixupLeft(ptr);
+				}
+				else
+				{
+					RemoveFixupRight(ptr);
+				}
+			}
+			ptr->is_black_ = true;
+		}
+		void RemoveFixupLeft(node_pointer& ptr)
+		{
+			node_pointer sibling = ptr->parent_->right_;
+			if (is_red_color(sibling))
+			{
+				sibling->is_black_ = true;
+				ptr->parent_->is_black_ = false;
+				RotateLeft(ptr->parent_);
+				sibling = ptr->parent_->right_;
+			}
+			if (is_black_color(sibling->left_) && is_black_color(sibling->right_))
+			{
+				sibling->is_black_ = false;
+				ptr = ptr->parent_;
+			}
+			else if (is_black_color(sibling->right_))
+			{
+				sibling->left_->is_black_ = true;
+				sibling->is_black_ = false;
+				RotateRight(sibling);
+				sibling = ptr->parent_->right_;
+			}
+			if (is_red_color(sibling->right_))
+			{
+				sibling->is_black_ = is_black_color(ptr->parent_);
+				ptr->parent_->is_black_ = true;
+				sibling->right_->is_black_ = true;
+				RotateLeft(ptr->parent_);
+				ptr = GetRoot();
+			}
+		}
+		void RemoveFixupRight(node_pointer& ptr)
+		{
+			node_pointer sibling = ptr->parent_->left_;
+			if (is_red_color(sibling))
+			{
+				sibling->is_black_ = true;
+				ptr->parent_->is_black_ = false;
+				RotateRight(ptr->parent_);
+				sibling = ptr->parent_->left_;
+			}
+			if (is_black_color(sibling->right_) && is_black_color(sibling->left_))
+			{
+				sibling->is_black_ = false;
+				ptr = ptr->parent_;
+			}
+			else if (is_black_color(sibling->left_))
+			{
+				sibling->right_->is_black_ = true;
+				sibling->is_black_ = false;
+				RotateLeft(sibling);
+				sibling = ptr->parent_->left_;
+			}
+			if (is_red_color(sibling->left_))
+			{
+				sibling->is_black_ = is_black_color(ptr->parent_);
+				ptr->parent_->is_black_ = true;
+				sibling->left_->is_black_ = true;
+				RotateRight(ptr->parent_);
+				ptr = GetRoot();
+			}
+		}
+		//TODO 뭐하는 녀석인지 찾아보기
+		void Transplant(node_pointer former, node_pointer latter)
+		{
+			if (former->parent_ == end_)
+			{
+				SetRoot(latter);
+			}
+			else if (is_left_child(former))
+			{
+				former->parent_->left_ = latter;
+			}
+			else
+			{
+				former->parent_->right_ = latter;
+			}
+			latter->parent_ = former->parent_;
+		}
+		void RotateLeft(node_pointer ptr)
+		{
+			node_pointer child = ptr->right_;
+			ptr->right_ = child->left_;
+			if (ptr->right_ != nil_)
+			{
+				ptr->right_->parent_ = ptr;
+			}
+			node_pointer parent = ptr->parent_;
+			child->parent_ = parent;
+			if (parent == end_)
+			{
+				SetRoot(child);
+			}
+			else if (is_left_child(ptr))
+			{
+				parent->left_ = child;
+			}
+			else
+			{
+				parent->right_ = child;
+			}
+			child->left_ = ptr;
+			ptr->parent_ = child;
+		}
+		void RotateRight(node_pointer ptr)
+		{
+			node_pointer child = ptr->left_;
+			ptr->left_ = child->right_;
+			if (ptr->left_ != nil_)
+			{
+				ptr->left_->parent_ = ptr;
+			}
+			node_pointer parent = ptr->parent_;
+			child->parent_ = parent;
+			if (parent == end_)
+			{
+				SetRoot(child);
+			}
+			else if (is_left_child(ptr))
+			{
+				parent->left_ = child;
+			}
+			else
+			{
+				parent->right_ = child;
+			}
+			child->right_ = ptr;
+			ptr->parent_ = child;
+		}
 
-  /* root */
-  //COMMENT end의 왼쪽 자식이 루트다
-  node_pointer __get_root(void) const {
-    return __end->left_;
-  }
-  void __set_root(const node_pointer ptr) {
-    ptr->parent_ = __end;
-    __end->left_ = ptr;
-  }
-
-  /* modifiers */
-  //COMMENT 노드 생성 후 주소 반환
-  node_pointer __construct_node(const value_type& value) {
-    node_pointer ptr = __alloc.allocate(1);
-    __alloc.construct(ptr, value);
-    ptr->parent_ = nil_;
-    ptr->left_ = nil_;
-    ptr->right_ = nil_;
-    ptr->is_black_ = false;
-    return ptr;
-  }
-  void __destruct_node(node_pointer ptr) {
-    __alloc.destroy(ptr);
-    __alloc.deallocate(ptr, 1);
-  }
-  //COMMENT 재귀 돌리면서 노드 왼쪽 오른쪽 방문하면서 삭제
-  void __destruct_node_recursive(node_pointer ptr) {
-    if (ptr == nil_) {
-      return;
-    }
-    __destruct_node_recursive(ptr->left_);
-    __destruct_node_recursive(ptr->right_);
-    __destruct_node(ptr);
-  }
-  //COMMENT 부모가 될 노드 찾기
-  //position을 넣어주면 그 position이 유효한지 확인하고 더 빨리 넣어주고,
-  //유효한 위치가 아니면 부모에서부터 찾음
-  node_pointer __search_parent(const value_type& value, node_pointer position = ft::nil) {
-    if (position && position != __end) {
-      if (__comp(value, position->value_) && position->left_ == nil_) {
-        iterator prev = iterator(position, nil_);
-        if (prev == begin() || __comp(*--prev, value)) {
-          return position;
-        }
-      } else if (position->right_ == nil_) {
-        iterator next = iterator(position, nil_);
-        if (next == end() || __comp(value, *++next)) {
-          return position;
-        }
-      }
-    }
-	//COMMENT position이 유효하지 않을때 상황
-    node_pointer cur = __get_root();
-    node_pointer tmp = __end;
-    for ( ; cur != nil_ ; ) {
-      tmp = cur;
-      if (__comp(value, cur->value_)) {
-        cur = cur->left_;
-      } else if (__comp(cur->value_, value)) {
-        cur = cur->right_;
-      } else {
-        return cur;
-      }
-    }
-    return tmp;
-  }
-  node_pointer __insert_internal(const value_type& value, node_pointer parent) {
-    node_pointer ptr = __construct_node(value);
-    if (parent == __end) {
-      __set_root(ptr);
-    } else if (__comp(value, parent->value_)) {
-      parent->left_ = ptr;
-    } else {
-      parent->right_ = ptr;
-    }
-    ptr->parent_ = parent;
-    __insert_fixup(ptr);
-    __insert_update(ptr);
-    return ptr;
-  }
-  void __insert_fixup(node_pointer ptr) {
-    while (is_red_color(ptr->parent_)) {
-      if (is_left_child(ptr->parent_)) {
-        __insert_fixup_left(ptr);
-      } else {
-        __insert_fixup_right(ptr);
-      }
-    }
-    __get_root()->is_black_ = true;
-  }
-  //COMMENT 해당 부모의 노드가 왼쪽 자식일 경우
-  void __insert_fixup_left(node_pointer& ptr) {
-    node_pointer uncle = ptr->parent_->parent_->right_;
-    if (is_red_color(uncle)) {
-      ptr->parent_->is_black_ = true;
-      uncle->is_black_ = true;
-      uncle->parent_->is_black_ = false;
-      ptr = uncle->parent_;
-    } else {
-      if (is_right_child(ptr)) {
-        ptr = ptr->parent_;
-        __rotate_left(ptr);
-      }
-      ptr->parent_->is_black_ = true;
-      ptr->parent_->parent_->is_black_ = false;
-      __rotate_right(ptr->parent_->parent_);
-    }
-  }
-  //COMMENT 해당 부모의 노드가 오른쪽 자식일 경우
-  void __insert_fixup_right(node_pointer& ptr) {
-    node_pointer uncle = ptr->parent_->parent_->left_;
-    if (is_red_color(uncle)) {
-      ptr->parent_->is_black_ = true;
-      uncle->is_black_ = true;
-      uncle->parent_->is_black_ = false;
-      ptr = uncle->parent_;
-    } else {
-      if (is_left_child(ptr)) {
-        ptr = ptr->parent_;
-        __rotate_right(ptr);
-      }
-      ptr->parent_->is_black_ = true;
-      ptr->parent_->parent_->is_black_ = false;
-      __rotate_left(ptr->parent_->parent_);
-    }
-  }
-  void __insert_update(const node_pointer ptr) {
-    if (__begin == __end || __comp(ptr->value_, __begin->value_)) {
-      __begin = ptr;
-    }
-    __size++;
-  }
-  void __remove_internal(node_pointer ptr) {
-    node_pointer recolor_node;
-    node_pointer fixup_node = ptr;
-    bool original_color = is_black_color(ptr);
-    if (ptr->left_ == nil_) {
-      recolor_node = ptr->right_;
-      __transplant(ptr, ptr->right_);
-    } else if (ptr->right_ == nil_) {
-      recolor_node = ptr->left_;
-      __transplant(ptr, ptr->left_);
-    } else {
-      fixup_node = get_min_node(ptr->right_, nil_);
-      original_color = is_black_color(fixup_node);
-      recolor_node = fixup_node->right_;
-      if (fixup_node->parent_ == ptr) {
-        recolor_node->parent_ = fixup_node;
-      } else {
-        __transplant(fixup_node, fixup_node->right_);
-        fixup_node->right_ = ptr->right_;
-        fixup_node->right_->parent_ = fixup_node;
-      }
-      __transplant(ptr, fixup_node);
-      fixup_node->left_ = ptr->left_;
-      fixup_node->left_->parent_ = fixup_node;
-      fixup_node->is_black_ = is_black_color(ptr);
-    }
-    if (original_color) {
-      __remove_fixup(recolor_node);
-    }
-  }
-  void __remove_fixup(node_pointer ptr) {
-    while (ptr != __get_root() && is_black_color(ptr)) {
-      if (is_left_child(ptr)) {
-        __remove_fixup_left(ptr);
-      } else {
-        __remove_fixup_right(ptr);
-      }
-    }
-    ptr->is_black_ = true;
-  }
-  void __remove_fixup_left(node_pointer& ptr) {
-    node_pointer sibling = ptr->parent_->right_;
-    if (is_red_color(sibling)) {
-      sibling->is_black_ = true;
-      ptr->parent_->is_black_ = false;
-      __rotate_left(ptr->parent_);
-      sibling = ptr->parent_->right_;
-    }
-    if (is_black_color(sibling->left_) && is_black_color(sibling->right_)) {
-      sibling->is_black_ = false;
-      ptr = ptr->parent_;
-    } else if (is_black_color(sibling->right_)) {
-      sibling->left_->is_black_ = true;
-      sibling->is_black_ = false;
-      __rotate_right(sibling);
-      sibling = ptr->parent_->right_;
-    }
-    if (is_red_color(sibling->right_)) {
-      sibling->is_black_ = is_black_color(ptr->parent_);
-      ptr->parent_->is_black_ = true;
-      sibling->right_->is_black_ = true;
-      __rotate_left(ptr->parent_);
-      ptr = __get_root();
-    }
-  }
-  void __remove_fixup_right(node_pointer& ptr) {
-    node_pointer sibling = ptr->parent_->left_;
-    if (is_red_color(sibling)) {
-      sibling->is_black_ = true;
-      ptr->parent_->is_black_ = false;
-      __rotate_right(ptr->parent_);
-      sibling = ptr->parent_->left_;
-    }
-    if (is_black_color(sibling->right_) && is_black_color(sibling->left_)) {
-      sibling->is_black_ = false;
-      ptr = ptr->parent_;
-    } else if (is_black_color(sibling->left_)) {
-      sibling->right_->is_black_ = true;
-      sibling->is_black_ = false;
-      __rotate_left(sibling);
-      sibling = ptr->parent_->left_;
-    }
-    if (is_red_color(sibling->left_)) {
-      sibling->is_black_ = is_black_color(ptr->parent_);
-      ptr->parent_->is_black_ = true;
-      sibling->left_->is_black_ = true;
-      __rotate_right(ptr->parent_);
-      ptr = __get_root();
-    }
-  }
-  void __transplant(node_pointer former, node_pointer latter) {
-    if (former->parent_ == __end) {
-      __set_root(latter);
-    } else if (is_left_child(former)) {
-      former->parent_->left_ = latter;
-    } else {
-      former->parent_->right_ = latter;
-    }
-    latter->parent_ = former->parent_;
-  }
-  void __rotate_left(node_pointer ptr) {
-    node_pointer child = ptr->right_;
-    ptr->right_ = child->left_;
-    if (ptr->right_ != nil_) {
-      ptr->right_->parent_ = ptr;
-    }
-    node_pointer parent = ptr->parent_;
-    child->parent_ = parent;
-    if (parent == __end) {
-      __set_root(child);
-    } else if (is_left_child(ptr)) {
-      parent->left_ = child;
-    } else {
-      parent->right_ = child;
-    }
-    child->left_ = ptr;
-    ptr->parent_ = child;
-  }
-  void __rotate_right(node_pointer ptr) {
-    node_pointer child = ptr->left_;
-    ptr->left_ = child->right_;
-    if (ptr->left_ != nil_) {
-      ptr->left_->parent_ = ptr;
-    }
-    node_pointer parent = ptr->parent_;
-    child->parent_ = parent;
-    if (parent == __end) {
-      __set_root(child);
-    } else if (is_left_child(ptr)) {
-      parent->left_ = child;
-    } else {
-      parent->right_ = child;
-    }
-    child->right_ = ptr;
-    ptr->parent_ = child;
-  }
-
-  /* lookup operations */
-  template <typename U>
-  node_pointer __find_internal(const U& value) const {
-    node_pointer ptr = __get_root();
-    while (ptr != nil_) {
-      if (__comp(value, ptr->value_)) {
-        ptr = ptr->left_;
-      } else if (__comp(ptr->value_, value)) {
-        ptr = ptr->right_;
-      } else {
-        return ptr;
-      }
-    }
-    return __end;
-  }
-  node_pointer __lower_bound_internal(const key_type& key) const {
-    node_pointer ptr = __get_root();
-    node_pointer tmp = __end;
-    while (ptr != nil_) {
-      if (!__comp(ptr->value_, key)) {
-        tmp = ptr;
-        ptr = ptr->left_;
-      } else {
-        ptr = ptr->right_;
-      }
-    }
-    return tmp;
-  }
-  node_pointer __upper_bound_internal(const key_type& key) const {
-    node_pointer ptr = __get_root();
-    node_pointer tmp = __end;
-    while (ptr != nil_) {
-      if (__comp(key, ptr->value_)) {
-        tmp = ptr;
-        ptr = ptr->left_;
-      } else {
-        ptr = ptr->right_;
-      }
-    }
-    return tmp;
-  }
-  template <typename U>
-  ft::pair<iterator, iterator> __equal_range_internal(const U& value) {
-    node_pointer ptr = __get_root();
-    node_pointer tmp = __end;
-    while (ptr != nil_) {
-      if (__comp(value, ptr->value_)) {
-        tmp = ptr;
-        ptr = ptr->left_;
-      } else if (__comp(ptr->value_, value)) {
-        ptr = ptr->right_;
-      } else {
-        if (ptr->right_ != nil_) {
-          tmp = get_min_node(ptr->right_, nil_);
-        }
-        return ft::make_pair(iterator(ptr, nil_), iterator(tmp, nil_));
-      }
-    }
-    return ft::make_pair(iterator(tmp, nil_), iterator(tmp, nil_));
-  }
-  template <typename U>
-  ft::pair<const_iterator, const_iterator> __equal_range_internal(const U& value) const {
-    node_pointer ptr = __get_root();
-    node_pointer tmp = __end;
-    while (ptr != nil_) {
-      if (__comp(value, ptr->value_)) {
-        tmp = ptr;
-        ptr = ptr->left_;
-      } else if (__comp(ptr->value_, value)) {
-        ptr = ptr->right_;
-      } else {
-        if (ptr->right_ != nil_) {
-          tmp = get_min_node(ptr->right_, nil_);
-        }
-        return ft::make_pair(const_iterator(ptr, nil_), const_iterator(tmp, nil_));
-      }
-    }
-    return ft::make_pair(const_iterator(tmp, nil_), const_iterator(tmp, nil_));
-  }
-};
+		template <typename U>
+		node_pointer FindInternal(const U& value) const
+		{
+			node_pointer ptr = GetRoot();
+			while (ptr != nil_)
+			{
+				if (comp_(value, ptr->value_))
+				{
+					ptr = ptr->left_;
+				}
+				else if (comp_(ptr->value_, value))
+				{
+					ptr = ptr->right_;
+				}
+				else
+				{
+					return ptr;
+				}
+			}
+			return (end_);
+		}
+		node_pointer LowerBoundInternal(const key_type& key) const
+		{
+			node_pointer ptr = GetRoot();
+			node_pointer tmp = end_;
+			while (ptr != nil_)
+			{
+				if (!comp_(ptr->value_, key))
+				{
+					tmp = ptr;
+					ptr = ptr->left_;
+				}
+				else
+				{
+					ptr = ptr->right_;
+				}
+			}
+			return (tmp);
+		}
+		node_pointer UpperBoundInternal(const key_type& key) const
+		{
+			node_pointer ptr = GetRoot();
+			node_pointer tmp = end_;
+			while (ptr != nil_)
+			{
+				if (comp_(key, ptr->value_))
+				{
+					tmp = ptr;
+					ptr = ptr->left_;
+				}
+				else
+				{
+					ptr = ptr->right_;
+				}
+			}
+			return (tmp);
+		}
+		template <typename U>
+		ft::pair<iterator, iterator> EqualRangeInternal(const U& value)
+		{
+			node_pointer ptr = GetRoot();
+			node_pointer tmp = end_;
+			while (ptr != nil_)
+			{
+				if (comp_(value, ptr->value_))
+				{
+					tmp = ptr;
+					ptr = ptr->left_;
+				}
+				else if (comp_(ptr->value_, value))
+				{
+					ptr = ptr->right_;
+				}
+				else
+				{
+					if (ptr->right_ != nil_)
+					{
+						tmp = get_min_node(ptr->right_, nil_);
+					}
+				return (ft::make_pair(iterator(ptr, nil_), iterator(tmp, nil_)));
+				}
+			}
+			return (ft::make_pair(iterator(tmp, nil_), iterator(tmp, nil_)));
+		}
+		template <typename U>
+		ft::pair<const_iterator, const_iterator> EqualRangeInternal(const U& value) const
+		{
+			node_pointer ptr = GetRoot();
+			node_pointer tmp = end_;
+			while (ptr != nil_)
+			{
+				if (comp_(value, ptr->value_))
+				{
+					tmp = ptr;
+					ptr = ptr->left_;
+				}
+				else if (comp_(ptr->value_, value))
+				{
+					ptr = ptr->right_;
+				}
+				else
+				{
+					if (ptr->right_ != nil_)
+					{
+						tmp = get_min_node(ptr->right_, nil_);
+					}
+					return (ft::make_pair(const_iterator(ptr, nil_), const_iterator(tmp, nil_)));
+				}
+			}
+			return (ft::make_pair(const_iterator(tmp, nil_), const_iterator(tmp, nil_)));
+		}
+	};
 }
 
 #endif

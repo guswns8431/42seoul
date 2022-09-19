@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 20:57:48 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/19 23:02:37 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,20 +278,20 @@ namespace ft
 			//COMMENT key 일치 or 초과하는 것 중 가장 작은 것
 			iterator lower_bound(const key_type& key)
 			{
-				return (tree_.lower_bound(key));
+				return (tree_.LowerBound(key));
 			}
 			const_iterator lower_bound(const key_type& key) const
 			{
-				return (tree_.lower_bound(key));
+				return (tree_.LowerBound(key));
 			}
 			//COMMENT Key보다 초과하는 것 중 가장 작은 것
 			iterator upper_bound(const key_type& key)
 			{
-				return (tree_.upper_bound(key));
+				return (tree_.UpperBound(key));
 			}
 			const_iterator upper_bound(const key_type& key) const
 			{
-				return (tree_.upper_bound(key));
+				return (tree_.UpperBound(key));
 			}
 
 /*--------------------------------------------------------------------------*/
