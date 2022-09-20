@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:06:58 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/19 23:02:37 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/20 19:50:14 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,11 +269,11 @@ namespace ft
 			//COMMENT lower_bound()의 결과와 upper_bound()의 결과 반환
 			ft::pair<iterator, iterator> equal_range(const key_type& key)
 			{
-				return (tree_.equal_range(key));
+				return (tree_.EqualRange(key));
 			}
 			ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const
 			{
-				return (tree_.equal_range(key));
+				return (tree_.EqualRange(key));
 			}
 			//COMMENT key 일치 or 초과하는 것 중 가장 작은 것
 			iterator lower_bound(const key_type& key)

@@ -72,6 +72,7 @@
 		"variant": "cpp",
 		"__functional_base": "cpp",
 		"set": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"filesystem": "cpp"
 	}
 }

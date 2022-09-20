@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/19 23:00:04 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/20 19:47:40 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -501,11 +501,11 @@ namespace ft
 			{
 				return (const_iterator(UpperBoundInternal(key), nil_));
 			}
-			ft::pair<iterator, iterator> equal_range(const key_type& key)
+			ft::pair<iterator, iterator> EqualRange(const key_type& key)
 			{
 				return (EqualRangeInternal(key));
 			}
-			ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const
+			ft::pair<const_iterator, const_iterator> EqualRange(const key_type& key) const
 			{
 				return (EqualRangeInternal(key));
 			}

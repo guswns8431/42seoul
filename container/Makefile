@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyson <hyson@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/01 19:46:37 by hyson             #+#    #+#              #
-#    Updated: 2022/09/01 20:05:54 by hyson            ###   ########.fr        #
+#    Updated: 2022/09/20 21:49:52 by hyson            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 #------------------------------------------------------------------------------#
 
 CXX			= 	c++
-CXXFLAGS		= 	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= 	-Wall -Wextra -Werror -std=c++98
 RM			= 	rm -f
 
 #------------------------------------------------------------------------------#
@@ -56,3 +56,10 @@ fclean		: 	clean
 
 .PHONY		:	re
 re			:	fclean all
+
+.PHONY      :	test
+test        :
+				@make -C ./tests/benchmark1
+				@make -C ./tests/benchmark2 bench
+				@make -C ./tests/diff_test
+				@make -C ./tests/unit_test
