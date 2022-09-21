@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:09:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 16:13:58 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/21 14:55:27 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,23 @@ namespace ft
 {
 
 //TODO nil 처리 어떻게 할지 생각
-const class nullptr_t {
- private:
-  void operator&(void) const;
+const class nullptr_t
+{
+	private:
+		void operator&(void) const;
 
- public:
-  template <typename T>
-  operator T*(void) const { return 0; }
+	public:
+		template <typename T>
+		operator T*(void) const
+		{
+			return (0);
+		}
 
-  template <typename T, typename U>
-  operator T U::*(void) const { return 0; }
+		template <typename T, typename U>
+  		operator T U::*(void) const
+		{
+			return (0);
+		}
 } nil = {};
 
 /*------------------------------------------------------------------------------*/

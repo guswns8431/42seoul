@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 22:38:12 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/17 13:56:12 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/21 14:54:07 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,49 +53,49 @@ namespace ft
 /*--------------------------------------------------------------------------*/
 /*						E L E M E N T _ A C C E S S							*/
 /*--------------------------------------------------------------------------*/
-	reference top(void)
-	{
-		return (c.back());
-	}
-	const_reference top(void) const
-	{
-		return (c.back());
-	}
+			reference top(void)
+			{
+				return (c.back());
+			}
+			const_reference top(void) const
+			{
+				return (c.back());
+			}
 
 /*--------------------------------------------------------------------------*/
 /*								C A P A C I T Y								*/
 /*--------------------------------------------------------------------------*/
-	bool empty(void) const
-	{
-		return (c.empty());
-	}
+			bool empty(void) const
+			{
+				return (c.empty());
+			}
 
-	size_type size(void) const
-	{
-		return (c.size());
-	}
+			size_type size(void) const
+			{
+				return (c.size());
+			}
 
 /*--------------------------------------------------------------------------*/
 /*							M O D I F I E R	S								*/
 /*--------------------------------------------------------------------------*/
-	void push(const value_type& value)
-	{
-		c.push_back(value);
-	}
-	void pop(void)
-	{
-		c.pop_back();
-	}
+			void push(const value_type& value)
+			{
+				c.push_back(value);
+			}
+			void pop(void)
+			{
+				c.pop_back();
+			}
 
-	protected:
-		container_type c;
+		protected:
+			container_type c;
 
 	//COMMENT c가 protected라서 그것을 쓸 수 있게 하기 위하여 friend 키워드 사용
 	//COMMENT non member function이라고 cppreference에 명시되어 있어서 friend를 통해서 접근가능
-	template < class U, class Cn >
-	friend bool operator== (const stack< U,Cn >& x, const stack< U,Cn >& y);
-	template < class U, class Cn >
-	friend bool operator<  (const stack< U,Cn >& x, const stack< U,Cn >& y);
+		template < class U, class Cn >
+		friend bool operator== (const stack< U,Cn >& x, const stack< U,Cn >& y);
+		template < class U, class Cn >
+		friend bool operator<  (const stack< U,Cn >& x, const stack< U,Cn >& y);
 
 	};
 
