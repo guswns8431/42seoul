@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:59:05 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/21 15:09:16 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/21 17:09:53 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ namespace ft
 			explicit vector(const allocator_type& alloc = allocator_type()): begin_(ft::nil), end_(ft::nil), cap_(ft::nil), alloc_(alloc) {}
 			explicit vector(size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type()) : alloc_(alloc)
 			{
-				__init(n);
+				Init(n);
 				Construct(n, value);
 			}
 			template <class InputIterator>
@@ -76,14 +76,14 @@ namespace ft
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = ft::nil) : alloc_(alloc)
 			{
 				size_type n = std::distance(first, last);
-				__init(n);
+				Init(n);
 				Construct(n);
 				std::copy(first, last, begin_);
 			}
 			vector(const vector& v) : alloc_(v.alloc_)
 			{
 				size_type n = v.size();
-				__init(v.capacity());
+				Init(v.capacity());
 				Construct(n);
 				std::copy(v.begin_, v.end_, begin_);
 			}
@@ -402,7 +402,7 @@ namespace ft
 			//__begin에 시작지점
 			//__end에 아직 공간 할당이 되기 전이기 때문에 __begin과 같은 위치
 			//cap_ 공간
-			void __init(size_type n)
+			void Init(size_type n)
 			{
 				if (n > max_size())
 				{
