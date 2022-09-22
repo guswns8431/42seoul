@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:55:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/07 20:19:16 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/22 18:44:16 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ namespace ft
 	class random_access_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	{
 		public:
-			//COMMENT 포인터로 들어올 경우도 처리를 해주기 위해
-			//TODO 근데 굳이 왜 T*를 썼을까
 			typedef T* iterator_type;
 
 			typedef typename ft::iterator_traits<iterator_type>::value_type value_type;
@@ -37,11 +35,10 @@ namespace ft
 			typedef typename ft::iterator_traits<iterator_type>::reference reference;
 			typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
 
-			//TODO nil 어떻게 처리할지 고민
-			random_access_iterator(void): __i(ft::nil) {}
-			random_access_iterator(T* pointer) : __i(pointer) {}
+			random_access_iterator(void): i_(ft::nil) {}
+			random_access_iterator(T* pointer) : i_(pointer) {}
 			template <typename U>
-			random_access_iterator(const random_access_iterator<U>& i) : __i(i.base()) {}
+			random_access_iterator(const random_access_iterator<U>& i) : i_(i.base()) {}
 			~random_access_iterator(void) {}
 
 /*------------------------------------------------------------------------------*/
@@ -50,68 +47,76 @@ namespace ft
 			template <typename U>
 			random_access_iterator& operator=(const random_access_iterator<U>& i)
 			{
-				__i = i.base();
+				i_ = i.base();
 				return (*this);
 			}
-			//COMMENT getter느낌으로 생각해도 좋을듯
-			iterator_type base(void) const { return __i; }
-			pointer operator->(void) const { return __i; }
-			reference operator*(void) const { return *__i; }
-
-			//COMMENT difference_type으로 둔 이유는 주소의 시작부터 끝까지
-			reference operator[](difference_type n) const { return __i[n]; }
+			iterator_type base(void) const
+			{
+				return i_;
+			}
+			pointer operator->(void) const
+			{
+				return i_;
+			}
+			reference operator*(void) const
+			{
+				return *i_;
+			}
+			reference operator[](difference_type n) const
+			{
+				return i_[n];
+			}
 
 			random_access_iterator& operator++(void)
 			{
-				++__i;
+				++i_;
 				return (*this);
 			}
 			random_access_iterator& operator--(void)
 			{
-				--__i;
+				--i_;
 				return (*this);
 			}
 			random_access_iterator operator++(int)
 			{
 				random_access_iterator tmp(*this);
-				++__i;
+				++i_;
 				return (tmp);
 			}
 			random_access_iterator operator--(int)
 			{
 				random_access_iterator tmp(*this);
-				--__i;
+				--i_;
 				return (tmp);
 			}
-
-			random_access_iterator operator+(difference_type n) const //COMMENT iter + n
+			random_access_iterator operator+(difference_type n) const
 			{
-				return (random_access_iterator(__i + n));
+				return (random_access_iterator(i_ + n));
 			}
 			random_access_iterator operator-(difference_type n) const
 			{
-				return (random_access_iterator(__i - n));
+				return (random_access_iterator(i_ - n));
 			}
 			random_access_iterator& operator+=(difference_type n)
 			{
-				__i += n;
+				i_ += n;
 				return (*this);
 			}
 			random_access_iterator& operator-=(difference_type n)
 			{
-				__i -= n;
+				i_ -= n;
 				return (*this);
 			}
 
 		private:
-			pointer __i;
+			pointer i_;
 	};
 
 /*------------------------------------------------------------------------------*/
 /*						N O N _ M E M B E R _ F U N C T I O N					*/
 /*------------------------------------------------------------------------------*/
 	template <typename T>
-	random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n, const random_access_iterator<T>& i) //COMMENT n + iter
+	random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n, const random_access_iterator<T>& i)
 	{
 		return (random_access_iterator<T>(i.base() + n));
 	}

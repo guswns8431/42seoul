@@ -5,11 +5,13 @@
 	#include <map>
 	#include <stack>
 	#include <vector>
+	#include <set>
 	namespace ft = std;
 #else
 	#include <map.hpp>
 	#include <stack.hpp>
 	#include <vector.hpp>
+	#include <set.hpp>
 #endif
 
 #include <stdlib.h>
@@ -31,7 +33,7 @@ class MutantStack : public ft::stack<T>
 public:
 	MutantStack() {}
 	MutantStack(const MutantStack<T>& src) { *this = src; }
-	MutantStack<T>& operator=(const MutantStack<T>& rhs) 
+	MutantStack<T>& operator=(const MutantStack<T>& rhs)
 	{
 		this->c = rhs.c;
 		return *this;
@@ -87,7 +89,7 @@ int main(int argc, char** argv) {
 	{
 		//NORMAL ! :P
 	}
-	
+
 	for (int i = 0; i < COUNT; ++i)
 	{
 		map_int.insert(ft::make_pair(rand(), rand()));
@@ -112,5 +114,50 @@ int main(int argc, char** argv) {
 		std::cout << *it;
 	}
 	std::cout << std::endl;
+
+	ft::vector<int> v;
+
+	v.push_back(3);
+	v.push_back(2);
+	v.push_back(4);
+	std::cout << "[vector]" << std::endl;
+	std::cout << "v[0] : " << v[0] << std::endl;
+	std::cout << "v[1] : " << v[1] << std::endl;
+	std::cout << "v[2] : " << v[2] << std::endl;
+
+	ft::stack<int> s;
+
+	s.push(3);
+	s.push(2);
+	s.push(4);
+	std::cout << "[stack]" << std::endl;
+	std::cout << "top : " << s.top() << std::endl;
+
+	ft::map<int, int> m;
+	ft::map<int, int>::iterator mi;
+
+	m.insert(ft::make_pair(3,1));
+	m.insert(ft::make_pair(1,2));
+	m.insert(ft::make_pair(3,1));
+	std::cout << "[map]" << std::endl;
+	for (mi = m.begin() ; mi != m.end() ; mi++)
+	{
+		std::cout << mi->first << " " << mi->second << std::endl;
+	}
+
+	ft::set<int> set_type;
+	ft::set<int>::iterator si;
+
+	set_type.insert(30);
+	set_type.insert(30);
+	set_type.insert(20);
+	set_type.insert(40);
+
+	std::cout << "[set]" << std::endl;
+	for (si = set_type.begin() ; si != set_type.end() ; si++)
+	{
+		std::cout << *si << std::endl;
+	}
+
 	return (0);
 }

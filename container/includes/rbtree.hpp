@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:05:57 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/20 19:47:40 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/22 18:50:51 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,11 @@ namespace ft
 		TreeNode* left_;
 		TreeNode* right_;
 		value_type 	value_;
-		//TODO is_black이 뭔지
 		binary_type is_black_;
 
 /*--------------------------------------------------------------------------*/
 /*				C O N S T R U C T O R _ & _ D E S T R U C T O R				*/
 /*--------------------------------------------------------------------------*/
-		//TODO ft::nil 확인
-		//COMMENT jseo의 코드는 tree가 nil을 가리킴으로써, parent->left->left 이런식으로 접근을할때 segfault가 터지는 것을 방지해줌
-		//예를들어, 모든경우에 대해서  if(parent->left != NULL), if(parent->left->left != NULL) 이런식으로 일일이 모든 경우를 비교하는게 힘들 수 있기 때문에
-		//nil객체를 가리키게함
-		//한 트리당 하나의 nil 객체를 만들게 되고 모든 nil을 표현하길 원하는 곳은 그 객체를 가리킴
 		TreeNode(void) : parent_(ft::nil), left_(ft::nil), right_(ft::nil), value_(value_type()), is_black_(binary_type()) {}
 		TreeNode(const value_type& value) : parent_(ft::nil), left_(ft::nil), right_(ft::nil), value_(value), is_black_(binary_type()) {}
 		TreeNode(const TreeNode& n) : parent_(n.parent_), left_(n.left_), right_(n.right_), value_(n.value_), is_black_(n.is_black_) {}
@@ -96,8 +90,6 @@ namespace ft
 		return (!ptr->is_black_);
 	}
 
-	//COMMENT 부모 노드를 기준으로 왼쪽이 작은 값이기 때문에,
-	//가장 왼쪽 노드를 찾아가면 그것이 최소값
 	template <class NodePtr>
 	NodePtr get_min_node(NodePtr ptr, NodePtr nil)
 	{
@@ -108,8 +100,6 @@ namespace ft
 		return (ptr);
 	}
 
-	//COMMENT 부모 노드를 기준으로 오른쪽이 큰 값이기 때문에,
-	//가장 오른쪽 노드를 찾아가면 그것이 최대값
 	template <class NodePtr>
 	NodePtr get_max_node(NodePtr ptr, NodePtr nil)
 	{
@@ -120,40 +110,27 @@ namespace ft
 		return (ptr);
 	}
 
-	//COMMENT BST의 다음 노드로 가는 법
-	//다음 노드는 다음으로 큰 수를 가리킴
 	template <class NodePtr>
 	NodePtr get_next_node(NodePtr ptr, NodePtr nil)
 	{
-		//COMMENT BST에서 오른쪽이 자기 자신보다 큰 수
-		//자기의 오른쪽 자식이 비어있지 않다면 그 자식의 가장 왼쪽에 있는 녀석이 다음 요소
 		if (ptr->right_ != nil)
 		{
 			return (get_min_node(ptr->right_, nil));
 		}
-		//COMMENT 자식 노드에서 찾을 수 있는 최대 노드는 부모 노드 보다 클 수 없음
-		//만약 현재 오른쪽 자식 노드라면 왼쪽 자식 노드가 될때까지 올라가고,
-		//그 왼쪽 자식 노드의 부모 노드가 다음 요소
-		//FIXED !is_left_child에서 변경
 		while (is_right_child(ptr))
 		{
 			ptr = ptr->parent_;
 		}
-		//COMMENT 이미 왼쪽 자식 노드라면 부모 노드가 다음 노드
 		return (ptr->parent_);
 	}
 
-	//COMMENT BST에서 이전 노드로 가는 법
 	template <class NodePtr>
 	NodePtr get_prev_node(NodePtr ptr, NodePtr nil)
 	{
-		//COMMENT 일단 먼저 왼쪽 자식 노드가 있는지 확인을 함
-		//자식 노드의 가장 오른쪽 노드가 이전 노드
 		if (ptr->left_ != nil)
 		{
 			return get_max_node(ptr->left_, nil);
 		}
-		//FIXED !is_right_child에서 변경
 		while (is_left_child(ptr))
 		{
 			ptr = ptr->parent_;
@@ -161,7 +138,6 @@ namespace ft
 		return (ptr->parent_);
 	}
 
-	//COMMENT comp에 뭐가 들어올지 모르겠지만, comp를 기준으로 두 개가 같은지를 확인해줌
 	template <typename U, typename V, class Comp>
 	bool is_equal(const U& u, const V& v, Comp comp)
 	{
@@ -171,8 +147,6 @@ namespace ft
 /*------------------------------------------------------------------------------*/
 /*							T R E E _ I T E R A T O R							*/
 /*------------------------------------------------------------------------------*/
-	//COMMENT map에서도 iterator가 필요. map에서는 rbtree.hpp에 구현된 iterator를 가져와서 사용
-	//tree_iterator를 구현할때 참고한 reference가 있는건가?
 	template <typename U, typename V>
 	class TreeIterator
 	{
@@ -219,9 +193,11 @@ namespace ft
 		{
 			return (&cur_->value_);
 		}
-		reference operator*(void) const { return cur_->value_; }
+		reference operator*(void) const
+		{
+			return (cur_->value_);
+		}
 
-		//COMMENT 우리는 nil 객체를 넣어주게 되는데, tree당 모든 nil은 하나의 nil을 가리킨다 생각하면됨
 		TreeIterator& operator++(void)
 		{
 			cur_ = ft::get_next_node(cur_, nil_);
@@ -256,16 +232,11 @@ namespace ft
 			return (!(*this == i));
 		}
 
-		//COMMENT node_type의 경우 iterator_traits를 받아서 const 처리가 되는데,
-		//value_type은 특수화라서 const 오버로딩을 따로 해줘야함
 		operator TreeIterator<const value_type, node_type>(void) const
 		{
 			return (TreeIterator<const value_type, node_type>(cur_, nil_));
 		}
 
-		//COMMENT non member function으로 구현
-		//it1 == it2 와 it2 == it1 둘다 비교가능하게 하려고 구현
-		//밖으로 빼도 되지만 밑 부분은 rbtree구현해야돼서 복잡할까봐 안에다가 구현
 		friend bool operator==(const TreeIterator& x, const TreeIterator& y)
 		{
 			return (x.cur_ == y.cur_);
@@ -389,16 +360,13 @@ namespace ft
 /*--------------------------------------------------------------------------*/
 /*								M O D I F I E R	S							*/
 /*--------------------------------------------------------------------------*/
-			//COMMENT map에서 insert를 할때 Key가 이미 존재하면 key 넣지 않음
 			ft::pair<iterator, bool> insert(const value_type& value)
 			{
 				node_pointer ptr = SearchParent(value);
-				//COMMENT 같은 key가 이미 존재할때
 				if (ptr != end_ && is_equal(ptr->value_, value, comp_))
 				{
 					return (ft::make_pair(iterator(ptr, nil_), false));
 				}
-				//COMMENT key가 존재하지 않을때 key 삽입
 				return (ft::make_pair(iterator(InsertInternal(value, ptr), nil_), true));
 			}
 			iterator insert(iterator position, const value_type& value)
@@ -487,12 +455,10 @@ namespace ft
 			{
 				return (iterator(LowerBoundInternal(key), nil_));
 			}
-			//TODO LowerBound / UpperBound 다시 찾아보기
 			const_iterator LowerBound(const key_type& key) const
 			{
 				return (const_iterator(LowerBoundInternal(key), nil_));
 			}
-			//COMMENT 초과
 			iterator UpperBound(const key_type& key)
 			{
 				return (iterator(UpperBoundInternal(key), nil_));
@@ -523,7 +489,6 @@ namespace ft
 			node_allocator alloc_;
 			size_type size_;
 
-		//COMMENT end의 왼쪽 자식이 루트다
 		node_pointer GetRoot(void) const
 		{
 			return (end_->left_);
@@ -534,7 +499,6 @@ namespace ft
 			end_->left_ = ptr;
 		}
 
-		//COMMENT 노드 생성 후 주소 반환
 		node_pointer ConstructNode(const value_type& value)
 		{
 			node_pointer ptr = alloc_.allocate(1);
@@ -550,7 +514,6 @@ namespace ft
 			alloc_.destroy(ptr);
 			alloc_.deallocate(ptr, 1);
 		}
-		//COMMENT 재귀 돌리면서 노드 왼쪽 오른쪽 방문하면서 삭제
 		void DestructNodeRecursive(node_pointer ptr)
 		{
 			if (ptr == nil_)
@@ -561,9 +524,6 @@ namespace ft
 			DestructNodeRecursive(ptr->right_);
 			DestructNode(ptr);
 		}
-		//COMMENT 부모가 될 노드 찾기
-		//position을 넣어주면 그 position이 유효한지 확인하고 더 빨리 넣어주고,
-		//유효한 위치가 아니면 부모에서부터 찾음
 		node_pointer SearchParent(const value_type& value, node_pointer position = ft::nil)
 		{
 			if (position && position != end_)
@@ -585,7 +545,6 @@ namespace ft
 					}
 				}
 			}
-			//COMMENT position이 유효하지 않을때 상황
 			node_pointer cur = GetRoot();
 			node_pointer tmp = end_;
 			for ( ; cur != nil_ ; )
@@ -641,7 +600,6 @@ namespace ft
 			}
 			GetRoot()->is_black_ = true;
 		}
-		//COMMENT 해당 부모의 노드가 왼쪽 자식일 경우
 		void InsertFixupLeft(node_pointer& ptr)
 		{
 			node_pointer uncle = ptr->parent_->parent_->right_;
@@ -664,7 +622,6 @@ namespace ft
 				RotateRight(ptr->parent_->parent_);
 			}
 		}
-		//COMMENT 해당 부모의 노드가 오른쪽 자식일 경우
 		void InsertFixupRight(node_pointer& ptr)
 		{
 			node_pointer uncle = ptr->parent_->parent_->left_;
@@ -812,7 +769,6 @@ namespace ft
 				ptr = GetRoot();
 			}
 		}
-		//TODO 뭐하는 녀석인지 찾아보기
 		void Transplant(node_pointer former, node_pointer latter)
 		{
 			if (former->parent_ == end_)

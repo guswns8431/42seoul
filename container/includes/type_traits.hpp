@@ -6,7 +6,7 @@
 /*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:09:25 by hyson             #+#    #+#             */
-/*   Updated: 2022/09/21 14:55:27 by hyson            ###   ########.fr       */
+/*   Updated: 2022/09/22 18:54:56 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 namespace ft
 {
 
-//TODO nil 처리 어떻게 할지 생각
 const class nullptr_t
 {
 	private:
@@ -36,7 +35,7 @@ const class nullptr_t
 		{
 			return (0);
 		}
-} nil = {};
+} nil;
 
 /*------------------------------------------------------------------------------*/
 /*								E N A B L E _ I F								*/
@@ -61,7 +60,10 @@ const class nullptr_t
 	  	typedef T value_type;
  		typedef integral_constant type;
   		static const value_type value = v;
-  		operator value_type(void) const { return value; }
+  		operator value_type(void) const
+		{
+			return (value);
+		}
 	};
 
 	typedef integral_constant<bool, true> true_type;
@@ -119,7 +121,6 @@ const class nullptr_t
 
 	template <typename T>
 	struct is_integral : public is_integral_base<typename remove_cv<T>::type> {};
-
 }
 
 #endif
