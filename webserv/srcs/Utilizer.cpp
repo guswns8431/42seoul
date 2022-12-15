@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Utilizer.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
+/*   By: hyson <hyson@42student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:28:55 by hyson             #+#    #+#             */
-/*   Updated: 2022/08/18 19:52:07 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/11/09 15:11:34 by hyson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,40 @@ void ft::safe_free_all(void ***ptr)
 		}
 		ft::safe_free(reinterpret_cast<void **>(ptr));
 	}
+}
+
+std::string ft::base64_decode(const std::string& str) {
+  if (str.length() == 0) {
+    return "";
+  }
+  char *p = const_cast<char *>(str.c_str());
+  unsigned char *str_ptr = reinterpret_cast<unsigned char *>(p);
+  std::size_t j = 0;
+  std::size_t pad1 = str.length() % 4 || str_ptr[str.length() - 1] == '=';
+  std::size_t pad2 = pad1 &&
+                    (str.length() % 4 > 2 || str_ptr[str.length() - 2] != '=');
+  const std::size_t last = (str.length() - pad1) / 4 << 2;
+  std::string result(last / 4 * 3 + pad1 + pad2, '\0');
+  unsigned char *res_ptr = reinterpret_cast<unsigned char *>(&result[0]);
+  for (std::size_t i = 0; i < last; i += 4) {
+    int n = ft::base64[str_ptr[i]] << 18 |
+            ft::base64[str_ptr[i + 1]] << 12 |
+            ft::base64[str_ptr[i + 2]] << 6 |
+            ft::base64[str_ptr[i + 3]];
+    res_ptr[j++] = n >> 16;
+    res_ptr[j++] = n >> 8 & 0xFF;
+    res_ptr[j++] = n & 0xFF;
+  }
+  if (pad1) {
+    int n = ft::base64[str_ptr[last]] << 18 |
+            ft::base64[str_ptr[last + 1]] << 12;
+    res_ptr[j++] = n >> 16;
+    if (pad2) {
+      n |= ft::base64[str_ptr[last + 2]] << 6;
+      res_ptr[j++] = n >> 8 & 0xFF;
+    }
+  }
+  return result;
 }
 
 std::string ft::tolower(std::string s)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>2CU - log in or sign up</title>
+  <meta property="og:site_name" content="2CU">
+  <meta property="og:url" content="https://www.2cu.com/">
+  <meta property="og:image" content="https://www.facebook.com/images/fb_icon_325x325.png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
+
+<script src="scripts.js" type="text/javascript">
+	window.onload = document.getElementById("signup").onclick = sign_up();
+</script>
+
+</head>
+<body>
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+		<h1>Hello people.</h1>
+		<p>We would like to CU meet new friends and experience a very safe social environment.</p>
+		<span>
+			<p>signup with social media</p>
+			<a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i> Sign Up with Facebook</a>
+			<a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i> Sign Up with Twitter</a>
+		</span>
+		</div>
+	</div>
+	
+	
+	<div class="right">
+		<h5>Sign Up</h5>
+		<h6>It's quick and easy.</h6>
+		<div class="inputs">
+			<input id="username" type="text" placeholder="Enter Email">
+			<br>
+			<input id="password" type="password" placeholder="Enter Password">
+			<br>
+			<input id="password1" type="password" placeholder="Repeat Password">
+		</div>
+		<br><br>
+		<div class="accept">
+			<button id="signup" onclick="sign_up()">Sign Up</button>
+		</div>
+		<div class="cancel">
+			<button id="cancel" onclick="cancel()">Cancel</button>
+		</div>
+	</div>
+	
+</div>
+  
+</body>
+</html>
